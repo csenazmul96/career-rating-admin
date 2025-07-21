@@ -1,0 +1,82 @@
+'use client'
+
+import Link from "next/link";
+import {Button} from "@/components/common/button";
+import {useDataTable} from "@/store/DataTableContext";
+import {confirmAlert} from "react-confirm-alert";
+import {deleteAnnouncements} from "@/utils/api/curriculumManagement";
+import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
+import {Pencil, Trash2} from "lucide-react";
+import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+
+function AnnouncementTableActions({id}) {
+    const{selectedRow, setSelectedRows} = useDataTable()
+
+    const deleteItems = async () => {
+        let form = {
+            ids: selectedRow
+        }
+        confirmAlert({
+            title: '공지사항 삭제',
+            message: '선택한 게시글을 삭제하시겠습니까?',
+            buttons: [
+                {
+                    label: '취소',
+                    buttonLabel: "취소",
+                    onClick: () => {
+                        return false;
+                    }
+                },
+                {
+                    label: '확인',
+                    buttonLabel: "삭제",
+                    onClick: async () => {
+                        try {
+                            const response = await deleteAnnouncements(form)
+                            if (response.status === 'success'){
+                                setSelectedRows([]) // Clear selected rows after deletion
+                                CommonToastMessage('성공.', 'Announcement has been deleted!', 'success')
+                            }
+                        } catch (error) {
+                            console.error("Error in onClick:", error.message);
+                            CommonToastMessage('오류.', 'Failed to delete item', 'error')
+                        }
+                    }
+                }
+            ],
+            customUI: ({ title, message, onClose , buttons}) => {
+                return (
+                    <ConfirmPopup title={title} message={message} onClose={onClose} onConfirm={buttons} />
+                );
+            }
+        });
+    }
+
+    return (
+        <>
+            <Link href={`/curriculum/course/details/${id}/announcement/create`} className={`h-[32px]`}>
+                <Button  color="primaryMedium">
+                    <span>
+                        {/*<img src="/images/content-management/white_pencil.png" alt=""/>*/}
+                        <Pencil size={20} />
+                    </span>
+                    <span>글쓰기</span>
+                </Button>
+            </Link>
+
+            <Button className={`h-[32px]`}
+                    onClick={deleteItems}
+                    disable={selectedRow.length ? false : true}
+                    color="transparentMedium">
+                <span>
+                    {/*<img src="/images/content-management/delete_outline.png" alt=""/>*/}
+                    <Trash2 size={20} />
+                </span>
+                <span>삭제</span>
+            </Button>
+
+        </>
+    );
+}
+
+export default AnnouncementTableActions;

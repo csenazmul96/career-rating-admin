@@ -1,0 +1,9 @@
+21-01-2025: manager says, we don't need drag and drop at organization list (page: A8)
+
+Remaining Task:
+
+- 1. Add permission apply page
+- 2. Organization shorting
+- 3. Dashboard
+- 4. curriculum course student and queries
+- 5. home page settings
