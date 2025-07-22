@@ -5,6 +5,8 @@ import {Button} from "@/components/common/button";
 import {useDataTable} from "@/store/DataTableContext";
 import {Plus, Trash2} from "lucide-react";
 import ConfirmPopup from "@/components/common/ConfirmPopup";
+import {multipleEmployeeDelete} from "@/utils/api/admin/EmployeeAPI";
+import {confirmAlert} from "react-confirm-alert";
 
 const EmployeeDataTableActions = () => {
     const{selectedRow, setSelectedRows} = useDataTable()
@@ -12,7 +14,7 @@ const EmployeeDataTableActions = () => {
     const [isOpen, setIsOpen] = useState(false);
 
 
-    const changedOrganization = (item) => {
+    const deleteEmployee = (item) => {
         if(item) {
             confirmAlert({
                 title: '조직그룹 변경',
@@ -26,16 +28,9 @@ const EmployeeDataTableActions = () => {
                     },
                     {
                         label: '확인',
-                        onClick: () => {
-                            memberGroupChangeRequestSend(item.id).then(res => {
-                                if (res) {
-                                    setSelectedRows([])
-                                    setIsOpen(false)
-                                    CommonToastMessage('성공.', 'Members group has been changed!', 'success')
-                                } else {
-                                    CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
-                                }
-                            })
+                        onClick: async () => {
+                          const response = await multipleEmployeeDelete({ids: selectedRow})
+                            console.log(response)
                         }
                     }
                 ],
@@ -56,7 +51,7 @@ const EmployeeDataTableActions = () => {
                     <span><Plus  size={20} className={`text-textSubColor`} /> </span> <span>New Employee</span>
                 </Button>
             </Link>
-            <Button disable={!selectedRow.length} className={'cursor-pointer border border-borderColor h-[32px] px-4 flex items-center gap-1'}>
+            <Button disable={!selectedRow.length} onClick={deleteEmployee} className={'cursor-pointer border border-borderColor h-[32px] px-4 flex items-center gap-1'}>
                 <Trash2 size={20} className={`text-textSubColor`} />
             </Button>
         </>

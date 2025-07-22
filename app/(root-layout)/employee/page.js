@@ -12,7 +12,7 @@ export default async function page({searchParams}) {
     return (
         <div className="flex flex-col member-list">
             <LmsPageHeading title="Employee List" tooltip={'Employee List'}/>
-<EmployeeFilter />
+            <EmployeeFilter />
             <div className="member-list-table pt-16">
                 <EmployeeDataTable employees={employees} pagination={pagination} queryParams={queryParams}/>
             </div>
