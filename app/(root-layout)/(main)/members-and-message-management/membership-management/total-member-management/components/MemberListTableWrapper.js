@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
-import DataTable from "@/components/common/DataTable";
-import TableHeaderCommonActions from "@/components/common/TableHeaderCommonActions";
+import LmsTable from "@/components/common/LmsTable";
+import LmsTableHeaderActions from "@/components/common/LmsTableHeaderActions";
 import React from "react";
 import {getSituationKoreanText} from "@/utils/helpers/CommonHelper";
 import {Button} from "@/components/common/button";
@@ -10,6 +10,15 @@ import MemberListTableActions
 
 export default function MemberListTableWrapper({members, pagination, organizations, queryParams}) {
     const columns = [
+        {
+            header: '회원유형',
+            accessor: 'situation',
+            cell: (_, member) => (
+                <Button color={`${member.memberType === 'MANAGER' ? 'primaryNoBgSmall' : "transparentSmall"}`} className={'rounded-[2px] w-[50px]'}>
+                    {member.memberType === 'MANAGER' ? '관리자' : "회원"}
+                </Button>
+            ),
+        },
         { header: '조직그룹', accessor: 'organizationGroupName' },
         { header: '이름', accessor: 'name' },
         { header: '회원ID', accessor: 'memberId' },
@@ -48,7 +57,7 @@ export default function MemberListTableWrapper({members, pagination, organizatio
     ];
 
     return <>
-        {pagination && <TableHeaderCommonActions
+        {pagination && <LmsTableHeaderActions
             pagination={pagination}
             TableActions={
                 <MemberListTableActions
@@ -57,9 +66,8 @@ export default function MemberListTableWrapper({members, pagination, organizatio
                     organizations={organizations} />
             }
         />}
-        <DataTable
+        <LmsTable
             columns={columns}
-            serialNo={true}
             data={members}
             checkMark={true}
             rowLink={(row) => `/members-and-message-management/membership-management/total-member-management/member-details/${row.id}/member-information?page=${queryParams?.page || 1}&size=${queryParams?.size || 5}`}

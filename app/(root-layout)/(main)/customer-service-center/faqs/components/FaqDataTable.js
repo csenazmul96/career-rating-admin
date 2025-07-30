@@ -1,6 +1,6 @@
 "use client";
-import TableHeaderCommonActions from "@/components/common/TableHeaderCommonActions";
-import DataTable from "@/components/common/DataTable";
+import LmsTableHeaderActions from "@/components/common/LmsTableHeaderActions";
+import LmsTable from "@/components/common/LmsTable";
 import React from "react";
 import FaqTableActions from "@/app/(root-layout)/(main)/customer-service-center/faqs/components/FaqTableActions";
 
@@ -14,9 +14,9 @@ function FaqDataTable({pagination, inqueries}) {
     ];
     return (
         <>
-            <TableHeaderCommonActions pagination={pagination} TableActions={<FaqTableActions url={"/student-inquiry"} />} classes={'mt-8'} />
+            <LmsTableHeaderActions pagination={pagination} TableActions={<FaqTableActions url={"/student-inquiry"} />} classes={'mt-8'} />
             {inqueries && columns &&
-                <DataTable
+                <LmsTable
                     columns={columns}
                     data={inqueries}
                     checkMark={true}

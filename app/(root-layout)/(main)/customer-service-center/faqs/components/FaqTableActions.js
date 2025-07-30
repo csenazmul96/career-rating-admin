@@ -5,7 +5,7 @@ import {confirmAlert} from "react-confirm-alert";
 import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
 import React from "react";
 import {deleteFaqs} from "@/utils/api/curriculumManagement";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 import {FilePlus, Trash2} from "lucide-react";
 import Link from "next/link";
 function FaqTableActions() {
@@ -28,9 +28,9 @@ function FaqTableActions() {
                         const response = await deleteFaqs({ids: selectedRow})
                         if (response.status === "Success") {
                             setSelectedRows([])
-                            CommonToastMessage('성공.', 'Faq has been deleted!', 'success')
+                            LmsToastMessage('성공.', 'Faq has been deleted!', 'success')
                         } else {
-                            CommonToastMessage('실패.', 'Faq has not been deleted!', 'error')
+                            LmsToastMessage('실패.', 'Faq has not been deleted!', 'error')
                         }
                     }
                 }

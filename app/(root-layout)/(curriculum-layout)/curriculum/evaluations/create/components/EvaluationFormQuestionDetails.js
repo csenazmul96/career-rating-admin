@@ -12,7 +12,7 @@ import EvaluationFormQuestionAnswer
 import {deleteEvaluationQuestion, imageUploadCommonFunction} from "@/utils/api/evaluationManagement";
 import {confirmAlert} from "react-confirm-alert";
 import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 function EvaluationFormQuestionDetails({questions, setQuestions, currentQuestion, setCurrentQuestion, errors, form, evaluation }) {
     const removeQuestion = () => {
@@ -71,7 +71,7 @@ function EvaluationFormQuestionDetails({questions, setQuestions, currentQuestion
         const maxFileSize = 5;
 
         if (fileSize > maxFileSize) {
-            CommonToastMessage('오류.', 'File size cannot exceed 5MB.', 'warning');
+            LmsToastMessage('오류.', 'File size cannot exceed 5MB.', 'warning');
             return;
         }
         const formData = new FormData();

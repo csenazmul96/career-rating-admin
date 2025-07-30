@@ -4,10 +4,10 @@ import Image from "next/image";
 import infoImg from "@/public/images/login-img.png";
 import {Info} from "lucide-react";
 
-function ToolTip({title, content}) {
+function ToolTip({title, content }) {
     return (
         <div className="flex justify-center items-center">
-            <Popover className={`rounded-0 shadow-none focus:outline-0 max-w-[360px] z-20`}
+            <Popover className={`rounded-0 shadow-none focus:outline-0 max-w-[360px] z-80`}
                 content={
                     <div className="p-6 bg-white border border-commonBorderColor">
                         <div data-popper-arrow={false} className="hidden" />

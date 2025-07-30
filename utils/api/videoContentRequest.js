@@ -232,7 +232,25 @@ export async function subTitleUpload(payload) {
       method: "POST",
       body: payload,
     });
+    if (request.ok) {
+      revalidatePath(`video_details_${payload.videoId}`);
+    }
+    return request.json();
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
 
+export async function subTitleDelete(id, videoID) {
+  try {
+    const request = await fetchRequest(`${contextPath}/delete/subtitle/${id}`, {
+      method: "DELETE",
+      body: '',
+    });
+    if (request.ok) {
+      console.log("deleted");
+      revalidatePath(`video_details_${videoID}`);
+    }
     return request.json();
   } catch (error) {
     throw new Error(error.message);

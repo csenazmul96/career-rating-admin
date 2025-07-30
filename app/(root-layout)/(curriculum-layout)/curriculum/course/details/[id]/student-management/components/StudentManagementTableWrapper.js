@@ -1,6 +1,6 @@
 "use client";
-import TableHeaderCommonActions from "@/components/common/TableHeaderCommonActions";
-import DataTable from "@/components/common/DataTable";
+import LmsTableHeaderActions from "@/components/common/LmsTableHeaderActions";
+import LmsTable from "@/components/common/LmsTable";
 import {Button} from "@/components/common/button";
 import Progress  from "@/components/common/ProgressBar";
 import React from "react";
@@ -57,11 +57,11 @@ function StudentManagementTableWrapper({ students, pagination, allSearchParams, 
     return (
         <>
             <div>
-            {pagination && <TableHeaderCommonActions
+            {pagination && <LmsTableHeaderActions
                 pagination={pagination}
 
             />}
-            <DataTable
+            <LmsTable
                 columns={columns}
                 data={students}
                 serialNo={true}

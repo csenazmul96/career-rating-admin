@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import {Dialog, DialogActions, DialogBody, DialogTitle} from "@/components/common/dialog";
 import {Button} from "@/components/common/button";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 import {formatErrors} from "@/utils/helpers/ErrorHeloper";
 import LmsStandardInputField from "@/components/common/form/LmsStandardInputField";
 import FieldWrapper from "@/components/common/form/FieldWrapper";
@@ -17,24 +17,31 @@ function VideoSubTitleForm({setOpenForm, openForm, video, newSubtitleAdded}) {
     const [form, setForm] = useState({
         file: "",
         language: "",
+        languageCode: "",
         videoId: video ? video.id : ""
     });
+    const languages =  getSubtitleLanguages()
     const fileInputRef = useRef(null);
     const submitForm = async () => {
         setLoading(true)
+        const languageObj = languages.find(lang => lang.id === form.languageCode);
+        const languageName = languageObj ? languageObj.name : '';
+
         let formData = new FormData();
         formData.set('file', form.file)
-        formData.set('language', form.language)
+        formData.set('language', languageName)
+        formData.set('languageCode', form.languageCode)
         formData.set('videoId', form.videoId)
         try {
             const response = await subTitleUpload(formData)
             if (response.status === 'success') {
                 newSubtitleAdded(response.data)
-                CommonToastMessage('성공.', 'Subtitle has been uploaded', 'success')
+                LmsToastMessage('성공.', 'Subtitle has been uploaded', 'success')
                 setOpenForm(false)
                 setForm({
                     file: "",
                     language: "",
+                    languageCode: "",
                     videoId: video ? video.id : ""
                 })
             }
@@ -44,12 +51,11 @@ function VideoSubTitleForm({setOpenForm, openForm, video, newSubtitleAdded}) {
                 }
             }
         } catch (e){
-            CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
+            LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
         }
         setLoading(false)
     }
 
-    const languages =  getSubtitleLanguages()
 
     const handleOnChange = (column, value) => {
         setForm((prev) => ({...prev, [column]: value}));
@@ -72,9 +78,9 @@ function VideoSubTitleForm({setOpenForm, openForm, video, newSubtitleAdded}) {
 
     return (
         <Dialog open={openForm} onClose={setOpenForm}>
-            <DialogTitle className={''}>
-                <span className={'w-full contents'}>자막 파일 추가</span>
-                <span className={'text-13 w-full text-placeholderColor'}>자막파일의 경우, SRT와 Web VTT 형식의 자막파일만 등록 가능합니다.</span>
+            <DialogTitle className={'flex flex-col '}>
+                <span className={'w-full contents text-medium text-black'}>자막 파일 추가</span>
+                <span className={'text-base  w-full text-textSubColor font-normal'}>자막파일의 경우, SRT와 Web VTT 형식의 자막파일만 등록 가능합니다.</span>
             </DialogTitle>
             <DialogBody>
                 <FieldWrapper
@@ -120,26 +126,26 @@ function VideoSubTitleForm({setOpenForm, openForm, video, newSubtitleAdded}) {
                     vertical={true}
                 >
                     <LmsStandardSelectInputV2
-                        name={`language`}
+                        name={`languageCode`}
                         classes={"w-full"}
                         fieldClass={'w-full h-[190px]'}
                         options={languages}
-                        error={errors?.language}
+                        error={errors?.languageCode}
                         changeDataHandler={handleOnChange}
-                        value={form.language} />
+                        value={form.languageCode} />
                 </FieldWrapper>
 
             </DialogBody>
             <DialogActions className={"!mt-4"}>
                 <Button
                     type="button"
-                    color="transparentMedium"
+                    color="transparentLarge"
                     className={'h-10'}
                     onClick={()=>setOpenForm(false)}> 취소 </Button>
                 <Button
                     type="button"
                     disable={!form.file ? true : loading ? true : false}
-                    color={`${!form.file ? 'secondaryMedium' : 'primaryMedium'}`}
+                    color={`${!form.file ? 'secondaryLarge' : 'primaryLarge'}`}
                     className={'h-10'}
                     loading={loading}
                     onClick={submitForm}> 확인 </Button>

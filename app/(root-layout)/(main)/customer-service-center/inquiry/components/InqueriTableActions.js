@@ -5,7 +5,7 @@ import {confirmAlert} from "react-confirm-alert";
 import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
 import React from "react";
 import {deleteInquiries} from "@/utils/api/curriculumManagement";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 function InqueriTableActions({url}) {
     const{selectedRow, setSelectedRows} = useDataTable()
 
@@ -26,9 +26,9 @@ function InqueriTableActions({url}) {
                         const response = await deleteInquiries({ids: selectedRow}, url)
                         if (response.status === "success") {
                             setSelectedRows([])
-                            CommonToastMessage('성공.', 'Inquiry has been deleted!', 'success')
+                            LmsToastMessage('성공.', 'Inquiry has been deleted!', 'success')
                         } else {
-                            CommonToastMessage('실패.', 'Inquiry has not been deleted!', 'error')
+                            LmsToastMessage('실패.', 'Inquiry has not been deleted!', 'error')
                         }
                     }
                 }

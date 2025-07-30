@@ -14,7 +14,7 @@ import { ErrorMessage, Field } from "@/components/common/fieldset";
 import { roleDataFormatForReuseOrganizationComponent } from "@/utils/helpers/CommonHelper";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
-import { CommonToastMessage } from "@/components/common/CommonToastMessage";
+import { LmsToastMessage } from "@/components/common/LmsToastMessage";
 import { createNewContent } from "@/utils/api/videoContentRequest";
 import { formatErrors } from "@/utils/helpers/ErrorHeloper";
 
@@ -87,7 +87,7 @@ const VideoForm = ({ roles }) => {
       const response = await createNewContent(formData, "/video/content");
 
       if (response.status === "Success") {
-        CommonToastMessage("성공.", "Video created successfully", "success");
+        LmsToastMessage("성공.", "Video created successfully", "success");
         setForm({
           file: [],
           groupId: "",
@@ -101,7 +101,7 @@ const VideoForm = ({ roles }) => {
       } else if (response.status === "error") {
         setErrors(formatErrors(response.errors));
       } else {
-        CommonToastMessage("오류.", "문제가 발생했습니다.", "error");
+        LmsToastMessage("오류.", "문제가 발생했습니다.", "error");
       }
     } catch (e) {
       console.log(e.message);

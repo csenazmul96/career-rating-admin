@@ -5,7 +5,7 @@ import React from "react";
 import {confirmAlert} from "react-confirm-alert";
 import {deleteCourseInquirieswReply} from "@/utils/api/curriculumManagement";
 import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 function InquiryReplyDeleteButton({ url}) {
     const deleteReply = () => {
@@ -24,9 +24,9 @@ function InquiryReplyDeleteButton({ url}) {
                     onClick: async () => {
                       const response =  await deleteCourseInquirieswReply(url)
                         if (response.status === 'error'){
-                            CommonToastMessage('오류.', 'no data found by replyId', 'error')
+                            LmsToastMessage('오류.', 'no data found by replyId', 'error')
                         } else {
-                            CommonToastMessage('성공.', '답변이 삭제되었습니다.', 'success')
+                            LmsToastMessage('성공.', '답변이 삭제되었습니다.', 'success')
                         }
                     }
                 }

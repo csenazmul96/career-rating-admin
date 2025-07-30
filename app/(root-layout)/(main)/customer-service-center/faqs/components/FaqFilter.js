@@ -79,7 +79,7 @@ const FaqFilter = ({queryParams, categories}) => {
     return (
         <>
             <FilterForm>
-                <div className="flex">
+                <div className="flex  border-b border-borderColor">
                     <FilterFormWrapper label="카테고리" singleElement={true}>
                         <LmsStandardSelectInputV2
                             name={`category`}

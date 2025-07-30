@@ -1,7 +1,7 @@
 "use client";
 import AnnouncementTableActions from "@/app/(root-layout)/(curriculum-layout)/curriculum/course/details/[id]/announcement/component/AnnouncementTableActions";
-import DataTable from "@/components/common/DataTable";
-import TableHeaderCommonActions from "@/components/common/TableHeaderCommonActions";
+import LmsTable from "@/components/common/LmsTable";
+import LmsTableHeaderActions from "@/components/common/LmsTableHeaderActions";
 import Link from "next/link";
 
 function AnnouncementTableWrapper({ announcements, id, pagination }) {
@@ -34,12 +34,12 @@ function AnnouncementTableWrapper({ announcements, id, pagination }) {
 
   return (
     <div>
-      <TableHeaderCommonActions
+      <LmsTableHeaderActions
         pagination={pagination}
         TableActions={<AnnouncementTableActions id={id} />}
       />
       {tableData && columns && (
-        <DataTable
+        <LmsTable
           columns={columns}
           pagination={pagination}
           data={tableData}

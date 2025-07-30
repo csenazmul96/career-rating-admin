@@ -3,7 +3,7 @@ import VideoUploadProgress
     from "@/app/(root-layout)/(content-layout)/content-management/video-management/new-video/components/VideoUploadProgress";
 import {useSession} from "next-auth/react";
 import {deleteRecentUploadedFile} from "@/utils/api/videoContentRequest";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 function InqueryUploadedFiles({fileInputRef, formClean, setFileUploadResponse, errors }) {
     const { data: session } = useSession();
@@ -70,7 +70,7 @@ function InqueryUploadedFiles({fileInputRef, formClean, setFileUploadResponse, e
                 setFileUploadResponse({...response.data[0]})
                 setCompleteFiles((prev) => ([...prev, response.data[0]]))
             } else {
-                CommonToastMessage('오류.', `${file.name} upload failed`, 'error')
+                LmsToastMessage('오류.', `${file.name} upload failed`, 'error')
             }
         };
 
@@ -90,7 +90,7 @@ function InqueryUploadedFiles({fileInputRef, formClean, setFileUploadResponse, e
             if (response.status === 'error') {
                 setLoading({status: false, name: ''})
             } else {
-                CommonToastMessage('삭제.', 'File has been deleted.', 'success')
+                LmsToastMessage('삭제.', 'File has been deleted.', 'success')
                 setLoading({status: false, name: ''})
             }
         }

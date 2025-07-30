@@ -34,6 +34,7 @@ export default {
             fontSize: {
                 sm: '12px',
                 '13': '13px',
+                '14': '14px',
                 base: '15px',
                 baseNormal: '17px',
                 medium: '19px',
@@ -68,6 +69,29 @@ export default {
             },
         },
     },
-    plugins: [],
+    plugins: [
+        function({ addComponents, theme }) {
+            addComponents({
+                '.gradient-border-rounded': {
+                    position: 'relative',
+                    borderRadius: theme('borderRadius.full'),
+                    overflow: 'hidden',
+                    '&::before': {
+                        content: '""',
+                        position: 'absolute',
+                        inset: '0',
+                        borderRadius: 'inherit',
+                        padding: '1.67px',
+                        background: 'linear-gradient(202.36deg, rgba(255, 255, 255, 0.2) 8.26%, rgba(255, 255, 255, 0) 85.43%)',
+                        mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                        maskComposite: 'exclude',
+                        WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                        WebkitMaskComposite: 'exclude',
+                        zIndex: '-1',
+                    },
+                },
+            });
+        },
+    ],
     darkMode: 'false',
 };

@@ -12,7 +12,7 @@ import {confirmAlert} from "react-confirm-alert";
 import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
 import { useRouter } from 'next/navigation';
 import {Trash2} from "lucide-react";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 
 const AdministratorList = ({roles}) => {
@@ -32,9 +32,9 @@ const AdministratorList = ({roles}) => {
                     onClick: async () => {
                       const response =  await deleteRole(id)
                         if(response.status === 'success'){
-                            CommonToastMessage('성공.', '관리자 유형이 삭제 되었습니다.', 'success')
+                            LmsToastMessage('성공.', '관리자 유형이 삭제 되었습니다.', 'success')
                         } else {
-                            CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
+                            LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
                         }
                     }
                 }

@@ -19,6 +19,63 @@ export async function getMembers(params) {
   }
 }
 
+export async function getMemberStatisticData(params) {
+  try {
+    const res = await fetchRequest(
+      `${contextPath}/member/statistics?${new URLSearchParams(params)}`
+    );
+
+    const data = await res.json();
+    return { members: data.data, pagination: data.pagination };
+  } catch (error) {
+    console.error("Error in getPermissions:", error);
+    throw error;
+  }
+}
+
+export async function getLoginStatisticData(params) {
+  try {
+    const res = await fetchRequest(
+        `${contextPath}/member/login/statistics?${new URLSearchParams(params)}`
+    );
+
+    const data = await res.json();
+    return { members: data.data, pagination: data.pagination };
+  } catch (error) {
+    console.error("Error in getPermissions:", error);
+    throw error;
+  }
+}
+
+
+export async function getExcellData(params) {
+  try {
+    const res = await fetchRequest(
+        `${contextPath}/member/login/statistics/excel?${new URLSearchParams(params)}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          },
+        }
+    );
+
+    if (!res.ok) throw new Error("Excel download failed");
+
+    const blob = await res.blob();
+
+    // Extract filename from Content-Disposition
+    const disposition = res.headers.get("Content-Disposition");
+    const match = disposition?.match(/filename="?(.+?)"?$/);
+    const fileName = match ? decodeURIComponent(match[1]) : "download.xlsx";
+
+    return { blob, fileName };
+  } catch (error) {
+    console.error("Error in getExcellData:", error);
+    throw error;
+  }
+}
+
 export async function getLoginUserInfo() {
   try {
     const res = await fetchRequest(
@@ -323,6 +380,20 @@ export async function getRolesWiseMembers() {
 
     const data = await res.json();
     return data.data;
+  } catch (error) {
+    console.error("Error in getPermissions:", error);
+    throw error;
+  }
+}
+
+export async function getMarketingInfo(params) {
+  try {
+    const res = await fetchRequest(
+        `${contextPath}/member/consent/email-sms?${new URLSearchParams(params)}`
+    );
+
+    const data = await res.json();
+    return { marketingInfo: data.data, pagination: data.pagination };
   } catch (error) {
     console.error("Error in getPermissions:", error);
     throw error;

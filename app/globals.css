@@ -595,18 +595,119 @@ body.react-confirm-alert-body-element {
 }
 
 /*datepicker range*/
-.custom-datepicker .react-calendar__tile--range.react-calendar__tile--rangeStart {
-    background: #3058FF!important;
-    color: #fff!important;
-    border-radius: 4px!important;
-}
-.custom-datepicker .react-calendar__tile--range.react-calendar__tile--rangeEnd {
-    background: #3058FF!important;
-    color: #fff!important;
-    border-radius: 4px!important;
-}
-.custom-datepicker .react-calendar__tile--range {
+
+.custom-datepicker .react-calendar__tile--range,
+.custom-datepicker .react-datepicker__week .react-datepicker__day--in-range,
+.custom-datepicker .react-datepicker__week .react-datepicker__day--in-selecting-range
+{
     background: #E6EEFF!important;
     color: #1d1d1d!important;
     border-radius: 0px!important;
+}
+
+.custom-datepicker .react-calendar__tile--range.react-calendar__tile--rangeStart,
+.custom-datepicker .react-datepicker__week .react-datepicker__day--range-start,
+.custom-datepicker .react-datepicker__week .react-datepicker__day--selecting-range-start
+{
+    background: #3058FF!important;
+    color: #fff!important;
+    border-radius: 4px!important;
+}
+.custom-datepicker .react-calendar__tile--range.react-calendar__tile--rangeEnd,
+.custom-datepicker .react-datepicker__week .react-datepicker__day--range-end,
+.custom-datepicker .react-datepicker__week .react-datepicker__day--selecting-range-end
+{
+    background: #3058FF!important;
+    color: #fff!important;
+    border-radius: 4px!important;
+}
+.react-datepicker-popper{
+    z-index: 30 !important;
+}
+
+
+/*date picker v2*/
+.react-datepicker-wrapper {}
+ .react-datepicker{
+    border: 1px solid #D8D8D8!important;
+    /*padding: 8px!important;*/
+     position: relative;
+     font-family: "Pretendard GOV Variable", "Pretendard GOV", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+.react-datepicker__header {
+    text-align: center;
+    background-color: transparent!important;
+    border-bottom: 0px solid #aeaeae!important;
+    border-top-left-radius: 0.3rem;
+    padding: 8px!important;
+    position: relative;
+}
+.react-datepicker__header .react-datepicker__day-name {
+    font-size: 15px!important;
+    color: #717171!important;
+    font-weight: 500!important;
+    padding: 0px 0px 0px!important;
+}
+.react-datepicker__month-container {
+    display: flex!important;
+    flex-direction: column!important;
+
+}
+
+.react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name {
+    display: inline-flex!important;
+    align-items: center!important;
+    justify-content: center!important;
+    width: 36px!important;
+    height: 36px!important;
+    margin: 0!important;
+    font-size: 15px!important;
+    color: #1d1d1d!important;
+}
+.react-datepicker__month {
+    margin: 0 !important;
+    padding: 0 12px 6px!important;
+}
+.react-datepicker__day--today {
+    border-radius: 4px!important;
+    background-color: #3058FF!important;
+    color: #fff!important;
+    font-weight: normal;
+}
+.react-datepicker__day--selected {
+    border-radius: 4px!important;
+    background-color: #3058FF!important;
+    color: #fff!important;
+    font-weight: normal;
+}
+.react-datepicker__day--keyboard-selected, .react-datepicker__month-text--keyboard-selected, .react-datepicker__quarter-text--keyboard-selected, .react-datepicker__year-text--keyboard-selected {
+    border-radius: 4px!important;
+    background-color: #3058FF!important;
+    color: #fff!important;
+}
+.react-datepicker-wrapper .react-datepicker__input-container {}
+.react-datepicker-wrapper .react-datepicker__input-container input, .react-datepicker-wrapper .react-datepicker__input-container input:focus{
+    position: relative;
+    display: block;
+    height: 48px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+    width: 100%;
+    appearance: none; /* Typically for form elements to remove browser default styles */
+    border-radius: 0px;
+    border: 1px solid #D8D8D8;
+    outline: 0;
+    box-shadow: none;
+    color: #8e8e8e;
+    font-size: 15px;
+}
+.react-datepicker__triangle {
+    display: none!important;
+}
+
+.react-datepicker__day--outside-month {
+    color: #717171!important;
 }

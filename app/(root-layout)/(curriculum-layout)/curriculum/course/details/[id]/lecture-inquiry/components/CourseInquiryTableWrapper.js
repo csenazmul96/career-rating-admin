@@ -1,8 +1,8 @@
 "use client"
 
 
-import TableHeaderCommonActions from "@/components/common/TableHeaderCommonActions";
-import DataTable from "@/components/common/DataTable";
+import LmsTableHeaderActions from "@/components/common/LmsTableHeaderActions";
+import LmsTable from "@/components/common/LmsTable";
 import React from "react";
 import Link from "next/link";
 import {Button} from "@/components/common/button";
@@ -44,9 +44,9 @@ function CourseInquiryTableWrapper({pagination, id, queries}) {
 
     return (
         <>
-            <TableHeaderCommonActions pagination={pagination} TableActions={<InqueriTableActions url={`/enrolled-course/${id}/inquiries`} />}  />
+            <LmsTableHeaderActions  pagination={pagination}  TableActions={<InqueriTableActions url={`/enrolled-course/${id}/inquiries`} />}  />
             {queries && columns &&
-                <DataTable
+                <LmsTable
                     columns={columns}
                     pagination={pagination}
                     data={transformedQueries}

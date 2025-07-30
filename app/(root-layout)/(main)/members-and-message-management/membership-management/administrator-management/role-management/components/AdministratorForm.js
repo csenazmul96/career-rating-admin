@@ -16,7 +16,7 @@ import AllSelectedPermissionTags
     from "@/app/(root-layout)/(main)/members-and-message-management/membership-management/administrator-management/role-management/components/AllSelectedPermissionTags";
 import Image from "next/image";
 import {formatErrors} from "@/utils/helpers/ErrorHeloper";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 const AdministratorForm = ({groups, disable= false, selectedRole = null, grpSelectBtnText="초기화"}) => {
 
@@ -165,19 +165,19 @@ const AdministratorForm = ({groups, disable= false, selectedRole = null, grpSele
                 if (response.errors){
                     setErrors(formatErrors(response.errors))
                 } else {
-                    CommonToastMessage('업데이트.', 'Role has been updated', 'success')
+                    LmsToastMessage('업데이트.', 'Role has been updated', 'success')
                 }
             } else {//new role create
                 const response = await createRole({name: formData.name, permissions: formData.permissions})
                 if (response.status === 500){
-                    CommonToastMessage('생성됨.', '문제가 발생했습니다.', 'error')
+                    LmsToastMessage('생성됨.', '문제가 발생했습니다.', 'error')
                     setLoading(false)
                     return;
                 }
                 if (response.errors){
                     setErrors(formatErrors(response.errors))
                 } else {
-                    CommonToastMessage('생성됨.', 'New role has been created', 'success')
+                    LmsToastMessage('생성됨.', 'New role has been created', 'success')
                     setCurrentGrp(response.data)
                     setEditRole(response.data)
                 }

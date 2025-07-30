@@ -1,6 +1,6 @@
 "use client";
-import TableHeaderCommonActions from "@/components/common/TableHeaderCommonActions";
-import DataTable from "@/components/common/DataTable";
+import LmsTableHeaderActions from "@/components/common/LmsTableHeaderActions";
+import LmsTable from "@/components/common/LmsTable";
 import InqueriTableActions
     from "@/app/(root-layout)/(main)/customer-service-center/inquiry/components/InqueriTableActions";
 import {Button} from "@/components/common/button";
@@ -35,9 +35,9 @@ function InquiryTable({pagination, queryParams, inqueries}) {
     ];
     return (
         <>
-            <TableHeaderCommonActions pagination={pagination} TableActions={<InqueriTableActions url={"/student-inquiry"} />} classes={'mt-8'} />
+            <LmsTableHeaderActions pagination={pagination} TableActions={<InqueriTableActions url={"/student-inquiry"} />} classes={'mt-8'} />
             {inqueries && columns &&
-                <DataTable
+                <LmsTable
                     columns={columns}
                     data={inqueries}
                     checkMark={true}

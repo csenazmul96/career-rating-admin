@@ -9,7 +9,7 @@ import {Button} from "@/components/common/button";
 import {Menu} from "lucide-react";
 import {createFaqs, createNotice, updateFaqs, updateNotice} from "@/utils/api/curriculumManagement";
 import {formatErrors} from "@/utils/helpers/ErrorHeloper";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 import {confirmAlert} from "react-confirm-alert";
 import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
 import {useRouter} from "next/navigation";
@@ -89,7 +89,7 @@ function NoticeForm({notice = null, categories}) {
         } else if (response?.status === "error") {
             setErrors(formatErrors(response?.errors))
         } else {
-            CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
+            LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
         }
 
 
@@ -145,6 +145,7 @@ function NoticeForm({notice = null, categories}) {
                             initialText={'카테고리 선택'}
                             value={form.category}
                             options={categories}
+                            fieldClass={`h-[190px] w-full`}
                             changeDataHandler={handleOnChange}/>
                     </FieldWrapper>
                 </div>

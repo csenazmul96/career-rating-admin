@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/common/button";
-import { CommonToastMessage } from "@/components/common/CommonToastMessage";
+import { LmsToastMessage } from "@/components/common/LmsToastMessage";
 import { deleteRecentUploadedFile } from "@/utils/api/videoContentRequest";
 import { FilePlus, Info } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -108,12 +108,12 @@ const DocumentUploadComponent = ({
           });
         });
       } else {
-        CommonToastMessage("오류.", `${file.name} upload failed`, "error");
+        LmsToastMessage("오류.", `${file.name} upload failed`, "error");
       }
     };
 
     xhr.onerror = () => {
-      CommonToastMessage("오류.", `${file.name} upload failed`, "error");
+      LmsToastMessage("오류.", `${file.name} upload failed`, "error");
     };
 
     xhr.send(formData);
@@ -136,7 +136,7 @@ const DocumentUploadComponent = ({
       );
 
       if (response.status !== "success") {
-        CommonToastMessage("성공.", response.message, "error");
+        LmsToastMessage("성공.", response.message, "error");
         setLoading({ status: false, uniqueName: "" });
         return;
       }
@@ -147,7 +147,7 @@ const DocumentUploadComponent = ({
       setFiles(filterdFiels);
       setLoading({ status: false, uniqueName: "" });
 
-      CommonToastMessage("성공.", "File has been deleted.", "success");
+      LmsToastMessage("성공.", "File has been deleted.", "success");
     }
   };
 

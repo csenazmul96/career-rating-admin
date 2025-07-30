@@ -11,7 +11,7 @@ import {Button} from "@/components/common/button";
 import Link from "next/link";
 import {Checkbox} from "@/components/common/checkbox";
 import {Info, Search} from "lucide-react";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 import LmsStandardSelectInputV2 from "@/components/common/form/LmsStandardSelectInputV2";
 
 const AdministratorRegisterForm = ({roles}) => {
@@ -102,9 +102,9 @@ const AdministratorRegisterForm = ({roles}) => {
     if (response.status === 'success'){
       setSearchSelectedList([])
       clearSearch()
-      CommonToastMessage('업데이트.', 'Role has been updated successfully!', 'success')
+      LmsToastMessage('업데이트.', 'Role has been updated successfully!', 'success')
     } else {
-      CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
+      LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
     }
     setLoader(false)
   }

@@ -10,7 +10,7 @@ import {useCurriculumContext} from "@/store/CurriculumContext";
 import {deleteChapter} from "@/utils/api/curriculumManagement";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {Plus, Trash2} from "lucide-react";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 const TableOfContentsSidebar = ({groups, courseId}) => {
     const [openForm, setOpenForm] = useState(false)
@@ -41,7 +41,7 @@ const TableOfContentsSidebar = ({groups, courseId}) => {
 
                         if (response.status === 'success') {
                             showDeleteButton && setShowDeleteButton(false)
-                            CommonToastMessage('성공.', 'Chapter has been deleted', 'success')
+                            LmsToastMessage('성공.', 'Chapter has been deleted', 'success')
                         }
                     }
                 }

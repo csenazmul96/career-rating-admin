@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
-import DataTable from "@/components/common/DataTable";
-import TableHeaderCommonActions from "@/components/common/TableHeaderCommonActions";
+import LmsTable from "@/components/common/LmsTable";
+import LmsTableHeaderActions from "@/components/common/LmsTableHeaderActions";
 import React from "react";
 import {Button} from "@/components/common/button";
 import AdministratorListTableActions
@@ -52,14 +52,14 @@ export default function AdministratorTableWrapper({members, pagination}) {
     ];
 
     return <>
-        {pagination && <TableHeaderCommonActions
+        {pagination && <LmsTableHeaderActions
             pagination={pagination}
             TableActions={
                 <AdministratorListTableActions />
             }
         />}
         {members &&
-        <DataTable
+        <LmsTable
             columns={columns}
             data={members}
             rowLink={(member) => `/members-and-message-management/membership-management/administrator-management/${member.id}`}

@@ -12,7 +12,7 @@ const RoleFormPermissionSingleElement = ({option, formData, handleCheckboxChange
                       clickHandler={() => handleCheckboxChange(option, 'permissions')}
                       color="lmscheckbox" name="allow_embedding"/>
             <Label className="font-normal cursor-pointer text-black"
-                   htmlFor={`permission-${option.id}`}>{option.name}</Label>
+                   htmlFor={`permission-${option.id}`}>{option.koreanName}</Label>
         </CheckboxField>
     </li>
 }

@@ -11,7 +11,7 @@ import { getSpecificPreviousDate } from "@/utils/helpers/CommonHelper";
 import { format } from "date-fns";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 import LmsDatatableFilterSummary from "@/components/common/LmsDatatableFilterSummary";
 
 const WithdrawalFilter = ({ queryParams }) => {
@@ -49,7 +49,7 @@ const WithdrawalFilter = ({ queryParams }) => {
       let startDate = new Date(params.startDate);
       let endDate = new Date(params.endDate);
       if (endDate < startDate) {
-        CommonToastMessage('오류.', '설정하신 날짜를 다시 확인해주세요', 'warning');
+        LmsToastMessage('오류.', '설정하신 날짜를 다시 확인해주세요', 'warning');
       }
     }
   }, [params]);
@@ -146,6 +146,8 @@ const WithdrawalFilter = ({ queryParams }) => {
           <FilterFormWrapper label="기간" className={` `}>
             <LmsStandardDatePicker
               name={"startDate"}
+              selectedEndDate={params?.endDate}
+              selectedStartDate={params?.startDate}
               value={params?.startDate}
               placeholder={"YYYY-MM-DD"}
               changeDataHandler={handleOnChnage}
@@ -153,6 +155,8 @@ const WithdrawalFilter = ({ queryParams }) => {
             <span>-</span>
             <LmsStandardDatePicker
               name={"endDate"}
+              selectedEndDate={params?.endDate}
+              selectedStartDate={params?.startDate}
               value={params?.endDate}
               placeholder={"YYYY-MM-DD"}
               changeDataHandler={handleOnChnage}

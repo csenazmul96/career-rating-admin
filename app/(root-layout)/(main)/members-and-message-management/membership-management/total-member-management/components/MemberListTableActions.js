@@ -9,8 +9,8 @@ import LmsOrganizationSingleSelect from "@/components/common/form/organizations/
 import {Dialog, DialogBody} from "@/components/common/dialog";
 import {useDataTable} from "@/store/DataTableContext";
 import {ListPlus, Plus, Users} from "lucide-react";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
-import {multipleEmployeeDelete} from "@/utils/api/admin/EmployeeAPI";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
+import LmsOrganizationSingleSelectV2 from "@/components/common/form/organizations/LmsOrganizationSingleSelectV2";
 
 const MemberListTableActions = ({organizations}) => {
     const{selectedRow, setSelectedRows} = useDataTable()
@@ -20,11 +20,13 @@ const MemberListTableActions = ({organizations}) => {
     const memberGroupChangeBtnClick = () => {
         setIsOpen(true)
     }
+    console.log(organizations)
     const changedOrganization = (item) => {
+        console.log(item)
         if(item) {
             confirmAlert({
-                title: 'Delete',
-                message: 'Are you sure about this action?',
+                title: '조직그룹 변경',
+                message: '조직그룹을 변경하시겠습니까?',
                 buttons: [
                     {
                         label: '취소',
@@ -34,11 +36,16 @@ const MemberListTableActions = ({organizations}) => {
                     },
                     {
                         label: '확인',
-                        onClick: async () => {
-                          const response =  await multipleEmployeeDelete({ids:selectedRow})
-                            if (response.status === 200) {
-
-                            }
+                        onClick: () => {
+                            memberGroupChangeRequestSend(item.id).then(res => {
+                                if (res) {
+                                    setSelectedRows([])
+                                    setIsOpen(false)
+                                    LmsToastMessage('성공.', 'Members group has been changed!', 'success')
+                                } else {
+                                    LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
+                                }
+                            })
                         }
                     }
                 ],
@@ -48,6 +55,8 @@ const MemberListTableActions = ({organizations}) => {
                     );
                 }
             });
+        } else {
+            setIsOpen(false);
         }
     }
 
@@ -90,8 +99,8 @@ const MemberListTableActions = ({organizations}) => {
             {isOpen &&
                 <>
                     <Dialog open={isOpen} onClose={setIsOpen} size={''}  className={'p-0 m-0 w-max flex justify-center'}>
-                        <DialogBody>
-                            <LmsOrganizationSingleSelect organizations={organizations?.organizations} callBack={changedOrganization}/>
+                        <DialogBody className={`!mt-0`}>
+                            <LmsOrganizationSingleSelectV2  organizations={organizations?.organizations} callBack={changedOrganization}/>
                         </DialogBody>
                     </Dialog>
                 </>

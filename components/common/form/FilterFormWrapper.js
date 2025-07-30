@@ -7,7 +7,7 @@ import {ErrorMessage} from "@/components/common/fieldset";
 const FilterFormWrapper = ({label, singleElement = false, required,  className, children, isHalfWidth = false }) => {
     return (
         <div
-            className={`flex items-center py-8 gap-6   ${isHalfWidth ? "w-1/2" : "w-full"} ${className ? className : ""}`}>
+            className={`flex items-center py-6 gap-6   ${isHalfWidth ? "w-1/2" : "w-full"} ${className ? className : ""}`}>
             {label &&
                 <div className="flex items-center min-w-[100px] self-stretch">
                     <span className="common-label-style">

@@ -152,6 +152,7 @@ const AdministratorTableFilter = ({organizations, queryParams, roles}) => {
                             initialText={'관리자 유형 선택'}
                             value={params && params.rolePermissionId ? params.rolePermissionId : ''}
                             options={roles}
+                            fieldClass={"h-[200px] w-full"}
                             changeDataHandler={handleOnChnage}/>
                     </FilterFormWrapper>
                     <FilterFormWrapper label="조직그룹" className={` `}>

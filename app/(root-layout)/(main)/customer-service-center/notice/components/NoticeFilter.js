@@ -75,18 +75,19 @@ const NoticeFilter = ({queryParams, categories}) => {
     return (
         <>
             <FilterForm>
-                <div className="flex">
-                    <FilterFormWrapper label="카테고리" singleElement={true} className={`pb-0`}>
+                <div className="flex  border-b border-borderColor">
+                    <FilterFormWrapper label="카테고리" singleElement={true} className={` `}>
                         <LmsStandardSelectInputV2
                             name={`noticeCategory`}
                             optionLabel={'label'}
                             optionValue={'name'}
+                            fieldClass={`h-[190px] w-full`}
                             initialText={'카테고리 선택'}
                             value={params?.noticeCategory || ''}
                             options={categories}
                             changeDataHandler={handleOnChnage}/>
                     </FilterFormWrapper>
-                    <FilterFormWrapper label="상태" className={'!pb-0'}>
+                    <FilterFormWrapper label="상태" className={' '}>
                         <LmsStandardRadioFieldGroup
                             name="noticeType"
                             options={[

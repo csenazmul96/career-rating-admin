@@ -15,7 +15,7 @@ import {createNewEvaluation, updateEvaluation} from "@/utils/api/evaluationManag
 import {formatErrors, getNearestQuestionError} from "@/utils/helpers/ErrorHeloper";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 function EvaluationForm({groups, evaluation = null}) {
     const router = useRouter()
@@ -84,7 +84,7 @@ function EvaluationForm({groups, evaluation = null}) {
                 setErrors(formatErrors(response.errors))
             }
             if (response.status === 'success') {
-                CommonToastMessage('성공.', evaluation ? "Evaluation has been updated successfully" : "Evaluation Created Successfully", 'success')
+                LmsToastMessage('성공.', evaluation ? "Evaluation has been updated successfully" : "Evaluation Created Successfully", 'success')
                 setErrors(null)
                 setQuestions(InitQuestion)
                 setCurrentQuestion(InitQuestion.length ? InitQuestion[0] : null)
@@ -96,7 +96,7 @@ function EvaluationForm({groups, evaluation = null}) {
 
             }
         } catch (error) {
-            CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
+            LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
             console.log(error.message)
         }
 

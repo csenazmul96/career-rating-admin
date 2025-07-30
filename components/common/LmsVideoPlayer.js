@@ -40,9 +40,6 @@ export default function LmsVideoPlayer({video}) {
 
                 if (plyrInstance.ready) {
                     handleReady();
-                    // Listen for time updates
-
-
                 } else {
                     plyrInstance.on('ready', handleReady);
                 }
@@ -68,8 +65,8 @@ export default function LmsVideoPlayer({video}) {
         tracks: video?.subtitles
             ? video.subtitles.map(sub => ({
                 kind: "subtitles",
-                label: getLanguageLabel(sub.language) || sub.language,
-                srcLang: sub.language,
+                label: sub.language,
+                srcLang: sub.languageCode,
                 src: sub.url,
                 default: sub.default || false,
             }))

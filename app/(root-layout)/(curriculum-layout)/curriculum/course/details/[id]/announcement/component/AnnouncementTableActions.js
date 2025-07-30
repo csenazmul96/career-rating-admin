@@ -7,7 +7,7 @@ import {confirmAlert} from "react-confirm-alert";
 import {deleteAnnouncements} from "@/utils/api/curriculumManagement";
 import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
 import {Pencil, Trash2} from "lucide-react";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 function AnnouncementTableActions({id}) {
     const{selectedRow, setSelectedRows} = useDataTable()
@@ -35,11 +35,11 @@ function AnnouncementTableActions({id}) {
                             const response = await deleteAnnouncements(form)
                             if (response.status === 'success'){
                                 setSelectedRows([]) // Clear selected rows after deletion
-                                CommonToastMessage('성공.', 'Announcement has been deleted!', 'success')
+                                LmsToastMessage('성공.', 'Announcement has been deleted!', 'success')
                             }
                         } catch (error) {
                             console.error("Error in onClick:", error.message);
-                            CommonToastMessage('오류.', 'Failed to delete item', 'error')
+                            LmsToastMessage('오류.', 'Failed to delete item', 'error')
                         }
                     }
                 }

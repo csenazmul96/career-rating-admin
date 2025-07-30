@@ -11,7 +11,7 @@ import {Button} from "@/components/common/button";
 import {createAnnouncement, updateAnnouncement} from "@/utils/api/curriculumManagement";
 import {formatErrors} from "@/utils/helpers/ErrorHeloper";
 import {useRouter} from "next/navigation";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 function AnnouncementForm({id, announcement = null}) {
     const router = useRouter()
@@ -57,7 +57,7 @@ function AnnouncementForm({id, announcement = null}) {
         }
         if (response && response.status === "success") {
             setCleanForm(true)
-            CommonToastMessage('성공.', announcement ? 'Announcement has been updated' :'Announcement has been created', 'success')
+            LmsToastMessage('성공.', announcement ? 'Announcement has been updated' :'Announcement has been created', 'success')
             setForm({
                 courseId: id,
                 title: "",
@@ -66,7 +66,7 @@ function AnnouncementForm({id, announcement = null}) {
             })
             router.push(`/curriculum/course/details/${id}/announcement`)
         } else {
-            CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
+            LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
         }
         setLoading(false)
     }

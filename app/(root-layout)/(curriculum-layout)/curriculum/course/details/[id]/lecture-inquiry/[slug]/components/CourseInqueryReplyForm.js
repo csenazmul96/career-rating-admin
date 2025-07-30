@@ -10,7 +10,7 @@ import InqueryUploadedFiles
     from "@/app/(root-layout)/(main)/customer-service-center/inquiry/[id]/components/InqueryUploadedFiles";
 import {formatErrors} from "@/utils/helpers/ErrorHeloper";
 import {submitInquiryReply} from "@/utils/api/curriculumManagement";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 function CourseInqueryReplyForm({id}) {
     const [formClean, setFormClear] = useState(false)
@@ -49,7 +49,7 @@ function CourseInqueryReplyForm({id}) {
         try {
             const  response = await submitInquiryReply(form, `/enrolled-course/inquiry/reply`)
             if (response.status === "success") {
-                CommonToastMessage('성공.', 'Reply has been submitted successfully', 'success')
+                LmsToastMessage('성공.', 'Reply has been submitted successfully', 'success')
                 setForm({
                     attachmentIds: [],
                     answer: '',
@@ -60,7 +60,7 @@ function CourseInqueryReplyForm({id}) {
             } else if (response.status === "error") {
                 setErrors(formatErrors(response.errors))
             } else {
-                CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
+                LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
             }
 
         } catch (e){

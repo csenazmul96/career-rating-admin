@@ -1,6 +1,6 @@
 'use client';
-import DataTable from "@/components/common/DataTable";
-import TableHeaderCommonActions from "@/components/common/TableHeaderCommonActions";
+import LmsTable from "@/components/common/LmsTable";
+import LmsTableHeaderActions from "@/components/common/LmsTableHeaderActions";
 import React from "react";
 import MemberSignInLogsTableActions
     from "@/app/(root-layout)/(main)/members-and-message-management/membership-management/total-member-management/member-details/[id]/signin-logs/components/MemberSignInLogsTableActions";
@@ -15,10 +15,10 @@ export default function CommonSignInLogsTableWrapper({logs, pagination}) {
     ];
 
     return <>
-        {pagination && <TableHeaderCommonActions pagination={pagination}
-                                                 pageSize={10}
-                                                 TableActions={<MemberSignInLogsTableActions />} />}
-        <DataTable
+        {pagination && <LmsTableHeaderActions pagination={pagination}
+                                              pageSize={10}
+                                              TableActions={<MemberSignInLogsTableActions />} />}
+        <LmsTable
             columns={columns}
             data={logs}
             pageSize={10}

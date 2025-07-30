@@ -61,30 +61,51 @@ export function generateSearchResult(lists) {
   let result = [];
   if (lists.length) {
     lists.forEach((parent) => {
+      // Top level
       result.push({
         id: parent.id,
         name: parent.name,
         grpName: parent.name,
         parent: null,
         subOrganizationGroupList: parent.subOrganizationGroupList
-          ? parent.subOrganizationGroupList
-          : [],
+            ? parent.subOrganizationGroupList
+            : [],
       });
+
       if (parent.subOrganizationGroupList) {
-        let allchilds = parent.subOrganizationGroupList.map((child) => {
-          return {
+        parent.subOrganizationGroupList.forEach((child) => {
+          // 2nd level
+          result.push({
             id: child.id,
             name: child.name,
             grpName: `${parent.name} > ${child.name}`,
             parent: parent,
-          };
+            subOrganizationGroupList: child.subOrganizationGroupList
+                ? child.subOrganizationGroupList
+                : [],
+          });
+
+          // 3rd level
+          if (child.subOrganizationGroupList) {
+            child.subOrganizationGroupList.forEach((grandchild) => {
+              result.push({
+                id: grandchild.id,
+                name: grandchild.name,
+                grpName: `${parent.name} > ${child.name} > ${grandchild.name}`,
+                parent: child,
+                subOrganizationGroupList: grandchild.subOrganizationGroupList
+                    ? grandchild.subOrganizationGroupList
+                    : [],
+              });
+            });
+          }
         });
-        result.push(...allchilds);
       }
     });
   }
   return result;
 }
+
 
 export function searchList(list, query) {
   return list

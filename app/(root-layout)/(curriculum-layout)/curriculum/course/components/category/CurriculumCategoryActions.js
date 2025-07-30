@@ -9,7 +9,7 @@ import {
     deleteCurriculumSubSubCategory
 } from "@/utils/api/curriculumCategory";
 import {useContentContext} from "@/store/ContentContext";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 const CurriculumCategoryActions = () => {
     const {setOpenForm, currentGroup, setActionType} = useContentContext();
@@ -49,9 +49,9 @@ const CurriculumCategoryActions = () => {
                         }
 
                         if (response && response.status === 'success') {
-                            CommonToastMessage('삭제.', 'Group has been removed', 'success')
+                            LmsToastMessage('삭제.', 'Group has been removed', 'success')
                         } else {
-                            CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
+                            LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
                         }
                     }
                 }

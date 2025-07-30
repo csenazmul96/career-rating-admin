@@ -8,7 +8,7 @@ import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
 import {useDataTable} from "@/store/DataTableContext";
 import {deleteCourse} from "@/utils/api/curriculumManagement";
 import {NotepadText, Trash2} from "lucide-react";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 export default function CourseTableActions() {
   const{selectedRow, setSelectedRows} = useDataTable()
@@ -38,11 +38,11 @@ export default function CourseTableActions() {
               const response = await deleteCourse(form)
               if (response.status === 'success'){
                 setSelectedRows([]) // Clear selected rows after deletion
-                CommonToastMessage('성공.', 'Course has been deleted!', 'success')
+                LmsToastMessage('성공.', 'Course has been deleted!', 'success')
               }
             } catch (error) {
               console.error("Error in onClick:", error.message);
-              CommonToastMessage('오류.', 'Failed to delete item', 'error')
+              LmsToastMessage('오류.', 'Failed to delete item', 'error')
             }
           }
         }

@@ -90,6 +90,8 @@ export default function EvaluationFilter({ queryParams, allParams }) {
         <LmsStandardDatePicker
           name={"startDate"}
           value={params?.startDate}
+          selectedEndDate={params?.endDate}
+          selectedStartDate={params?.startDate}
           placeholder={"YYYY-MM-DD"}
           changeDataHandler={handleOnChnage}
         />
@@ -97,6 +99,8 @@ export default function EvaluationFilter({ queryParams, allParams }) {
         <LmsStandardDatePicker
           name={"endDate"}
           value={params?.endDate}
+          selectedEndDate={params?.endDate}
+          selectedStartDate={params?.startDate}
           placeholder={"YYYY-MM-DD"}
           changeDataHandler={handleOnChnage}
         />

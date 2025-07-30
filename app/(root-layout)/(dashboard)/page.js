@@ -2,9 +2,11 @@
 
 import React, {useState} from 'react';
 import {Heading} from "@/components/common/heading";
+import { GoChevronRight} from "react-icons/go";
 import {Button} from "@/components/common/button";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/common/table";
 import LmsPageHeading from "@/components/common/LmsPageHeading";
 import {
     ChevronRight,
@@ -23,7 +25,6 @@ const Page = () => {
     return (
 
         <div className={`dashboard flex flex-col gap-12 lg:gap-16`}>
-
 
             <div className="dashboaed-stat flex flex-col">
                 <LmsPageHeading headingClasses={`pb-6`} title={'회원 현황'} tooltip={"아래의 현황은 당일 (12:00 - 24:00) 기준입니다."} />

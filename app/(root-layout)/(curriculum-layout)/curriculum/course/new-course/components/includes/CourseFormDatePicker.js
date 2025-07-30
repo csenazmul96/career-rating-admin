@@ -1,6 +1,6 @@
 import FieldWrapper from "@/components/common/form/FieldWrapper";
 import LmsStandardDatePicker from "@/components/common/form/date-picker/LmsStandardDatePicker";
-import { CommonToastMessage } from "@/components/common/CommonToastMessage";
+import { LmsToastMessage } from "@/components/common/LmsToastMessage";
 import { useEffect } from "react";
 
 export default function CourseFormDatePicker({ form, setForm, errors }) {
@@ -12,7 +12,7 @@ export default function CourseFormDatePicker({ form, setForm, errors }) {
       let startDate = new Date(form.courseStartDate);
       let endDate = new Date(form.courseEndDate);
       if (endDate < startDate) {
-        CommonToastMessage(
+        LmsToastMessage(
           "오류.",
           "설정하신 날짜를 다시 확인해주세요",
           "warning"

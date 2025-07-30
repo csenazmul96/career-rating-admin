@@ -5,7 +5,7 @@ import {confirmAlert} from "react-confirm-alert";
 import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
 import {memberRolePermissionRemove} from "@/utils/api/memberManagementRequest";
 import {Trash2} from "lucide-react";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 const AdministratorDeleteButton = ({id}) => {
     const deleteMember = async (e) => {
@@ -26,9 +26,9 @@ const AdministratorDeleteButton = ({id}) => {
                       const response =  await memberRolePermissionRemove(id)
                          
                         if(response.status === 'success'){
-                            CommonToastMessage('성공.', 'Member has been removed', 'success')
+                            LmsToastMessage('성공.', 'Member has been removed', 'success')
                         } else {
-                            CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
+                            LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
                         }
                     }
                 }

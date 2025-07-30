@@ -3,7 +3,7 @@ import {Radio, RadioField, RadioGroup} from "@/components/common/radio";
 import {Label} from "@/components/common/fieldset";
 import React, {useEffect, useState} from "react";
 import {getMemberRegistrationsSettingsUpdate} from "@/utils/api/memberManagementRequest";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 const MemberRegistrationSettingsForm = ({settings}) => {
     const [allSettings, setAllSettings] = useState([])
@@ -62,10 +62,10 @@ const MemberRegistrationSettingsForm = ({settings}) => {
         try {
             let response =  await getMemberRegistrationsSettingsUpdate({...setting, use: val}, setting.id)
             if (response.status === 'success'){
-                CommonToastMessage('성공.', 'Status has been updated!', 'success')
+                LmsToastMessage('성공.', 'Status has been updated!', 'success')
             }
         }catch (e){
-            CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
+            LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
         }
     }
 

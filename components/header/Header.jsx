@@ -8,19 +8,26 @@ import {
   DropdownMenu,
   DropdownItem
 } from "@/components/common/dropdown";
-import { Navbar, NavbarItem, NavbarSection } from "@/components/common/navbar";
+import {Navbar, NavbarItem, NavbarLabel, NavbarSection} from "@/components/common/navbar";
 import SignOutButton from "@/components/header/SignOutButton";
 import { useSidebar } from "@/custom-hooks/useSidebar";
 import { BellRing, Info, Menu, User } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import LmsNotificationWrapper from "@/components/header/LmsNotificationWrapper";
+import LmsNotificationWrapper from "@/components/header/notification-components/LmsNotificationWrapper";
+import {useNotificationContext} from "@/store/NotificationContext";
+import {useRef} from "react";
 
 const Header = () => {
   const { toggleMainSidebar } = useSidebar();
   const { data: session } = useSession();
+  const {setIsOpen, isOpen} = useNotificationContext()
+  const bellRef = useRef(null);
 
-
+  const handleClick = (e) => {
+    e.stopPropagation();
+    setIsOpen(!isOpen)
+  }
   return (
     <Navbar
       className={
@@ -38,14 +45,12 @@ const Header = () => {
         </div>
       </div>
 
-      <NavbarSection className={"px-0 gap-0"}>
-        <NavbarItem className={"cursor-pointer"} aria-label="Search">
+      <NavbarSection className={"px-0 gap-0 relative"}>
+        <LmsNotificationWrapper bellRef={bellRef} />
+        <NavbarItem className={"cursor-pointer"} aria-label="Search" onClick={handleClick} ref={bellRef} >
           <BellRing size={26} className={`text-[#777] cursor-pointer`} strokeWidth={1.25} />
-          {/*<img src="/images/header/bell-ring.png" width={20} height={20} alt="author img"/>*/}
-          {/*<LmsNotificationWrapper />*/}
         </NavbarItem>
         <NavbarItem href="/" aria-label="Inbox">
-          {/*<img src="/images/header/info.png" width={20} height={20} alt="author img"/>*/}
           <Info strokeWidth={1.25} size={26} className={`text-[#777]`} />
         </NavbarItem>
         <Dropdown>

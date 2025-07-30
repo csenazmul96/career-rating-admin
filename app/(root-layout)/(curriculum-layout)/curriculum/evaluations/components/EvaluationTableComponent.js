@@ -2,15 +2,15 @@
 
 import ContentTableBreadCrumbs from "@/app/(root-layout)/(content-layout)/components/ContentTableBreadCrumbs";
 import EvaluationTableActions from "@/app/(root-layout)/(curriculum-layout)/curriculum/evaluations/components/EvaluationTableActions";
-import DataTable from "@/components/common/DataTable";
-import TableHeaderCommonActions from "@/components/common/TableHeaderCommonActions";
+import LmsTable from "@/components/common/LmsTable";
+import LmsTableHeaderActions from "@/components/common/LmsTableHeaderActions";
 import { Button } from "@/components/common/button";
 import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
 import { deleteEvaluation } from "@/utils/api/evaluationManagement";
 import { Trash2 } from "lucide-react";
 import Link from "next/link";
 import { confirmAlert } from "react-confirm-alert";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 export default function EvaluationTableComponent({
   evaluations,
@@ -38,7 +38,7 @@ export default function EvaluationTableComponent({
               const request = await deleteEvaluation(id);
 
               if (request.status === "success") {
-                CommonToastMessage('성공.', 'Evaluation has been deleted successfully.', 'success')
+                LmsToastMessage('성공.', 'Evaluation has been deleted successfully.', 'success')
               }
             } catch (error) {
               console.error("Error in deleteEvaluation:", error);
@@ -117,13 +117,13 @@ export default function EvaluationTableComponent({
 
   return (
     <>
-      <TableHeaderCommonActions
+      <LmsTableHeaderActions
         pagination={pagination}
         TableActions={<EvaluationTableActions />}
         classes={"mt-8"}
       />
       {evaluations && columns && (
-        <DataTable
+        <LmsTable
           columns={columns}
           data={evaluations}
           serialNo={true}

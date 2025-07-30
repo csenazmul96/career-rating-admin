@@ -2,14 +2,14 @@
 
 import { useState } from "react"
 
-function ToggleSwitch({ options, defaultValue, onChange, className }) {
+function ToggleSwitch({ options, defaultValue, onChange, className, name = '' }) {
 
-    const [selectedValue, setSelectedValue] = useState(defaultValue || (options.length > 0 ? options[0].value : ""))
+    const [selectedValue, setSelectedValue] = useState(defaultValue)
 
     const handleSelect = (value) => {
         setSelectedValue(value)
         if (onChange) {
-            onChange(value)
+            onChange(name, value)
         }
     }
 

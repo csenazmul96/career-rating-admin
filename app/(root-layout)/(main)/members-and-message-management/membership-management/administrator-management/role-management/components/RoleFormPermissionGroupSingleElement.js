@@ -19,7 +19,7 @@ const RoleFormPermissionGroupSingleElement = ({option, formData, hangleGroupClic
                 disabled={disable}
                 clickHandler={(e) => hangleGroupClick(option, e)}
                 color="lmscheckbox" name="allow_embedding"/>
-      <Label className="font-normal cursor-pointer text-black" onClick={()=>selectGroup(option)}>{option.name}sds</Label>
+      <Label className="font-normal cursor-pointer text-black" onClick={()=>selectGroup(option)}>{option.koreanName}</Label>
     </CheckboxField>
   </li>
 }

@@ -11,7 +11,7 @@ import {
     createCurriculumNewSubSubCategory
 } from "@/utils/api/curriculumCategory";
 import {useContentContext} from "@/store/ContentContext";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 const CurriculumCategoryForm = () => {
     const {openForm, setOpenForm, currentGroup, actionType, setActionType, activeDropdown} = useContentContext();
@@ -72,15 +72,15 @@ const CurriculumCategoryForm = () => {
 
             if (response && response.status === 'success') {
                 cancelForm()
-                CommonToastMessage('성공.', `${currentGroup ? 'Group has been updated' : 'Group has been created'}`, 'success')
+                LmsToastMessage('성공.', `${currentGroup ? 'Group has been updated' : 'Group has been created'}`, 'success')
             } else {
                 if (response?.errors) {
                     setErrors(formatErrors(response?.errors))
                 }
-                CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
+                LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
             }
         } catch (e){
-            CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
+            LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
         }
 
         setLoading(false)

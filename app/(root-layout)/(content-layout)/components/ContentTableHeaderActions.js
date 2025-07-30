@@ -12,7 +12,7 @@ import { Folder, Trash2, Upload } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { confirmAlert } from "react-confirm-alert";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 export default function ContentTableHeaderActions() {
   let [isOpen, setIsOpen] = useState(false);
@@ -62,7 +62,7 @@ export default function ContentTableHeaderActions() {
                   : "/document/content/group/change"
               }`
             ).then(() => {
-              CommonToastMessage('성공.', 'group has been changed.', 'success')
+              LmsToastMessage('성공.', 'group has been changed.', 'success')
             });
             setSelectedRows([]);
           },
@@ -108,11 +108,11 @@ export default function ContentTableHeaderActions() {
                   : "/document/content";
 
               await deleteContent(form.ids, endpoint, tag);
-              CommonToastMessage('삭제.', 'Item deleted successfully', 'success')
+              LmsToastMessage('삭제.', 'Item deleted successfully', 'success')
               setSelectedRows([]);
             } catch (error) {
               console.error("Error in onClick:", error.message);
-              CommonToastMessage('오류.', 'Failed to delete item', 'error')
+              LmsToastMessage('오류.', 'Failed to delete item', 'error')
             }
           },
         },

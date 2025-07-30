@@ -12,7 +12,7 @@ import MemberTableComponent
 import {Dialog, DialogBody} from "@/components/common/dialog";
 import LmsOrganizationSingleSelect from "@/components/common/form/organizations/LmsOrganizationSingleSelect";
 import {Search} from "lucide-react";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 const OrganizationMemberList = ({searchParams, organizations}) => {
   const organizationCtx = useContext(OrganizationContext);
@@ -70,9 +70,9 @@ const OrganizationMemberList = ({searchParams, organizations}) => {
     if(item) {
       const response = await assignOrganizationToMembers(item.id, selectedIds.map(id => +id));
       if(response){
-        CommonToastMessage('성공.', 'Update has been complete', 'success')
+        LmsToastMessage('성공.', 'Update has been complete', 'success')
       } else {
-        CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
+        LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
       }
       setIsOrgSelectModalOpen(false)
     }

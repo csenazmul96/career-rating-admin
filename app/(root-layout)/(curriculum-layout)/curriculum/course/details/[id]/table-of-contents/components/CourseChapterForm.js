@@ -6,7 +6,7 @@ import React, { useState} from "react";
 import LmsStandardInputField from "@/components/common/form/LmsStandardInputField";
 import {createChapter} from "@/utils/api/curriculumManagement";
 import {formatErrors} from "@/utils/helpers/ErrorHeloper";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 const CourseChapterForm = ({openForm, setOpenForm, chapter, courseId, groupsLength}) => {
     const [errors, setErrors] = useState(null);
@@ -23,7 +23,7 @@ const CourseChapterForm = ({openForm, setOpenForm, chapter, courseId, groupsLeng
             const response = await createChapter(form, courseId)
 
             if (response.status === 'success') {
-                CommonToastMessage('성공.', 'Chapter has been created.', 'success')
+                LmsToastMessage('성공.', 'Chapter has been created.', 'success')
                 setOpenForm(false)
                 setForm({chapterName: ''})
             }
@@ -33,7 +33,7 @@ const CourseChapterForm = ({openForm, setOpenForm, chapter, courseId, groupsLeng
                 }
             }
         } catch (e){
-            CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
+            LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
         }
         setLoading(false)
     }

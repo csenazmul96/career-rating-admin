@@ -25,7 +25,7 @@ import {
 import { formatErrors } from "@/utils/helpers/ErrorHeloper";
 import { Menu } from "lucide-react";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 const DocumentForm = ({ roles, document = null }) => {
   const allRoles = roleDataFormatForReuseOrganizationComponent(roles);
@@ -112,7 +112,7 @@ const DocumentForm = ({ roles, document = null }) => {
 
       if (response.status === "success") {
         if (!document) {
-          CommonToastMessage('성공.', 'Data created successfully', 'success')
+          LmsToastMessage('성공.', 'Data created successfully', 'success')
           setForm({
             title: "",
             description: "",
@@ -126,12 +126,12 @@ const DocumentForm = ({ roles, document = null }) => {
           setFormClear(true);
           setSelectedGroup(null);
         } else {
-          CommonToastMessage('업데이트.', 'Data updated successfully', 'success')
+          LmsToastMessage('업데이트.', 'Data updated successfully', 'success')
         }
       } else if (response.status === "error") {
         setErrors(formatErrors(response.errors));
       } else {
-        CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
+        LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
       }
     } catch (e) {
       console.log(e.message);

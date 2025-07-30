@@ -1,6 +1,6 @@
 'use client';
-import DataTable from "@/components/common/DataTable";
-import TableHeaderCommonActions from "@/components/common/TableHeaderCommonActions";
+import LmsTable from "@/components/common/LmsTable";
+import LmsTableHeaderActions from "@/components/common/LmsTableHeaderActions";
 import React from "react";
 import {Button} from "@/components/common/button";
 import {getSituationKoreanText} from "@/utils/helpers/CommonHelper";
@@ -22,8 +22,8 @@ export default function WithdrawalMemberTableWrapper({members, pagination}) {
     ];
 
     return <>
-        {pagination && <TableHeaderCommonActions pagination={pagination} />}
-        <DataTable
+        {pagination && <LmsTableHeaderActions pagination={pagination} />}
+        <LmsTable
             columns={columns}
             data={members}
             pagination={pagination??null} />

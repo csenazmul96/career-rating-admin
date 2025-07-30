@@ -9,7 +9,7 @@ import {Button} from "@/components/common/button";
 import {Menu} from "lucide-react";
 import {createFaqs, updateFaqs} from "@/utils/api/curriculumManagement";
 import {formatErrors} from "@/utils/helpers/ErrorHeloper";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 import {confirmAlert} from "react-confirm-alert";
 import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
 import {useRouter} from "next/navigation";
@@ -65,7 +65,7 @@ function FaqForm({faq = null, categories}) {
         } else if (response?.status === "error") {
             setErrors(formatErrors(response?.errors))
         } else {
-            CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
+            LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
         }
 
 

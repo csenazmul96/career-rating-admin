@@ -9,27 +9,30 @@ import {DataTableProvider} from "@/store/DataTableContext"
 import SidebarProvider from "@/providers/SidebarProvider";
 import {CurriculumProvider} from "@/store/CurriculumContext";
 import {AuthContextProvider} from "@/store/AuthContext";
+import {NotificationProvider} from "@/store/NotificationContext";
 
 export default function Provider({children, session}) {
     return (
         <SessionProvider session={session}>
             <AuthContextProvider>
                 <DataTableProvider>
-                    <PageSidebarProvider>
-                        <CurriculumProvider>
-                            <SidebarProvider>
-                                <ContentProvider>
-                                    <RoleContextProvider>
-                                        <MemberProvider>
-                                            <OrganizationContextProvider>
-                                                {children}
-                                            </OrganizationContextProvider>
-                                        </MemberProvider>
-                                    </RoleContextProvider>
-                                </ContentProvider>
-                            </SidebarProvider>
-                        </CurriculumProvider>
-                    </PageSidebarProvider>
+                    <NotificationProvider>
+                        <PageSidebarProvider>
+                            <CurriculumProvider>
+                                <SidebarProvider>
+                                    <ContentProvider>
+                                        <RoleContextProvider>
+                                            <MemberProvider>
+                                                <OrganizationContextProvider>
+                                                    {children}
+                                                </OrganizationContextProvider>
+                                            </MemberProvider>
+                                        </RoleContextProvider>
+                                    </ContentProvider>
+                                </SidebarProvider>
+                            </CurriculumProvider>
+                        </PageSidebarProvider>
+                    </NotificationProvider>
                 </DataTableProvider>
             </AuthContextProvider>
         </SessionProvider>

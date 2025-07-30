@@ -7,7 +7,7 @@ import {useSession} from "next-auth/react";
 
 import {Button} from "@/components/common/button";
 import {updateLogedinUserPassword} from "@/utils/api/memberManagementRequest";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 import {formatErrors} from "@/utils/helpers/ErrorHeloper";
 
 function LoggedInUserPasswordUpdate(props) {
@@ -33,7 +33,7 @@ function LoggedInUserPasswordUpdate(props) {
         const response = await updateLogedinUserPassword(form, data?.username)
 
         if (response?.status === 500){
-            CommonToastMessage("실패", response.error, "error")
+            LmsToastMessage("실패", response.error, "error")
         }
         if (response?.errors) {
             setErrors(formatErrors(response?.errors));
@@ -44,7 +44,7 @@ function LoggedInUserPasswordUpdate(props) {
                 "newPassword": "",
                 "confirmNewPassword": ""
             })
-            CommonToastMessage('성공.', '회원이 성공적으로 업데이트되었습니다.', 'success')
+            LmsToastMessage('성공.', '회원이 성공적으로 업데이트되었습니다.', 'success')
         }
 
         setLoading(false);

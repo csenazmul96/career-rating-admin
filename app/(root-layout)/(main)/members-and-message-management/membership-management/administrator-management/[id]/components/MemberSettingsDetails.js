@@ -11,7 +11,7 @@ import {generateMemberForm} from "@/utils/helpers/CommonHelper";
 import { singleMemberRoleUpdate} from "@/utils/api/memberManagementRequest";
 import {formatErrors} from "@/utils/helpers/ErrorHeloper";
 import Link from "next/link";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 const MemberSettingsDetails = ({groups, roles, member}) => {
     const [currentRole, setCurrentRole] = useState(null)
@@ -58,11 +58,11 @@ const MemberSettingsDetails = ({groups, roles, member}) => {
 
             if (response.errors) {
                 setErrors(formatErrors(response.errors))
-                CommonToastMessage('업데이트.', "문제가 발생했습니다.", 'error')
+                LmsToastMessage('업데이트.', "문제가 발생했습니다.", 'error')
             } else {
                 if (!form.id) {
                 }
-                CommonToastMessage('성공.', 'Member has been updated successfully.', 'success')
+                LmsToastMessage('성공.', 'Member has been updated successfully.', 'success')
             }
             setLoading(false)
         } catch (e){

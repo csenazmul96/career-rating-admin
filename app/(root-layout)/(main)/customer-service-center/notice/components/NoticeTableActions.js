@@ -5,7 +5,7 @@ import {confirmAlert} from "react-confirm-alert";
 import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
 import React from "react";
 import {deleteNotice} from "@/utils/api/curriculumManagement";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 import {NotepadText, SquarePen, Trash2} from "lucide-react";
 import Link from "next/link";
 function NoticeTableActions() {
@@ -28,9 +28,9 @@ function NoticeTableActions() {
                         const response = await deleteNotice({ids: selectedRow})
                         if (response.status === "Success") {
                             setSelectedRows([])
-                            CommonToastMessage('성공.', 'Notice has been deleted!', 'success')
+                            LmsToastMessage('성공.', 'Notice has been deleted!', 'success')
                         } else {
-                            CommonToastMessage('실패.', 'Notice has not been deleted!', 'error')
+                            LmsToastMessage('실패.', 'Notice has not been deleted!', 'error')
                         }
                     }
                 }

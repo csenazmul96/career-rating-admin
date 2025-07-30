@@ -1,7 +1,7 @@
 import FieldWrapper from "@/components/common/form/FieldWrapper";
 import { Heading } from "@/components/common/heading";
 import { Copy } from "lucide-react";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 const VideoDetailsInfo = ({ video }) => {
   return (

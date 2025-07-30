@@ -15,7 +15,7 @@ import {SlArrowDown, SlArrowUp} from "react-icons/sl";
 import {format} from "date-fns";
 import LmsSearchInput from "@/components/common/form/LmsSearchInput";
 import LmsStandardDatePeriodPicker from "@/components/common/form/LmsStandardDatePeriodPicker";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 import LmsDatatableFilterSummary from "@/components/common/LmsDatatableFilterSummary";
 import LmsStandardDatePicker from "@/components/common/form/date-picker/LmsStandardDatePicker";
 
@@ -33,7 +33,7 @@ const MemberTableFilter = ({organizations, queryParams}) => {
             let startDate = new Date(params.startDate);
             let endDate = new Date(params.endDate);
             if (endDate < startDate) {
-                CommonToastMessage('오류.', '설정하신 날짜를 다시 확인해주세요', 'warning');
+                LmsToastMessage('오류.', '설정하신 날짜를 다시 확인해주세요', 'warning');
             }
         }
     }, [params]);

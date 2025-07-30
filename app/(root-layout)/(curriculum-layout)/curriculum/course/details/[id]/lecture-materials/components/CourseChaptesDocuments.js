@@ -2,7 +2,7 @@
 import VideoAssignToDocument from "@/app/(root-layout)/(curriculum-layout)/curriculum/course/details/[id]/lecture-materials/components/VideoAssignToDocument";
 import { Button } from "@/components/common/button";
 import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
-import DataTable from "@/components/common/DataTable";
+import LmsTable from "@/components/common/LmsTable";
 import { useCurriculumContext } from "@/store/CurriculumContext";
 import {
   deleteDocumentFromChapter,
@@ -14,7 +14,7 @@ import { Play, Trash2 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { confirmAlert } from "react-confirm-alert";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 function CourseChaptesDocuments({ documents, courseId }) {
   const params = useSearchParams();
@@ -43,7 +43,7 @@ function CourseChaptesDocuments({ documents, courseId }) {
               id
             );
             if (response.status === "success") {
-              CommonToastMessage('성공.', 'Chapter has been deleted', 'success')
+              LmsToastMessage('성공.', 'Chapter has been deleted', 'success')
             }
           },
         },
@@ -157,7 +157,7 @@ function CourseChaptesDocuments({ documents, courseId }) {
   return (
     <>
       <div className="max-h-96 overflow-y-auto w-full   border-t border-commonBorderColor">
-        <DataTable
+        <LmsTable
           columns={columns}
           data={tableData}
           emptyMessage={"등록된 자료가 없습니다. 자료를 등록해 주세요."}

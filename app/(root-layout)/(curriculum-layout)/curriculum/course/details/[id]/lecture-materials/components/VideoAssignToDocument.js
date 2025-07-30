@@ -5,7 +5,7 @@ import {
   DialogBody,
   DialogTitle,
 } from "@/components/common/dialog";
-import { CommonToastMessage } from "@/components/common/CommonToastMessage";
+import { LmsToastMessage } from "@/components/common/LmsToastMessage";
 import { assignVideoToDocument } from "@/utils/api/curriculumManagement";
 import { Play } from "lucide-react";
 import { useState } from "react";
@@ -33,11 +33,11 @@ function VideoAssignToDocument({ isOpen, setIsOpen, form, setForm }) {
     try {
       const response = await assignVideoToDocument(form);
       if (response.status === "success") {
-        CommonToastMessage("성공.", "영상이 할당되었습니다.", "success");
+        LmsToastMessage("성공.", "영상이 할당되었습니다.", "success");
         closeDialog();
       }
     } catch (e) {
-      CommonToastMessage("오류.", e.message, "error");
+      LmsToastMessage("오류.", e.message, "error");
     }
     setLoading(false);
   };

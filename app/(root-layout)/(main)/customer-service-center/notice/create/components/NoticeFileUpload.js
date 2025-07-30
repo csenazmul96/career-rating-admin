@@ -5,7 +5,7 @@ import {IoMdClose} from "react-icons/io";
 import {noticeFileUpload, uploadCurriculumFile} from "@/utils/api/curriculumManagement";
 import {getFileExtension} from "@/utils/helpers/CommonHelper";
 import {FilePlus} from "lucide-react";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 import {useSession} from "next-auth/react";
 
 const NoticeFileUpload = ({ setForm, cleanForm, notice = null}) => {
@@ -41,7 +41,7 @@ const NoticeFileUpload = ({ setForm, cleanForm, notice = null}) => {
                 setFileInfo((prev) => [...prev, data]);
                 setForm((prev) => ({...prev, attachmentIds: [...prev.attachmentIds ,data.id]}));
             } else {
-                CommonToastMessage('오류.', `${file.name} upload failed`, 'error')
+                LmsToastMessage('오류.', `${file.name} upload failed`, 'error')
             }
         };
 

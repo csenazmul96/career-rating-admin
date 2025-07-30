@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/common/button";
-import DataTable from "@/components/common/DataTable";
-import TableHeaderCommonActions from "@/components/common/TableHeaderCommonActions";
+import LmsTable from "@/components/common/LmsTable";
+import LmsTableHeaderActions from "@/components/common/LmsTableHeaderActions";
 import { getSituationKoreanText } from "@/utils/helpers/CommonHelper";
 
 export default function CourseDetailsTable({ courses, pagination }) {
@@ -45,9 +45,9 @@ export default function CourseDetailsTable({ courses, pagination }) {
   return (
     <>
       {pagination && (
-        <TableHeaderCommonActions pagination={pagination} pageSize={10} />
+        <LmsTableHeaderActions pagination={pagination} pageSize={10} />
       )}
-      <DataTable
+      <LmsTable
         columns={columns}
         data={tableData}
         pageSize={10}

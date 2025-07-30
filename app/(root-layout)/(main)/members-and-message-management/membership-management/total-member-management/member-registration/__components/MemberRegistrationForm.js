@@ -10,7 +10,7 @@ import FieldWrapper from "@/components/common/form/FieldWrapper";
 import LmsStandardInputField from "@/components/common/form/LmsStandardInputField";
 import LmsStandardRadioFieldGroup from "@/components/common/form/LmsStandardRadioFieldGroup";
 import LmsStandardTextArea from "@/components/common/form/LmsStandardTextArea";
-import { CommonToastMessage } from "@/components/common/CommonToastMessage";
+import { LmsToastMessage } from "@/components/common/LmsToastMessage";
 import { useOrganization } from "@/custom-hooks/useOrganization";
 import {
   memberRegistration,
@@ -26,7 +26,7 @@ const MemberRegistrationForm = ({
   roles,
   member = null,
   settings,
-    allParams
+  allParams,
 }) => {
   const { setAllOrganizations } = useOrganization();
   const [situations, setSituations] = useState([
@@ -90,15 +90,17 @@ const MemberRegistrationForm = ({
         const errors = formatErrors(data.errors);
         setErrors(errors);
         if (!errors) {
-          CommonToastMessage("오류.", "문제가 발생했습니다.", "error");
+          LmsToastMessage("오류.", "문제가 발생했습니다.", "error");
         }
       } else {
         if (!form.id) {
           resetForm();
         }
-        CommonToastMessage(
+        LmsToastMessage(
           "성공.",
-            form?.id ?"회원이 성공적으로 업데이트되었습니다." : "회원이 성공적으로 생성되었습니다.",
+          form?.id
+            ? "회원이 성공적으로 업데이트되었습니다."
+            : "회원이 성공적으로 생성되었습니다.",
           "success"
         );
       }
@@ -185,7 +187,7 @@ const MemberRegistrationForm = ({
               name="password"
               type="password"
               value={form.password}
-              placeholder="비밀번호를 입력해주세요."
+              placeholder="영문, 숫자, 특수문자 조합 8자 이상 입력하세요"
               changeDataHandler={handleOnChnage}
             />
           </FieldWrapper>
@@ -269,9 +271,9 @@ const MemberRegistrationForm = ({
             <div className="left-col flex items-center">
               <div className="member-collapse-list ">
                 <Link
-                  href={
-                    `/members-and-message-management/membership-management/total-member-management?page=${allParams?.page || 1}&&size=${allParams?.size || 5}`
-                  }
+                  href={`/members-and-message-management/membership-management/total-member-management?page=${
+                    allParams?.page || 1
+                  }&&size=${allParams?.size || 5}`}
                 >
                   <Button
                     color="transparent"

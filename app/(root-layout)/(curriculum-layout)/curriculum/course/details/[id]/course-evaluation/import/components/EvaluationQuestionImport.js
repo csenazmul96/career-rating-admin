@@ -6,7 +6,7 @@ import {evaluationsWithoutPagination} from "@/utils/api/evaluationManagement";
 import ToolTip from "@/components/common/ToolTip";
 import Link from "next/link";
 import {Button} from "@/components/common/button";
-import DataTable from "@/components/common/DataTable";
+import LmsTable from "@/components/common/LmsTable";
 import EvaluationQuestionFilter
     from "@/app/(root-layout)/(curriculum-layout)/curriculum/course/details/[id]/course-evaluation/import/components/EvaluationQuestionFilter";
 import {useRouter} from "next/navigation";
@@ -15,7 +15,7 @@ import {
     assignEvaluationToCourse
 } from "@/utils/api/curriculumManagement";
 import {FileInput, Menu} from "lucide-react";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 import {formatErrors} from "@/utils/helpers/ErrorHeloper";
 
 function EvaluationQuestionImport({groups, queryParams, allParams}) {
@@ -55,16 +55,16 @@ function EvaluationQuestionImport({groups, queryParams, allParams}) {
                 const response = await assignEvaluationToCourse( {ids: selectedRow}, allParams.id)
 
                 if (response.status === "success") {
-                    CommonToastMessage('성공.', 'Evaluation has been imported', 'success')
+                    LmsToastMessage('성공.', 'Evaluation has been imported', 'success')
                     setSelectedRows([])
                     route.push(`/curriculum/course/details/${allParams.id}/course-evaluation`)
                 } else {
                     if (response.errors) {
                         const errors = formatErrors(response.errors)
                         if (errors?.courseId)
-                            CommonToastMessage('오류.', errors?.courseId, 'error')
+                            LmsToastMessage('오류.', errors?.courseId, 'error')
                     } else {
-                        CommonToastMessage('오류.', "문제가 발생했습니다.", 'error')
+                        LmsToastMessage('오류.', "문제가 발생했습니다.", 'error')
                     }
 
                 }
@@ -125,7 +125,7 @@ function EvaluationQuestionImport({groups, queryParams, allParams}) {
                             </div>
                         </div>
                     }
-                    <DataTable
+                    <LmsTable
                         columns={columns}
                         data={evaluations}
                         checkMark={true}

@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
-import DataTable from "@/components/common/DataTable";
-import TableHeaderCommonActions from "@/components/common/TableHeaderCommonActions";
+import LmsTable from "@/components/common/LmsTable";
+import LmsTableHeaderActions from "@/components/common/LmsTableHeaderActions";
 import {Button} from "@/components/common/button";
 import Link from "next/link";
 import {FileInput} from "lucide-react";
@@ -28,8 +28,8 @@ function CourseEvaluationTable({documents, allParams, pagination}) {
 
     return (
         <div>
-            <TableHeaderCommonActions pagination={pagination} TableActions={<ImportButton />} />
-            <DataTable
+            <LmsTableHeaderActions pagination={pagination} TableActions={<ImportButton />} />
+            <LmsTable
                 columns={columns}
                 data={documents}
                 serialNo={true}

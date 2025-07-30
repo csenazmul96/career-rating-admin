@@ -5,19 +5,20 @@ import { Checkbox, CheckboxField } from "@/components/common/checkbox";
 import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
 import { Label } from "@/components/common/fieldset";
 import { Heading } from "@/components/common/heading";
-import { CommonToastMessage } from "@/components/common/CommonToastMessage";
+import { LmsToastMessage } from "@/components/common/LmsToastMessage";
 import { useSidebar } from "@/custom-hooks/useSidebar";
 import {
   applyDefaultThumbnail,
   createThumbnail,
   deleteExistsThumb,
 } from "@/utils/api/videoContentRequest";
-import { ImagePlus, Info, X } from "lucide-react";
+import {ImagePlus, Info, Play, X} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { confirmAlert } from "react-confirm-alert";
 import Dropzone from "react-dropzone";
 import VideoPlayerOuter
   from "@/app/(root-layout)/(content-layout)/content-management/video-management/details/[id]/components/VideoPlayerOuter";
+import {FaPlay} from "react-icons/fa";
 
 const VideoDetailsThumbnails = ({ thumbnail, id, setFormData, video }) => {
   const { isSidebarOpen } = useSidebar();
@@ -72,7 +73,7 @@ const VideoDetailsThumbnails = ({ thumbnail, id, setFormData, video }) => {
           onClick: async () => {
             const response = await deleteExistsThumb(name, id);
             if (response && response.status === "success") {
-              CommonToastMessage("성공.", "Image has been deleted", "success");
+              LmsToastMessage("성공.", "Image has been deleted", "success");
             }
           },
         },
@@ -109,7 +110,7 @@ const VideoDetailsThumbnails = ({ thumbnail, id, setFormData, video }) => {
               tempSelectedThumbnail.id
             );
             if (response && response.status === "success") {
-              CommonToastMessage("성공.", "Thumbnail has been updated", "success");
+              LmsToastMessage("성공.", "Thumbnail has been updated", "success");
             }
           },
         },
@@ -134,7 +135,21 @@ const VideoDetailsThumbnails = ({ thumbnail, id, setFormData, video }) => {
           isSidebarOpen ? "w-[35%]" : "w-[50%]"
         }`}
       >
-        <div className="inner relative rounded-[20px] overflow-hidden w-full bg-[#000] aspect-[16/9]" onClick={()=>setOpen(true)}>
+        <div className="inner relative rounded-[20px] overflow-hidden  w-full bg-[#000] aspect-[16/9]" onClick={()=>setOpen(true)}>
+          <div className={` absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center`}>
+            <div className="gradient-border-rounded z-10 size-[120px] rounded-full overflow-hidden flex items-center justify-center cursor-pointer">
+              <div className="
+                    relative
+                    h-full w-full flex items-center justify-center overflow-hidden rounded-full
+                    bg-black bg-opacity-25
+                    backdrop-blur-[33.33px]
+                    shadow-[inset_-1.22px_1.22px_1.22px_-2.43px_#ffffff59]
+                    p-4
+                ">
+                <FaPlay size={45} className={`text-white`} />
+              </div>
+            </div>
+          </div>
           {selectedThumbnail ? (
             <img
               src={selectedThumbnail.url}

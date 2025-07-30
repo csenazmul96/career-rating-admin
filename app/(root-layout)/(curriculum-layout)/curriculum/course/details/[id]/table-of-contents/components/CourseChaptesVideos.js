@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/common/button";
 import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
-import { CommonToastMessage } from "@/components/common/CommonToastMessage";
+import { LmsToastMessage } from "@/components/common/LmsToastMessage";
 import { Table, TableCell, TableRow } from "@/components/common/table";
 import { deleteVideoFromChapter } from "@/utils/api/curriculumManagement";
 import { useSearchParams } from "next/navigation";
@@ -31,10 +31,10 @@ function CourseChaptesVideos({ videos }) {
               id
             );
             if (response.status === "success") {
-              CommonToastMessage("삭제.", "Chapter has been deleted", "success");
+              LmsToastMessage("삭제.", "Chapter has been deleted", "success");
             }
             if (response.status === "error") {
-              CommonToastMessage(
+              LmsToastMessage(
                 "오류.",
                 "이미 수강 중인 학생이 있어 이 강의의 영상, 챕터를 수정하거나 삭제할 수 없습니다.",
                 "error"

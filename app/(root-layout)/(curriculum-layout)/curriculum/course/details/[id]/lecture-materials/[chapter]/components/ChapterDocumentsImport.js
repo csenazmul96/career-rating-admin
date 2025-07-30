@@ -3,8 +3,8 @@
 import ContentPageFilter from "@/app/(root-layout)/(content-layout)/content-management/video-management/components/ContentPageFilter";
 import CurriculumCategorySidebar from "@/app/(root-layout)/(curriculum-layout)/curriculum/course/components/category/CurriculumCategorySidebar";
 import { Button } from "@/components/common/button";
-import DataTable from "@/components/common/DataTable";
-import { CommonToastMessage } from "@/components/common/CommonToastMessage";
+import LmsTable from "@/components/common/LmsTable";
+import { LmsToastMessage } from "@/components/common/LmsToastMessage";
 import ToolTip from "@/components/common/ToolTip";
 import { useDataTable } from "@/store/DataTableContext";
 import { assignDocumentToChapter } from "@/utils/api/curriculumManagement";
@@ -68,7 +68,7 @@ function ChapterDocumentsImport({ groups, queryParams, allParams }) {
           allParams.chapter
         );
         if (response.status === "success") {
-          CommonToastMessage("성공.", "Documents has been imported", "success");
+          LmsToastMessage("성공.", "Documents has been imported", "success");
           setSelectedRows([]);
           route.push(
             `/curriculum/course/details/${allParams.id}/lecture-materials?chapter=${allParams.chapter}`
@@ -76,7 +76,7 @@ function ChapterDocumentsImport({ groups, queryParams, allParams }) {
         }
 
         if (response.status === "error") {
-          CommonToastMessage(
+          LmsToastMessage(
             "오류.",
             "해당 강의에는 이미 수강 중인 학생이 있어, 강의 영상, 챕터를 수정하거나 삭제할 수 없습니다.",
             "error"
@@ -158,7 +158,7 @@ function ChapterDocumentsImport({ groups, queryParams, allParams }) {
                 </div>
               </div>
             )}
-            <DataTable
+            <LmsTable
               columns={columns}
               data={documents}
               checkMark={true}

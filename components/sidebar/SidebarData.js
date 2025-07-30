@@ -1,4 +1,4 @@
-import {LayoutDashboard, LayoutList, Monitor, Package, Phone, Users} from "lucide-react";
+import {LayoutDashboard, LayoutList, Monitor, Package, Phone, Users, ChartPie} from "lucide-react";
 
 export const menuItems = [
     {
@@ -22,6 +22,7 @@ export const menuItems = [
 
                     { id: "17", label: "활동로그", slug: '/administration-logs/signin-logs' },
                     { id: "15", label: "회원가입 항목 설정", slug: '/member-registration-settings' },
+                    { id: "16", label: "마케팅정보수신동의관리", slug: '/marketing-information-receipt-consent-management' },
                     // { id: "16", label: "마케팅정보수신동의관리", slug: '/administration-logs/activity-logs' },
                 ]
             },
@@ -51,18 +52,6 @@ export const menuItems = [
             {id: "27", label: "평가관리", slug:"evaluations"},
         ]
     },
-    // {
-    //     id: "23",
-    //     label: "커리큘럼관리",
-    //     slug: "/curriculum-management",
-    //     icon: <Curriculum/>
-    // },
-    // {
-    //     id: "24",
-    //     label: "주문결제관리",
-    //     slug: "/order-payment-management",
-    //     icon: <Orders/>,
-    // },
     {
         id: "28",
         label: "홈페이지관리",
@@ -72,12 +61,16 @@ export const menuItems = [
             {id: "29", label: "기본정보 등록", slug:"basic-settings"}
         ]
     },
-    // {
-    //     id: "26",
-    //     label: "통계관리",
-    //     slug: "/statistics-management",
-    //     icon: <Statistic/>
-    // },
+    {
+        id: "26",
+        label: "통계관리",
+        slug: "/statistics-management",
+        icon: <ChartPie size={16} />,
+        dropdown: [
+            {id: "61", label: "회원 통계", slug:"member-statistics"},
+            {id: "62", label: "로그인 통계", slug:"login-statistics"},
+        ]
+    },
     {
         id: "30",
         label: "고객센터",

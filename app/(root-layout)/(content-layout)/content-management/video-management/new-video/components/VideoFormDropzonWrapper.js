@@ -5,7 +5,7 @@ import {FilePlus, Info} from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Dropzone from "react-dropzone";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 const VideoFormDropzonWrapper = ({
                                      formClean,
@@ -107,7 +107,7 @@ const VideoFormDropzonWrapper = ({
                 });
 
             } else {
-                CommonToastMessage('오류.', `${file.name} upload failed`, 'error')
+                LmsToastMessage('오류.', `${file.name} upload failed`, 'error')
             }
         };
 
@@ -126,7 +126,7 @@ const VideoFormDropzonWrapper = ({
             const response = await deleteRecentUploadedFile(item.objectName, "/delete/video-file");
 
             if (response.status !== "success") {
-                CommonToastMessage('성공.', response.message, 'error')
+                LmsToastMessage('성공.', response.message, 'error')
                 setLoading({ status: false, uniqueName: "" });
                 return;
             }

@@ -12,7 +12,7 @@ import {Field} from "@/components/common/fieldset";
 import {Button} from "@/components/common/button";
 import {updateLogedinUserInfo} from "@/utils/api/memberManagementRequest";
 import {formatErrors} from "@/utils/helpers/ErrorHeloper";
-import {CommonToastMessage} from "@/components/common/CommonToastMessage";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 function ProfileUpdateForm({profile, settings}) {
     const [errors, setErrors] = useState(null);
@@ -64,13 +64,13 @@ function ProfileUpdateForm({profile, settings}) {
         const response = await updateLogedinUserInfo(formData)
 
         if (response?.status === 500){
-            CommonToastMessage("실패", response.error, "error")
+            LmsToastMessage("실패", response.error, "error")
         }
         if (response?.errors) {
             setErrors(formatErrors(response?.errors));
         }
         if (response?.status === "success") {
-            CommonToastMessage('성공.', '회원이 성공적으로 업데이트되었습니다.', 'success')
+            LmsToastMessage('성공.', '회원이 성공적으로 업데이트되었습니다.', 'success')
         }
 
         setLoading(false);

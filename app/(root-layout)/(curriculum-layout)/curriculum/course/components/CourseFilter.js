@@ -100,6 +100,8 @@ export default function CourseFilter({queryParams}) {
                 <FilterFormWrapper label="수강기간" className={`!pb-0  ${isSidebarOpen ? '!w-3/5 ' : ''}`}>
                     <LmsStandardDatePicker
                         name={'startDate'}
+                        selectedEndDate={params?.endDate}
+                        selectedStartDate={params?.startDate}
                         value={params?.startDate}
                         placeholder={'YYYY-MM-DD'}
                         changeDataHandler={handleOnChnage}
@@ -108,6 +110,8 @@ export default function CourseFilter({queryParams}) {
                     <LmsStandardDatePicker
                         name={'endDate'}
                         value={params?.endDate}
+                        selectedEndDate={params?.endDate}
+                        selectedStartDate={params?.startDate}
                         placeholder={'YYYY-MM-DD'}
                         changeDataHandler={handleOnChnage}
                     />
