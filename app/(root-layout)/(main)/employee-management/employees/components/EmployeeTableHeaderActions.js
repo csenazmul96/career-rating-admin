@@ -6,7 +6,7 @@ function EmployeeTableHeaderActions(props) {
     return (
         <>
             <Link href={"/employee-management/employees/create"}>
-                <Button className={`h-[32px]`} color="primaryMedium">
+                <Button className={`h-[32px] rounded`} color="primaryMedium">
                     <span> <PlusIcon size={20} /></span>
                     Create Employee
                 </Button>

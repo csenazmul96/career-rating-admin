@@ -10,9 +10,6 @@ import EmployeeTableHeaderActions
     from "@/app/(root-layout)/(main)/employee-management/employees/components/EmployeeTableHeaderActions";
 
 const EmployeeTable = ({ employees, pagination }) => {
-    const pathName = usePathname()
-
-
     let columns = [
         {
             header: "Name",
