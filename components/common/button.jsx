@@ -2,8 +2,6 @@ import * as Headless from '@headlessui/react'
 import clsx from 'clsx'
 import React, { forwardRef } from 'react'
 import { Link } from './link'
-import { faCircleNotch} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 const styles = {
     base: [
         // Base
@@ -313,7 +311,7 @@ export const Button = forwardRef(function Button({ color, outline, plain, classN
         <Headless.Button {...props} disabled={disable} className={clsx(classes, 'cursor-default')} ref={ref}>
             <TouchTarget>
                 {children}
-                {loading && <span className={'text-[14px] opacity-70'}><FontAwesomeIcon icon={faCircleNotch} spin/></span>}
+                {loading && <span className={'text-[14px] opacity-70'}>x</span>}
             </TouchTarget>
         </Headless.Button>
     )

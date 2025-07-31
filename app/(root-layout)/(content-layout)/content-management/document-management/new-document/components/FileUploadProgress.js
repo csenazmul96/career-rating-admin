@@ -1,5 +1,4 @@
-import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import React, { useEffect } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { IoMdClose } from "react-icons/io";
@@ -25,11 +24,7 @@ const FileUploadProgress = ({ value = 0, uniqueName, deleteFile, loading }) => {
         <span onClick={deleteFile}>
           {" "}
           {loading.status && loading.uniqueName === uniqueName ? (
-            <FontAwesomeIcon
-              className="size-[24px] text-[#C6C6C6]"
-              icon={faCircleNotch}
-              spin
-            />
+            <span></span>
           ) : (
             <IoMdClose className="size-[24px] text-[#C6C6C6] cursor-pointer" />
           )}

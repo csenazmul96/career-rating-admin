@@ -1,18 +1,13 @@
 "use client"
 
 import Field from "@/components/common/Field";
-import Image from "next/image";
-import infoImg from "@/public/images/login-img.png";
 import React, {useEffect, useState} from "react";
 import {signIn} from "next-auth/react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {redirect, useRouter} from "next/navigation";
 import {formatErrors} from "@/utils/helpers/ErrorHeloper";
 import {FaRegEye, FaRegEyeSlash} from "react-icons/fa";
-import {faCircleNotch} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import {Checkbox} from "@/components/common/checkbox";
-import LmsStandardInputField from "@/components/common/form/LmsStandardInputField";
 
 const LoginForm = () => {
     const [loading, setLoading] = useState(false);
@@ -177,7 +172,7 @@ const LoginForm = () => {
                 disabled={loading}
             >
                 로그인
-                {loading && <span className={'text-[16px] ml-1 opacity-70 '}><FontAwesomeIcon icon={faCircleNotch} spin/></span>}
+                {loading && <span className={'text-[16px] ml-1 opacity-70 '}>x</span>}
             </button>
             <ul className="flex items-center justify-center gap-4 text-[13px] py-6 leading-none">
                 <li><Link href="/find-id-password">아이디/패스워드 찾기</Link></li>

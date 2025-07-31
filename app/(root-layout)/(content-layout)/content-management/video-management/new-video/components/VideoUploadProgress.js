@@ -2,8 +2,6 @@ import {CircularProgressbar} from "react-circular-progressbar";
 import React, {useEffect} from "react";
 import {PiCheckCircle} from "react-icons/pi";
 import {IoMdClose} from "react-icons/io";
-import {faCircleNotch} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const VideoUploadProgress = ({value = 0, uniqueName, deleteVideo, loading}) => {
     const [status, setStatus] = React.useState('uploading')
@@ -22,7 +20,7 @@ const VideoUploadProgress = ({value = 0, uniqueName, deleteVideo, loading}) => {
 
     return (
         <>{
-            status === 'completed' ? <span onClick={deleteVideo}> { loading.status && loading.uniqueName === uniqueName ? <FontAwesomeIcon className="size-[24px] text-[#C6C6C6]" icon={faCircleNotch} spin/> : <IoMdClose className="size-[24px] text-[#C6C6C6] cursor-pointer"/> }</span>
+            status === 'completed' ? <span onClick={deleteVideo}> { loading.status && loading.uniqueName === uniqueName ? <span>x</span> : <IoMdClose className="size-[24px] text-[#C6C6C6] cursor-pointer"/> }</span>
             : status === 'seeding' ?
                 <span><PiCheckCircle className="size-[24px] text-[#246BEB] cursor-pointer"/></span>
                 :

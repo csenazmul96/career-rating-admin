@@ -8,8 +8,7 @@ import {
   deleteDocumentFromChapter,
   getChapterVideos,
 } from "@/utils/api/curriculumManagement";
-import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { Play, Trash2 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -114,7 +113,7 @@ function CourseChaptesDocuments({ documents, courseId }) {
               <span>강의 선택</span>
               {loading && document.id === form.documentId && (
                 <span className={"text-[12px] opacity-70"}>
-                  <FontAwesomeIcon icon={faCircleNotch} spin />
+                 X
                 </span>
               )}
             </Button>
