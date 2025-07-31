@@ -6,6 +6,8 @@ import LmsTableHeaderActions from "@/components/common/LmsTableHeaderActions";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname} from "next/navigation";
+import EmployeeTableHeaderActions
+    from "@/app/(root-layout)/(main)/employee-management/employees/components/EmployeeTableHeaderActions";
 
 const EmployeeTable = ({ employees, pagination }) => {
     const pathName = usePathname()
@@ -49,7 +51,7 @@ const EmployeeTable = ({ employees, pagination }) => {
 
     return (
         <>
-            <LmsTableHeaderActions pagination={pagination} />
+            <LmsTableHeaderActions pagination={pagination} TableActions={<EmployeeTableHeaderActions />} />
             {employees && columns && (
                 <LmsTable
                     columns={columns}
