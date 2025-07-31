@@ -6,7 +6,7 @@ import { useState } from "react";
 const LmsTableHeaderActions = ({
                                  pagination,
                                  TableActions = null,
-                                 pageSize = 5,
+                                 pageSize = 10,
                                  classes = "",
                                }) => {
   const searchParams = useSearchParams();
@@ -14,12 +14,12 @@ const LmsTableHeaderActions = ({
   const { replace } = useRouter();
   const oldParams = new URLSearchParams(searchParams);
   const [size, setSize] = useState(
-      oldParams && oldParams.get("size") ? oldParams.get("size") : pageSize
+      oldParams && oldParams.get("per_page") ? oldParams.get("per_page") : pageSize
   );
 
   const handleOnChnage = (column, value) => {
     setSize(value);
-    oldParams.set("size", value);
+    oldParams.set("per_page", value);
     oldParams.set("page", 1);
     sendSearchRequest();
   };
@@ -34,7 +34,7 @@ const LmsTableHeaderActions = ({
           <div className="flex items-center gap-2">
             <div className="">Total</div>
             <div className="text-themeColor font-bold">
-              {pagination && pagination.total ? pagination.total : 0}건
+              {pagination && pagination.total ? pagination.total : 0} cases
             </div>
             <div className="">
               <LmsStandardSelectInputV2
@@ -55,7 +55,7 @@ const LmsTableHeaderActions = ({
                   changeDataHandler={handleOnChnage}
               />
             </div>
-            <div>건 씩보기</div>
+            <div>View each page</div>
           </div>
           {TableActions && (
               <div className="flex flex-1 items-center justify-end gap-3">

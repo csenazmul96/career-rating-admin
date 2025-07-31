@@ -10,7 +10,6 @@ import {
     TableRow,
 } from "@/components/common/table";
 import { useDataTable } from "@/store/DataTableContext";
-import Image from "next/image";
 import {useRouter} from "next/navigation";
 import {MessageCircleWarning} from "lucide-react";
 
@@ -20,13 +19,13 @@ export default function LmsTable({
                                      checkMark = false,
                                      serialNo = false,
                                      pagination = null,
-                                     pageSize = 5,
+                                     pageSize = 10,
                                      emptyMessage = "표에 사용 가능한 데이터가 없습니다",
                                      showEmptyMessage = false,
                                      rowLink = () =>{}
                                  }) {
     const { selectedRow, setSelectedRows } = useDataTable();
-    const startSerialNo = pagination ? (pagination.page - 1) * pagination.size + 1 : 1;
+    const startSerialNo = pagination ? (pagination.current_page - 1) * pagination.per_page + 1 : 1;
     const router = useRouter();
     const handleTrClick = (row) => {
         if (rowLink) {

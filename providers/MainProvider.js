@@ -2,7 +2,6 @@
 import {SessionProvider} from "next-auth/react";
 import {RoleContextProvider} from "@/store/RoleContext";
 import {OrganizationContextProvider} from "@/store/OrganizationContext"
-import {MemberProvider} from "@/store/MembersContext"
 import {ContentProvider} from "@/store/ContentContext"
 import {PageSidebarProvider} from "@/store/PageSidebarContext"
 import {DataTableProvider} from "@/store/DataTableContext"
@@ -22,11 +21,9 @@ export default function Provider({children, session}) {
                                 <SidebarProvider>
                                     <ContentProvider>
                                         <RoleContextProvider>
-                                            <MemberProvider>
                                                 <OrganizationContextProvider>
                                                     {children}
                                                 </OrganizationContextProvider>
-                                            </MemberProvider>
                                         </RoleContextProvider>
                                     </ContentProvider>
                                 </SidebarProvider>

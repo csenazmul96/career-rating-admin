@@ -46,9 +46,7 @@ function LmsNotificationWrapper({bellRef }) {
         };
     }, [isOpen, bellRef]);
 
-    useEffect(() => {
-        sendNotificationRequest()
-    }, [])
+
 
 
     return (

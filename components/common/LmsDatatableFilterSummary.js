@@ -29,7 +29,7 @@ function LmsDatatableFilterSummary({filterCriteria}) {
             <div className="flex px-4 py-3">
                 <div className="flex items-center justify-between w-full min-h-6">
                     <div className=" flex items-center space-x-3">
-                        <span className={`flex gap-1`}> <span className={"common-label-style text-13 font-bold"}>적용 필터</span> <span className={"text-themeColor text-13 font-bold"}>{filterCriteria.length}</span>  </span>
+                        <span className={`flex gap-1`}> <span className={"common-label-style text-13 font-bold"}>Apply Filter</span> <span className={"text-themeColor text-13 font-bold"}>{filterCriteria.length}</span>  </span>
                         <span className={"text-placeholderColor bg-borderColor flex w-[1px] h-[15px]"}></span>
                         {filterCriteria && filterCriteria.length > 0 ?
                             <>
@@ -43,7 +43,7 @@ function LmsDatatableFilterSummary({filterCriteria}) {
                                 ))}
                             </>
                             :
-                            <span>적용된 필터가 없습니다.</span>
+                            <span>No filters applied.</span>
                         }
                     </div>
 
