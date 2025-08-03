@@ -20,10 +20,10 @@ const ConfirmPopup = ({title, message, onClose, onConfirm}) => {
                             btn.onClick();
                             onClose();
                         } }
-                        color={btn.label === '확인' ? 'primary' : 'transparent'}
+                        color={btn.label === 'Cancel' ? 'transparent' : 'primary'}
                         className="min-w-[62px] !p-3 !h-[40px] cursor-pointer"
                     >
-                        {btn.label === '확인' ? (btn.buttonLabel ? btn.buttonLabel : '확인') : (btn.buttonLabel ? btn.buttonLabel : '취소')}
+                        {btn.buttonLabel ? btn.buttonLabel : 'Ok'}
 
                     </Button>
                 ))}
