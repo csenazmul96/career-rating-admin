@@ -19,7 +19,7 @@ const FieldWrapper = ({label,
         <div
             className={`flex ${vertical && "flex-col !border-none !py-4 !pr-0 !gap-2"} items-center pr-4  border-t border-commonBorderColor gap-4 ${className ? className : ""}`}>
             {label &&
-                <div className={`pl-6 flex items-center min-w-[153px]  bg-secondaryBgColor self-stretch ${vertical && "bg-white !pl-0"} `}>
+                <div className={`pl-6 flex items-center min-w-[180px]  bg-secondaryBgColor self-stretch ${vertical && "bg-white !pl-0"} `}>
                     <span className= {`flex common-label-style ${labelClass ? labelClass : ""}`}>
                         {required && vertical &&  <span className="text-dangerColor mr-1">*</span> }
                         {label}

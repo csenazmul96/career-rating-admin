@@ -10,21 +10,23 @@ import {Button} from "@/components/common/button";
 import Link from "next/link";
 import {Menu} from "lucide-react";
 import {storeEmployee} from "@/utils/api/employeeApi";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
+const formObject = {
+    email: "",
+    password: "",
+    confirmPassword: "",
+    username: "",
+    first_name: "",
+    last_name: "",
+    status: true,
+    checkEmployee: false,
+}
 
 function EmployeeForm(props) {
 
     const [errors, setErrors] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [form, setForm] = useState({
-        email: "",
-        password: "",
-        confirmPassword: "",
-        username: "",
-        first_name: "",
-        last_name: "",
-        status: true,
-        checkEmployee: false,
-    });
+    const [form, setForm] = useState(formObject);
 
     const handleOnChnage = (column, value) => {
         setForm((prev) => ({ ...prev, [column]: value }));
@@ -34,8 +36,12 @@ function EmployeeForm(props) {
     const submitForm = async () => {
         setLoading(true);
         const response = await storeEmployee(form);
+
         if (response.status === 422) {
             setErrors(response.errors);
+        } else  if (response.status === 201) {
+            LmsToastMessage('Success', 'Employee created successfully', 'success')
+            setForm(formObject)
         }
         setLoading(false);
     }
@@ -55,7 +61,7 @@ function EmployeeForm(props) {
                     />
                 </FieldWrapper>
                 <EmployeeExistsCheck form={form} errors={errors} setForm={setForm} />
-                <div className={"flex"}>
+
                     <FieldWrapper label={"First Name"} required={true}>
                         <LmsStandardInputField
                             error={errors?.first_name}
@@ -65,7 +71,7 @@ function EmployeeForm(props) {
                             changeDataHandler={handleOnChnage}
                         />
                     </FieldWrapper>
-                    <FieldWrapper label={"Last Name"} className={"pl-8 w-full"}>
+                    <FieldWrapper label={"Last Name"} className={"w-full"}>
                         <LmsStandardInputField
                             error={errors?.last_name}
                             name="last_name"
@@ -74,7 +80,7 @@ function EmployeeForm(props) {
                             changeDataHandler={handleOnChnage}
                         />
                     </FieldWrapper>
-                </div>
+
                 <FieldWrapper label={"Email"} required={true}>
                     <LmsStandardInputField
                         error={errors?.email}
@@ -85,8 +91,8 @@ function EmployeeForm(props) {
                         changeDataHandler={handleOnChnage}
                     />
                 </FieldWrapper>
-                <div className="flex">
-                    <FieldWrapper label="Password" required={true}>
+
+                <FieldWrapper label="Password" required={true}>
                         <LmsStandardInputField
                             error={errors?.password}
                             name="password"
@@ -98,7 +104,7 @@ function EmployeeForm(props) {
                     </FieldWrapper>
                     <FieldWrapper
                         label="Confirm Password"
-                        className={"pl-8 w-full"}
+                        className={"w-full"}
                         required={true}
                     >
                         <LmsStandardInputField
@@ -110,7 +116,7 @@ function EmployeeForm(props) {
                             changeDataHandler={handleOnChnage}
                         />
                     </FieldWrapper>
-                </div>
+
                 <div className="flex items-center justify-between border-t border-commonBorderColor pt-10">
                     <div className="left-col flex items-center">
                         <div className="member-collapse-list ">

@@ -44,7 +44,7 @@ function EmployeeExistsCheck({ form,  errors, setForm }) {
                     <Button color="secondary"
                             onClick={checkDplicate}
                             loading={loading}
-                            disable={loading}
+                            disable={loading || !form.username }
                             className="h-[48px] cursor-pointer">
                         Check Exists
                     </Button>
