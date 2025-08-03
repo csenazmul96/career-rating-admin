@@ -14,6 +14,16 @@ export async function getsEmployee (params) {
         throw new Error(JSON.stringify(res));
     }
 }
+export async function getsSingleEmployee (id) {
+    const req = await fetchRequest(`/employees/${id}`)
+    const res = await req.json();
+
+    if (req.ok) {
+        return res.data
+    } else {
+        throw new Error(JSON.stringify(res));
+    }
+}
 
 export async function checkIfEmployeeExists (payload) {
     try {
