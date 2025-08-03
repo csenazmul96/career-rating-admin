@@ -3,7 +3,6 @@ import {PlusIcon, Trash2} from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import {confirmAlert} from "react-confirm-alert";
-import {deleteCourse} from "@/utils/api/curriculumManagement";
 import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
 import {useDataTable} from "@/store/DataTableContext";

@@ -26,7 +26,7 @@ function EmployeeForm({employee = null}) {
 
     const [errors, setErrors] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [form, setForm] = useState({...employee, status: employee.status ? true : false} || formObject);
+    const [form, setForm] = useState(employee ? {...employee, status: employee.status ? true : false} : formObject);
 
     const handleOnChnage = (column, value) => {
         setForm((prev) => ({ ...prev, [column]: value }));
