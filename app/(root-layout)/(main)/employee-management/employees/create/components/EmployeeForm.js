@@ -9,7 +9,7 @@ import EmployeeExistsCheck
 import {Button} from "@/components/common/button";
 import Link from "next/link";
 import {Menu} from "lucide-react";
-import {storeEmployee} from "@/utils/api/employeeApi";
+import {storeEmployee, storeEmployeeUpdate} from "@/utils/api/employeeApi";
 import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 const formObject = {
     email: "",
@@ -22,11 +22,11 @@ const formObject = {
     checkEmployee: false,
 }
 
-function EmployeeForm(props) {
+function EmployeeForm({employee = null}) {
 
     const [errors, setErrors] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [form, setForm] = useState(formObject);
+    const [form, setForm] = useState({...employee, status: employee.status ? true : false} || formObject);
 
     const handleOnChnage = (column, value) => {
         setForm((prev) => ({ ...prev, [column]: value }));
@@ -35,13 +35,18 @@ function EmployeeForm(props) {
 
     const submitForm = async () => {
         setLoading(true);
-        const response = await storeEmployee(form);
+        let response = {};
+         if (employee) {
+             response = await storeEmployeeUpdate(form, employee.id);
+         } else {
+             response = await storeEmployee(form);
+         }
 
         if (response.status === 422) {
             setErrors(response.errors);
-        } else  if (response.status === 201) {
-            LmsToastMessage('Success', 'Employee created successfully', 'success')
-            setForm(formObject)
+        } else  if (response.status === 201 || response.status === 200) {
+            LmsToastMessage(employee ? "Update" : 'Create', employee ? 'Employee updated successfully ' : 'Employee created successfully', 'success')
+           if (!employee) setForm(formObject)
         }
         setLoading(false);
     }

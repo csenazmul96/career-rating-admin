@@ -51,3 +51,17 @@ export async function storeEmployee (payload) {
         throw new Error(error.message);
     }
 }
+
+export async function storeEmployeeUpdate (payload, id) {
+    try {
+        const request = await fetchRequest(`/employees/${id}`, {
+            method: "PUT",
+            body: JSON.stringify(payload)
+        });
+        const res = await request.json();
+
+        return {...res, status: request.status};
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
