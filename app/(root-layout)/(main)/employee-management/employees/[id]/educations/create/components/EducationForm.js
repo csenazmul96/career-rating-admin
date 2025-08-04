@@ -1,6 +1,6 @@
 "use client";
 import React, {useState} from 'react';
-import {useRouter} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import FieldWrapper from "@/components/common/form/FieldWrapper";
 import LmsStandardInputField from "@/components/common/form/LmsStandardInputField";
 import LmsStandardSelectInputV2 from "@/components/common/form/LmsStandardSelectInputV2";
@@ -27,6 +27,7 @@ const initialForm = {
     verified: false
 };
 function EducationForm({education, educationLevels, countries, gradingScales, gradingSystems}) {
+    const params = useParams();
     const router = useRouter();
     const [errors, setErrors] = useState(null);
     const [loading, setLoading] = useState(false);
