@@ -117,7 +117,7 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
 
             <FieldWrapper label="Level of degree" singleElement={true} required>
                 <LmsStandardSelectInputV2
-                    fieldClass={"h-[200px]"}
+                    fieldClass={"h-[200px] w-[270px]"}
                     name={`education_level_id`}
                     initialText={"Degree Level"}
                     value={form.education_level_id}
@@ -132,6 +132,48 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                         error={errors?.education_level}
                         value={form.education_level}
                         placeholder={`Other level of degree`}
+                    />
+                }
+            </FieldWrapper>
+
+            <FieldWrapper label="Grading System" singleElement={true} required>
+                <LmsStandardSelectInputV2
+                    fieldClass={"h-[200px] w-[270px]"}
+                    name={`grading_system_id`}
+                    initialText={"Grading System"}
+                    value={form.grading_system_id}
+                    options={gradingSystems}
+                    changeDataHandler={inputChangeHandler}
+                />
+                {form.grading_system_id === 'other' &&
+                    <LmsStandardInputField
+                        fieldClass={'mt-1 w-[270px]'}
+                        changeDataHandler={inputChangeHandler}
+                        name="grading_system"
+                        error={errors?.grading_system}
+                        value={form.grading_system}
+                        placeholder={`Other Grading System`}
+                    />
+                }
+            </FieldWrapper>
+
+            <FieldWrapper label="Grading Scale" singleElement={true} required>
+                <LmsStandardSelectInputV2
+                    fieldClass={"h-[200px] w-[270px]"}
+                    name={`grading_scale_id`}
+                    initialText={"Grading Scale"}
+                    value={form.grading_scale_id}
+                    options={gradingSystems}
+                    changeDataHandler={inputChangeHandler}
+                />
+                {form.grading_scale_id === 'other' &&
+                    <LmsStandardInputField
+                        fieldClass={'mt-1 w-[270px]'}
+                        changeDataHandler={inputChangeHandler}
+                        name="grading_scale"
+                        error={errors?.grading_scale}
+                        value={form.grading_scale}
+                        placeholder={`Other Grading Scale`}
                     />
                 }
             </FieldWrapper>
