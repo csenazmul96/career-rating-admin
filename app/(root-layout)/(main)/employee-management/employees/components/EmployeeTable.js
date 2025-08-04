@@ -35,7 +35,7 @@ const EmployeeTable = ({ employees, pagination }) => {
                 <Button>
                     <Link
                         className={"flex cursor-pointer"}
-                        href={`/employee-management/employees/${employee.id}`}
+                        href={`/employee-management/employees/${employee.id}/personal-information`}
                     >
                         <ChevronRight size={24} />
                     </Link>
@@ -55,7 +55,7 @@ const EmployeeTable = ({ employees, pagination }) => {
                     data={employees}
                     serialNo={true}
                     rowLink={(row) =>
-                        `/employee-management/employees/${row.id}`
+                        `/employee-management/employees/${row.id}/personal-information`
                     }
                     checkMark={true}
                     pagination={pagination}
