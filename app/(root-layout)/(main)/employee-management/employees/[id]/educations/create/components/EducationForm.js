@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {useRouter} from "next/navigation";
 import FieldWrapper from "@/components/common/form/FieldWrapper";
 import LmsStandardInputField from "@/components/common/form/LmsStandardInputField";
+import LmsStandardSelectInputV2 from "@/components/common/form/LmsStandardSelectInputV2";
 const initialForm = {
     user_id: "",
     institution_name: "",
@@ -45,6 +46,16 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                     value={form.courseName}
                     placeholder={`과정명을 입력하세요.`}
                     fieldClass="w-full"
+                />
+            </FieldWrapper>
+            <FieldWrapper label="과정명" singleElement={true} required>
+                <LmsStandardSelectInputV2
+                    fieldClass={"h-[200px]"}
+                    name={`country_id`}
+                    initialText={"Select Country"}
+                    value={form.country_id}
+                    options={countries}
+                    changeDataHandler={inputChangeHandler}
                 />
             </FieldWrapper>
 

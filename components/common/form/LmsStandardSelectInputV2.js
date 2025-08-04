@@ -84,7 +84,7 @@ const LmsStandardSelectInputV2 = ({label = "",
                             <div
                                 key={`option_item_${initialText}`}
                                 onClick={(e) => handleSelect({[optionValue]: initialValue, [optionLabel]: initialText})}
-                                className={`cursor-pointer px-4 min-h-[48px] py-3 text-base text-textColor hover:bg-primaryLightColor hover:font-bold hover:text-themeColor ${
+                                className={`cursor-pointer px-4 min-h-[48px] py-3 text-base text-textColor hover:bg-primaryLightColor  hover:text-themeColor ${
                                     value === initialValue ? 'bg-primaryLightColor text-themeColor' : 'text-textColor'
                                 }`}
                             >
@@ -95,7 +95,7 @@ const LmsStandardSelectInputV2 = ({label = "",
                             <div
                                 key={`option_item_${label}_${option[optionValue]}`}
                                 onClick={(e) => handleSelect(option)}
-                                className={`cursor-pointer px-4 min-h-[48px] py-3 text-base text-textColor hover:bg-primaryLightColor hover:font-bold hover:text-themeColor ${
+                                className={`cursor-pointer px-4 min-h-[48px] py-3 text-base text-textColor hover:bg-primaryLightColor  hover:text-themeColor ${
                                     value === option[optionValue] ? 'bg-primaryLightColor text-themeColor' : 'text-textColor'
                                 }`}
                             >
