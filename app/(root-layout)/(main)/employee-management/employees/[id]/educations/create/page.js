@@ -6,16 +6,22 @@ import {
     getDegreeNames,
     getEducationLevel,
     getGradingScale,
-    getGradingSystem
+    getGradingSystem, getLanguages
 } from "@/utils/api/commonAPI";
 
 export default async function Page() {
-    const [countries, educationLevels, gradingSystems, gradingScales, degreeNames] = await Promise.all([
+    const [countries,
+        educationLevels,
+        gradingSystems,
+        gradingScales,
+        degreeNames,
+        languages] = await Promise.all([
         getCountries(),
         getEducationLevel(),
         getGradingSystem(),
         getGradingScale(),
         getDegreeNames(),
+        getLanguages(),
     ]);
 
     return (
@@ -27,6 +33,7 @@ export default async function Page() {
                 educationLevels={educationLevels}
                 gradingSystems={gradingSystems}
                 degreeNames={degreeNames}
+                languages={languages}
                 gradingScales={gradingScales} />
         </div>
     );

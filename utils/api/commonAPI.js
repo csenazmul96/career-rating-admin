@@ -52,3 +52,13 @@ export async function getDegreeNames () {
         throw new Error(JSON.stringify(res));
     }
 }
+export async function getLanguages () {
+    const req = await fetchRequest(`/languages`)
+    const res = await req.json();
+
+    if (req.ok) {
+        return res.data;
+    } else {
+        throw new Error(JSON.stringify(res));
+    }
+}

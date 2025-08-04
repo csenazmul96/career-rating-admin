@@ -7,6 +7,8 @@ import LmsStandardSelectInputV2 from "@/components/common/form/LmsStandardSelect
 import LmsStandardDatePicker from "@/components/common/form/date-picker/LmsStandardDatePicker";
 import {Checkbox, CheckboxField} from "@/components/common/checkbox";
 import {Label} from "@/components/common/fieldset";
+import LmsStandardRadioFieldGroup from "@/components/common/form/LmsStandardRadioFieldGroup";
+import LmsStandardTextArea from "@/components/common/form/LmsStandardTextArea";
 const initialForm = {
     user_id: "",
     institution_name: "",
@@ -26,13 +28,14 @@ const initialForm = {
     grading_system: "",
     grading_scale_id: "",
     grading_scale: "",
-    study_mode: "",
+    study_mode: "full-time",
+    language_of_instruction_id: "",
     language_of_instruction: "",
     thesis_title: "",
     description: "",
     verified: false
 };
-function EducationForm({education, educationLevels, countries, gradingScales, gradingSystems, degreeNames}) {
+function EducationForm({education, educationLevels, countries, gradingScales, gradingSystems, degreeNames, languages}) {
     const params = useParams();
     const router = useRouter();
     const [errors, setErrors] = useState(null);
@@ -185,6 +188,61 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                     placeholder={`Obtain Score of the degree`}
                 />
             </FieldWrapper>
+            <FieldWrapper label="Study Mode" className={"h-full"}>
+                <LmsStandardRadioFieldGroup
+                    options={[
+                        { id: "full-time", name: "Full-time" },
+                        { id: "part-time", name: "Part-time" },
+                        { id: "online", name: "Online" },
+                    ]}
+                    changeDataHandler={inputChangeHandler}
+                    value={form.study_mode}
+                    name="study_mode"
+                />
+            </FieldWrapper>
+
+            <FieldWrapper label="Language of Study" >
+                <LmsStandardSelectInputV2
+                    fieldClass={"h-[200px] w-[270px]"}
+                    name={`language_of_instruction_id`}
+                    initialText={"Language of Instruction"}
+                    value={form.language_of_instruction_id}
+                    options={languages}
+                    changeDataHandler={inputChangeHandler}
+                />
+                {form.language_of_instruction_id === 'other' &&
+                    <LmsStandardInputField
+                        fieldClass={'mt-1 w-[270px]'}
+                        changeDataHandler={inputChangeHandler}
+                        name="language_of_instruction"
+                        error={errors?.language_of_instruction}
+                        value={form.language_of_instruction}
+                        placeholder={`Other Language of Instruction`}
+                    />
+                }
+            </FieldWrapper>
+            <div className={"flex items-center"}>
+                <FieldWrapper label="Thesis Title" singleElement={true} >
+                    <LmsStandardInputField
+                        singleElement={true}
+                        changeDataHandler={inputChangeHandler}
+                        name="thesis_title"
+                        error={errors?.thesis_title}
+                        value={form.thesis_title}
+                        placeholder={`Thesis Title`}
+                    />
+                </FieldWrapper>
+                <FieldWrapper label="Credential Type" singleElement={true} >
+                    <LmsStandardInputField
+                        singleElement={true}
+                        changeDataHandler={inputChangeHandler}
+                        name="credential_type"
+                        error={errors?.credential_type}
+                        value={form.credential_type}
+                        placeholder={`Credential Type (e.g. Diploma, Certificate, etc.)`}
+                    />
+                </FieldWrapper>
+            </div>
 
             <div className={"flex items-center"}>
                 <FieldWrapper label="Country">
@@ -207,6 +265,28 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                     />
                 </FieldWrapper>
             </div>
+            <FieldWrapper label="Verified" singleElement={true} >
+                <CheckboxField>
+                    <Checkbox
+                        color="lmscheckbox"
+                        name="verified"
+                        value={1}
+                        clickHandler={()=>inputChangeHandler('verified', !form.verified)}
+                        checked={form.verified}
+                    />
+                    <Label className="font-normal"> Is Degree Verified? </Label>
+                </CheckboxField>
+            </FieldWrapper>
+            <FieldWrapper label="Description" singleElement={true} >
+                <LmsStandardTextArea
+                     singleElement={true}
+                     error={errors?.description}
+                     value={form.description}
+                     name="description"
+                     placeholder={"Description"}
+                     changeDataHandler={inputChangeHandler}
+                     className={`w-full`} />
+            </FieldWrapper>
 
         </>
     );
