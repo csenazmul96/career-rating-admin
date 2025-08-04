@@ -5,7 +5,6 @@ import FieldWrapper from "@/components/common/form/FieldWrapper";
 import LmsStandardInputField from "@/components/common/form/LmsStandardInputField";
 import LmsStandardSelectInputV2 from "@/components/common/form/LmsStandardSelectInputV2";
 import LmsStandardDatePicker from "@/components/common/form/date-picker/LmsStandardDatePicker";
-import ToggleSwitch from "@/components/common/form/ToggleSwitch";
 import {Checkbox, CheckboxField} from "@/components/common/checkbox";
 import {Label} from "@/components/common/fieldset";
 const initialForm = {
@@ -14,14 +13,18 @@ const initialForm = {
     country_id: "",
     city: "",
     degree_title: "",
+    degree_title_id: "",
     field_of_study: "",
+    education_level_id: "",
     education_level: "",
     credential_type: "",
     start_date: "",
     end_date: "",
     is_current: true,
     grade: "",
+    grading_system_id: "",
     grading_system: "",
+    grading_scale_id: "",
     grading_scale: "",
     study_mode: "",
     language_of_instruction: "",
@@ -29,7 +32,7 @@ const initialForm = {
     description: "",
     verified: false
 };
-function EducationForm({education, educationLevels, countries, gradingScales, gradingSystems}) {
+function EducationForm({education, educationLevels, countries, gradingScales, gradingSystems, degreeNames}) {
     const params = useParams();
     const router = useRouter();
     const [errors, setErrors] = useState(null);
@@ -40,20 +43,28 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
         setForm((prev) => ({ ...prev, [column]: value }));
     };
 
-    const thumbnailClickHandler = (item) => {
-        console.log(item)
-    }
     return (
         <>
             <FieldWrapper label="Degree Name" singleElement={true} required>
-                <LmsStandardInputField
-                    singleElement={true}
+                <LmsStandardSelectInputV2
+                    fieldClass={"h-[200px]"}
+                    name={`degree_title_id`}
+                    initialText={"Select Degree Name"}
+                    value={form.degree_title_id}
+                    options={degreeNames}
                     changeDataHandler={inputChangeHandler}
-                    name="degree_title"
-                    error={errors?.degree_title}
-                    value={form.degree_title}
-                    placeholder={`Degree name`}
                 />
+                {form.degree_title_id === 'other' &&
+                    <LmsStandardInputField
+                        fieldClass={'mt-1 w-[270px]'}
+                        singleElement={true}
+                        changeDataHandler={inputChangeHandler}
+                        name="degree_title"
+                        error={errors?.degree_title}
+                        value={form.degree_title}
+                        placeholder={`Degree name`}
+                    />
+                }
             </FieldWrapper>
             <FieldWrapper label="과정명" singleElement={true} required>
                 <LmsStandardInputField
@@ -63,6 +74,15 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                     error={errors?.institution_name}
                     value={form.institution_name}
                     placeholder={`Institute name`}
+                />
+            </FieldWrapper>
+            <FieldWrapper label="Subject/major" singleElement={true} required>
+                <LmsStandardInputField
+                    changeDataHandler={inputChangeHandler}
+                    name="field_of_study"
+                    error={errors?.field_of_study}
+                    value={form.field_of_study}
+                    placeholder={`Subject/major`}
                 />
             </FieldWrapper>
             <FieldWrapper label="Duration" singleElement={true} required>
@@ -93,6 +113,27 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                         <Label className="font-normal">Currently studying</Label>
                     </CheckboxField>
                 </div>
+            </FieldWrapper>
+
+            <FieldWrapper label="Level of degree" singleElement={true} required>
+                <LmsStandardSelectInputV2
+                    fieldClass={"h-[200px]"}
+                    name={`education_level_id`}
+                    initialText={"Degree Level"}
+                    value={form.education_level_id}
+                    options={educationLevels}
+                    changeDataHandler={inputChangeHandler}
+                />
+                {form.education_level_id === 'other' &&
+                    <LmsStandardInputField
+                        fieldClass={'mt-1 w-[270px]'}
+                        changeDataHandler={inputChangeHandler}
+                        name="education_level"
+                        error={errors?.education_level}
+                        value={form.education_level}
+                        placeholder={`Other level of degree`}
+                    />
+                }
             </FieldWrapper>
 
             <div className={"flex items-center"}>

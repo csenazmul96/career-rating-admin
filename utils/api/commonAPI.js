@@ -42,3 +42,13 @@ export async function getGradingScale () {
         throw new Error(JSON.stringify(res));
     }
 }
+export async function getDegreeNames () {
+    const req = await fetchRequest(`/degree-name`)
+    const res = await req.json();
+
+    if (req.ok) {
+        return res.data;
+    } else {
+        throw new Error(JSON.stringify(res));
+    }
+}

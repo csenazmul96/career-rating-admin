@@ -1,14 +1,21 @@
 import LmsPageHeading from "@/components/common/LmsPageHeading";
 import EducationForm
     from "@/app/(root-layout)/(main)/employee-management/employees/[id]/educations/create/components/EducationForm";
-import {getCountries, getEducationLevel, getGradingScale, getGradingSystem} from "@/utils/api/commonAPI";
+import {
+    getCountries,
+    getDegreeNames,
+    getEducationLevel,
+    getGradingScale,
+    getGradingSystem
+} from "@/utils/api/commonAPI";
 
 export default async function Page() {
-    const [countries, educationLevels, gradingSystems, gradingScales] = await Promise.all([
+    const [countries, educationLevels, gradingSystems, gradingScales, degreeNames] = await Promise.all([
         getCountries(),
         getEducationLevel(),
         getGradingSystem(),
         getGradingScale(),
+        getDegreeNames(),
     ]);
 
     return (
@@ -19,6 +26,7 @@ export default async function Page() {
                 countries={countries}
                 educationLevels={educationLevels}
                 gradingSystems={gradingSystems}
+                degreeNames={degreeNames}
                 gradingScales={gradingScales} />
         </div>
     );
