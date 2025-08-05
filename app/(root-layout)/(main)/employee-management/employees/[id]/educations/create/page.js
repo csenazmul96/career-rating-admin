@@ -9,7 +9,7 @@ import {
     getGradingSystem, getLanguages
 } from "@/utils/api/commonAPI";
 
-export default async function Page() {
+export default async function Page({params}) {
     const [countries,
         educationLevels,
         gradingSystems,
@@ -23,7 +23,7 @@ export default async function Page() {
         getDegreeNames(),
         getLanguages(),
     ]);
-
+const {id} = await params;
     return (
         <div className="flex flex-col">
             <LmsPageHeading title="과정 등록"/>
@@ -34,6 +34,7 @@ export default async function Page() {
                 gradingSystems={gradingSystems}
                 degreeNames={degreeNames}
                 languages={languages}
+                id={id}
                 gradingScales={gradingScales} />
         </div>
     );

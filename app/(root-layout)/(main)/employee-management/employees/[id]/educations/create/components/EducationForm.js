@@ -9,6 +9,10 @@ import {Checkbox, CheckboxField} from "@/components/common/checkbox";
 import {Label} from "@/components/common/fieldset";
 import LmsStandardRadioFieldGroup from "@/components/common/form/LmsStandardRadioFieldGroup";
 import LmsStandardTextArea from "@/components/common/form/LmsStandardTextArea";
+import Link from "next/link";
+import {Button} from "@/components/common/button";
+import {Menu} from "lucide-react";
+import {createAcademic} from "@/utils/api/employeeApi";
 const initialForm = {
     user_id: "",
     institution_name: "",
@@ -35,7 +39,7 @@ const initialForm = {
     description: "",
     verified: false
 };
-function EducationForm({education, educationLevels, countries, gradingScales, gradingSystems, degreeNames, languages}) {
+function EducationForm({education, educationLevels, countries, gradingScales, gradingSystems, degreeNames, languages, id}) {
     const params = useParams();
     const router = useRouter();
     const [errors, setErrors] = useState(null);
@@ -46,6 +50,16 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
         setForm((prev) => ({ ...prev, [column]: value }));
     };
 
+    const submitForm = async () => {
+        setLoading(true);
+        setErrors(null);
+        const response = await createAcademic({...form, user_id: id});
+        if (response.status === 422) {
+            setErrors(response.errors);
+        }
+        setLoading(false);
+    }
+
     return (
         <>
             <FieldWrapper label="Degree Name"   required>
@@ -54,6 +68,7 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                     name={`degree_title_id`}
                     initialText={"Select Degree Name"}
                     value={form.degree_title_id}
+                    error={errors?.degree_title_id}
                     options={degreeNames}
                     changeDataHandler={inputChangeHandler}
                 />
@@ -67,7 +82,7 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                     />
                 }
             </FieldWrapper>
-            <FieldWrapper label="과정명" singleElement={true} required>
+            <FieldWrapper label="Institute Name" singleElement={true} required>
                 <LmsStandardInputField
                     singleElement={true}
                     changeDataHandler={inputChangeHandler}
@@ -91,6 +106,7 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                     <LmsStandardDatePicker
                         name={'start_date'}
                         value={form.start_date}
+                        error={errors?.start_date}
                         placeholder={'YYYY-MM-DD'}
                         changeDataHandler={inputChangeHandler}
                     />
@@ -99,6 +115,7 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                         <LmsStandardDatePicker
                             name={'end_date'}
                             value={form.end_date}
+                            error={errors?.end_date}
                             placeholder={'YYYY-MM-DD'}
                             changeDataHandler={inputChangeHandler}
                         />
@@ -116,12 +133,13 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                 </div>
             </FieldWrapper>
 
-            <FieldWrapper label="Level of degree" singleElement={true} required>
+            <FieldWrapper label="Level of degree" required>
                 <LmsStandardSelectInputV2
                     fieldClass={"h-[200px] w-[270px]"}
                     name={`education_level_id`}
                     initialText={"Degree Level"}
                     value={form.education_level_id}
+                    error={errors?.education_level_id}
                     options={educationLevels}
                     changeDataHandler={inputChangeHandler}
                 />
@@ -143,6 +161,7 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                     name={`grading_system_id`}
                     initialText={"Grading System"}
                     value={form.grading_system_id}
+                    error={errors?.grading_system_id}
                     options={gradingSystems}
                     changeDataHandler={inputChangeHandler}
                 />
@@ -164,6 +183,7 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                     name={`grading_scale_id`}
                     initialText={"Grading Scale"}
                     value={form.grading_scale_id}
+                    error={errors?.grading_scale_id}
                     options={gradingScales}
                     changeDataHandler={inputChangeHandler}
                 />
@@ -208,6 +228,7 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                     initialText={"Language of Instruction"}
                     value={form.language_of_instruction_id}
                     options={languages}
+                    error={errors?.language_of_instruction_id}
                     changeDataHandler={inputChangeHandler}
                 />
                 {form.language_of_instruction_id === 'other' &&
@@ -251,6 +272,7 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                         name={`country_id`}
                         initialText={"Select Country"}
                         value={form.country_id}
+                        error={errors?.country_id}
                         options={countries}
                         changeDataHandler={inputChangeHandler}
                     />
@@ -287,6 +309,29 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                      changeDataHandler={inputChangeHandler}
                      className={`w-full`} />
             </FieldWrapper>
+            <div className="flex items-center justify-between border-t border-commonBorderColor pt-10">
+                <div className="left-col flex items-center">
+                    <div className="member-collapse-list ">
+                        <Link href={`/employee-management/employees/${id}/educations`} className="w-full">
+                            <Button color="transparent" className="w-full mb-2 text-center cursor-pointer gap">
+                                <span className={`flex`}><Menu /></span>
+                                <span className="text-19px flex leading-[normal]"> Employee List</span>
+                            </Button>
+                        </Link>
+                    </div>
+                </div>
+                <div className="right-col flex justify-end items-end flex-1  px-4 pl-[20px] pr-0">
+                    <Button
+                        color="primary"
+                        onClick={() => submitForm()}
+                        loading={loading}
+                        disable={loading}
+                        className={"cursor-pointer"}
+                    >
+                        Save
+                    </Button>
+                </div>
+            </div>
 
         </>
     );

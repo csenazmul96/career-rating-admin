@@ -106,7 +106,7 @@ const LmsStandardSelectInputV2 = ({label = "",
 
                 </div>
             )}
-            {error && <span className="mt-1 pt-1 text-red-700">{error}</span>}
+            {error && <span className="mt-1 pt-1 text-13 text-dangerColor">{error}</span>}
         </div>
         </>
     );

@@ -78,3 +78,18 @@ export async function deleteEmployee (payload) {
         throw new Error(error.message);
     }
 }
+
+
+export async function createAcademic (payload) {
+    try {
+        const request = await fetchRequest(`/academic`, {
+            method: "POST",
+            body: JSON.stringify(payload)
+        });
+        const res = await request.json();
+
+        return {...res, status: request.status};
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
