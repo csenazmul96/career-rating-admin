@@ -2,6 +2,7 @@
 
 import React, {useEffect, useRef, useState} from 'react';
 import {ChevronDown, ChevronUp} from 'lucide-react';
+import LmsSearchInput from "@/components/common/form/LmsSearchInput";
 
 const LmsStandardSelectInputV2 = ({label = "",
                                       singleElement = false,
@@ -9,7 +10,7 @@ const LmsStandardSelectInputV2 = ({label = "",
                                       optionValue = 'id',
                                       optionLabel = 'name',
                                       options = [],
-                                      inline = false,
+                                      search = false,
                                       required = false,
                                       error = null,
                                       initialText = null,
@@ -20,10 +21,13 @@ const LmsStandardSelectInputV2 = ({label = "",
                                       size="",
                                       changeDataHandler = (name, value) => {}}) => {
     const [open, setOpen] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+
 
     const handleSelect = (option) => {
         changeDataHandler(name, option[optionValue])
         setOpen(false);
+        setSearchTerm('')
     };
 
     const getValue = () => {
@@ -57,6 +61,18 @@ const LmsStandardSelectInputV2 = ({label = "",
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, [open]);
 
+    // Filter options based on searchTerm
+    const filteredOptions = options.filter(option =>
+        (option[optionLabel] || '')
+            .toString()
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase())
+    );
+
+    const handleOnChnage = (column, value) => {
+        setSearchTerm(value);
+    }
+
 
     return (
         <>
@@ -65,7 +81,7 @@ const LmsStandardSelectInputV2 = ({label = "",
                 onClick={() => setOpen(!open)}
                 className={`w-full border relative ${size ? size : ""}  overflow-hidden border-borderColor h-[48px] px-4 py-2 bg-white flex justify-between items-center focus:outline-none ${open === true ? 'border-inputColor' : 'border-borderColor'}`}
             >
-                <span className={`text-base`}>
+                <span className={`text-base whitespace-nowrap`}>
                   {getValue()}
                 </span>
                 <span className={`absolute top-1/2 -translate-y-1/2 bg-white pr-3 right-0`}>
@@ -79,7 +95,17 @@ const LmsStandardSelectInputV2 = ({label = "",
 
             {open && (
                 <div className={`absolute mt-[-2px]  z-30 bg-white border ${fieldClass ? fieldClass : "w-[270px]"} border-borderColor`}>
-                    <div className="custom-scrollbar">
+                    {search &&
+                    <div className={"flex-auto selectInputSearch absolute w-full"}>
+                        <LmsSearchInput singleElement={true}
+                                        fieldClass="w-full !border-t-0"
+                                        name="search"
+                                        changeDataHandler={handleOnChnage}
+                                        value={searchTerm}
+                                        placeholder="검색어를 검색해주세요." />
+                    </div>
+                    }
+                    <div className={`custom-scrollbar ${search ? 'pt-12' : ''}`}>
                         {initialText &&
                             <div
                                 key={`option_item_${initialText}`}
@@ -91,7 +117,7 @@ const LmsStandardSelectInputV2 = ({label = "",
                                 {initialText}
                             </div>
                         }
-                        {options.map((option) => (
+                        {filteredOptions.map((option) => (
                             <div
                                 key={`option_item_${label}_${option[optionValue]}`}
                                 onClick={(e) => handleSelect(option)}

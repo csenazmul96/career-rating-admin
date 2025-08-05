@@ -68,6 +68,7 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                     name={`degree_title_id`}
                     initialText={"Select Degree Name"}
                     value={form.degree_title_id}
+                    search={true}
                     error={errors?.degree_title_id}
                     options={degreeNames}
                     changeDataHandler={inputChangeHandler}
@@ -228,6 +229,7 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                     initialText={"Language of Instruction"}
                     value={form.language_of_instruction_id}
                     options={languages}
+                    search={true}
                     error={errors?.language_of_instruction_id}
                     changeDataHandler={inputChangeHandler}
                 />
@@ -271,6 +273,7 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
                         fieldClass={"h-[200px]"}
                         name={`country_id`}
                         initialText={"Select Country"}
+                        search={true}
                         value={form.country_id}
                         error={errors?.country_id}
                         options={countries}
