@@ -98,7 +98,8 @@ const LmsStandardSelectInputV2 = ({label = "",
                     {search &&
                     <div className={"flex-auto selectInputSearch absolute w-full"}>
                         <LmsSearchInput singleElement={true}
-                                        fieldClass="w-full !border-t-0"
+                                        fieldClass="w-full"
+                                        border={false}
                                         name="search"
                                         changeDataHandler={handleOnChnage}
                                         value={searchTerm}

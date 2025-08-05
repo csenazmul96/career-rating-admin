@@ -270,7 +270,7 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
             <div className={"flex items-center"}>
                 <FieldWrapper label="Country">
                     <LmsStandardSelectInputV2
-                        fieldClass={"h-[200px]"}
+                        fieldClass={"h-[200px] w-[270px]"}
                         name={`country_id`}
                         initialText={"Select Country"}
                         search={true}

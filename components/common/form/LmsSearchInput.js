@@ -47,7 +47,6 @@ const LmsSearchInput = ({   required = false,
                            invalid={error? true : false}
                            placeholder={placeholder} className={`w-full`}/>
                     <span className={`bg-white pl-5 cursor-pointer z-10 absolute right-4 top-1/2 transform -translate-y-1/2`}>
-                        {/*<img src="/images/search.png" alt="search"/>*/}
                         <Search size={24} className={`text-placeholderColor`} />
                     </span>
 
