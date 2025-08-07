@@ -1,6 +1,6 @@
 import LmsPageHeading from "@/components/common/LmsPageHeading";
 import EducationForm
-    from "@/app/(root-layout)/(main)/employee-management/employees/[id]/educations/create/components/EducationForm";
+    from "@/app/(root-layout)/(main)/employee-management/employees/[id]/[user_id]/educations/create/components/EducationForm";
 import {
     getCountries,
     getDegreeNames,
@@ -9,7 +9,7 @@ import {
     getGradingSystem, getLanguages
 } from "@/utils/api/commonAPI";
 
-export default async function Page({params, searchParams}) {
+export default async function Page({params}) {
     const [countries,
         educationLevels,
         gradingSystems,
@@ -23,7 +23,6 @@ export default async function Page({params, searchParams}) {
         getDegreeNames(),
         getLanguages(),
     ]);
-const queryParams = await searchParams;
 
     return (
         <div className="flex flex-col">
@@ -35,7 +34,6 @@ const queryParams = await searchParams;
                 gradingSystems={gradingSystems}
                 degreeNames={degreeNames}
                 languages={languages}
-                id={queryParams?.user_id}
                 gradingScales={gradingScales} />
         </div>
     );

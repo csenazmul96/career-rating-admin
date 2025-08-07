@@ -39,7 +39,7 @@ const initialForm = {
     description: "",
     verified: false
 };
-function EducationForm({education, educationLevels, countries, gradingScales, gradingSystems, degreeNames, languages, id}) {
+function EducationForm({education, educationLevels, countries, gradingScales, gradingSystems, degreeNames, languages}) {
     const params = useParams();
     const {replace} = useRouter();
     const [errors, setErrors] = useState(null);
@@ -53,12 +53,12 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
     const submitForm = async () => {
         setLoading(true);
         setErrors(null);
-        const response = await createAcademic({...form, user_id: id});
+        const response = await createAcademic({...form, user_id: params.user_id});
 
         if (response.status === 422) {
             setErrors(response.errors);
         } else if (response.status === 200) {
-            replace(`/employee-management/employees/${params.id}/educations?user_id=${id}`);
+            replace(`/employee-management/employees/${params.id}/${params.user_id}/educations`);
         }
         setLoading(false);
     }
@@ -318,7 +318,7 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
             <div className="flex items-center justify-between border-t border-commonBorderColor pt-10">
                 <div className="left-col flex items-center">
                     <div className="member-collapse-list ">
-                        <Link href={`/employee-management/employees/${id}/educations`} className="w-full">
+                        <Link href={`/employee-management/employees/${params.id}/${params.user_id}/educations`} className="w-full">
                             <Button color="transparent" className="w-full mb-2 text-center cursor-pointer gap">
                                 <span className={`flex`}><Menu /></span>
                                 <span className="text-19px flex leading-[normal]"> Employee List</span>

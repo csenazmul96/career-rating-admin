@@ -1,19 +1,28 @@
 import {getAcademicRecords} from "@/utils/api/academicApi";
 import AcademicItemCard
-    from "@/app/(root-layout)/(main)/employee-management/employees/[id]/educations/components/AcademicItemCard";
+    from "@/app/(root-layout)/(main)/employee-management/employees/[id]/[user_id]/educations/components/AcademicItemCard";
 import {Button} from "@/components/common/button";
 import { PlusIcon} from "lucide-react";
 import Link from "next/link";
 
-export default async function Page({params, searchParams}) {
-    const {id} = await params;
-    const queryParams = await searchParams;
-    const academics = await getAcademicRecords(queryParams?.user_id)
+export default async function Page({params}) {
+    const {id, user_id} = await params;
+    const academics = await getAcademicRecords(user_id)
+
+
+
+
+
+
+
+
+
+
 
     return (
         <div className="dashboaed-stat flex flex-col">
             <div className="w-full flex justify-end">
-                <Link href={`/employee-management/employees/${id}/educations/create?user_id=${queryParams?.user_id}`}>
+                <Link href={`/employee-management/employees/${id}/${user_id}/educations/create`}>
                     <Button color={"primaryLightRoundedSmall"} className={'!h-10  rounded-full'}><PlusIcon size={16} /> Create New </Button>
                 </Link>
             </div>
