@@ -12,7 +12,8 @@ import LmsStandardTextArea from "@/components/common/form/LmsStandardTextArea";
 import Link from "next/link";
 import {Button} from "@/components/common/button";
 import {Menu} from "lucide-react";
-import {createAcademic} from "@/utils/api/employeeApi";
+import {createAcademic, updateAcademic} from "@/utils/api/employeeApi";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 const initialForm = {
     user_id: "",
     institution_name: "",
@@ -53,11 +54,17 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
     const submitForm = async () => {
         setLoading(true);
         setErrors(null);
-        const response = await createAcademic({...form, user_id: params.user_id});
+        let response = {};
+        if (!education) {
+            response = await createAcademic({...form, user_id: params.user_id});
+        } else {
+            response = await updateAcademic({...form, user_id: params.user_id}, education.id);
+        }
 
         if (response.status === 422) {
             setErrors(response.errors);
         } else if (response.status === 200) {
+            LmsToastMessage(education ? "Update" : 'Create', education ? 'Education updated successfully ' : 'Education created successfully', 'success')
             replace(`/employee-management/employees/${params.id}/${params.user_id}/educations`);
         }
         setLoading(false);

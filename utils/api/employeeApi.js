@@ -93,3 +93,17 @@ export async function createAcademic (payload) {
         throw new Error(error.message);
     }
 }
+
+export async function updateAcademic (payload, id) {
+    try {
+        const request = await fetchRequest(`/academic/${id}`, {
+            method: "PUT",
+            body: JSON.stringify(payload)
+        });
+        const res = await request.json();
+
+        return {...res, status: request.status};
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
