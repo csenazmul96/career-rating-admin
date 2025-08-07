@@ -8,7 +8,7 @@ import {getRatingBtnClass} from "@/utils/helpers/CommonHelper";
 import Link from "next/link";
 
 export default async function Page({params}) {
-    const {id} = params;
+    const {id} = await params;
     const employee = await getsSingleEmployee(id);
 
 

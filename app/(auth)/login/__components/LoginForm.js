@@ -91,7 +91,7 @@ const LoginForm = () => {
         if (!response.ok) {
             setLoading(false);
             if(response.error && JSON.parse(response.error)){
-                setErrors(formatErrors(JSON.parse(response.error)))
+                setErrors(JSON.parse(response.error))
             }
 
             setError(response.error);

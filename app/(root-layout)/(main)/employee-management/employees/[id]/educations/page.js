@@ -5,14 +5,15 @@ import {Button} from "@/components/common/button";
 import { PlusIcon} from "lucide-react";
 import Link from "next/link";
 
-export default async function Page({params}) {
+export default async function Page({params, searchParams}) {
     const {id} = await params;
-    const academics = await getAcademicRecords({user_id: id})
+    const queryParams = await searchParams;
+    const academics = await getAcademicRecords(queryParams?.user_id)
 
     return (
         <div className="dashboaed-stat flex flex-col">
             <div className="w-full flex justify-end">
-                <Link href={`/employee-management/employees/${id}/educations/create`}>
+                <Link href={`/employee-management/employees/${id}/educations/create?user_id=${queryParams?.user_id}`}>
                     <Button color={"primaryLightRoundedSmall"} className={'!h-10  rounded-full'}><PlusIcon size={16} /> Create New </Button>
                 </Link>
             </div>

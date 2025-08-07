@@ -7,13 +7,13 @@ import EmployeeDetailsPageHeading
 import {getsSingleEmployee} from "@/utils/api/employeeApi";
 
 export default async function layout({children, params}) {
-    const {id} = params;
+    const {id} = await params;
     const employee = await getsSingleEmployee(id);
     return(
         <div className="flex flex-col">
             <EmployeeDetailsPageHeading employee={employee} />
             <TabGroup defaultIndex={0} className="tab-wrapper-controller">
-                <EmployeeDetailsTabPanel />
+                <EmployeeDetailsTabPanel employee={employee} />
                 <TabPanels className="tab-content-controller">
                     <TabPanel>
                         {children}

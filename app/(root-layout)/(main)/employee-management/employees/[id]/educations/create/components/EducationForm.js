@@ -41,7 +41,7 @@ const initialForm = {
 };
 function EducationForm({education, educationLevels, countries, gradingScales, gradingSystems, degreeNames, languages, id}) {
     const params = useParams();
-    const router = useRouter();
+    const {replace} = useRouter();
     const [errors, setErrors] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -54,8 +54,11 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
         setLoading(true);
         setErrors(null);
         const response = await createAcademic({...form, user_id: id});
+
         if (response.status === 422) {
             setErrors(response.errors);
+        } else if (response.status === 200) {
+            replace(`/employee-management/employees/${params.id}/educations?user_id=${id}`);
         }
         setLoading(false);
     }
