@@ -7,7 +7,7 @@ import {
     getEducationLevel,
     getGradingScale,
     getGradingSystem, getLanguages
-} from "@/utils/api/commonAPI";
+} from "@/utils/api/career/commonAPI";
 
 export default async function Page({params}) {
     const [countries,

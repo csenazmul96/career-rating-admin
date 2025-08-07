@@ -6,7 +6,7 @@ import {confirmAlert} from "react-confirm-alert";
 import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
 import {useDataTable} from "@/store/DataTableContext";
-import {deleteEmployee} from "@/utils/api/employeeApi";
+import {deleteEmployee} from "@/utils/api/career/employeeApi";
 
 function EmployeeTableHeaderActions(props) {
     const{selectedRow, setSelectedRows} = useDataTable()

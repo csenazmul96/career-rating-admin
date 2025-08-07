@@ -1,4 +1,4 @@
-import {getAcademicRecords} from "@/utils/api/academicApi";
+import {getAcademicRecords} from "@/utils/api/career/academicApi";
 import AcademicItemCard
     from "@/app/(root-layout)/(main)/employee-management/employees/[id]/[user_id]/educations/components/AcademicItemCard";
 import {Button} from "@/components/common/button";

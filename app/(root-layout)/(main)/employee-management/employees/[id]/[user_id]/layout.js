@@ -4,7 +4,7 @@ import EmployeeDetailsTabPanel
     from "@/app/(root-layout)/(main)/employee-management/employees/[id]/[user_id]/components/EmployeeDetailsTabPanel";
 import EmployeeDetailsPageHeading
     from "@/app/(root-layout)/(main)/employee-management/employees/[id]/[user_id]/components/EmployeeDetailsPageHeading";
-import {getsSingleEmployee} from "@/utils/api/employeeApi";
+import {getsSingleEmployee} from "@/utils/api/career/employeeApi";
 
 export default async function layout({children, params}) {
     const {id, user_id} = await params;

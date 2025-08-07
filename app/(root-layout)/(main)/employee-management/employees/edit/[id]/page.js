@@ -1,4 +1,4 @@
-import {getsSingleEmployee} from "@/utils/api/employeeApi";
+import {getsSingleEmployee} from "@/utils/api/career/employeeApi";
 import LmsPageHeading from "@/components/common/LmsPageHeading";
 import EmployeeForm from "@/app/(root-layout)/(main)/employee-management/employees/create/components/EmployeeForm";
 

@@ -1,4 +1,4 @@
-import {getSingleAcademicRecords} from "@/utils/api/academicApi";
+import {getSingleAcademicRecords} from "@/utils/api/career/academicApi";
 import LmsPageHeading from "@/components/common/LmsPageHeading";
 import EducationForm
     from "@/app/(root-layout)/(main)/employee-management/employees/[id]/[user_id]/educations/create/components/EducationForm";
@@ -8,7 +8,7 @@ import {
     getEducationLevel,
     getGradingScale,
     getGradingSystem, getLanguages
-} from "@/utils/api/commonAPI";
+} from "@/utils/api/career/commonAPI";
 
 export default async function Page({ params}) {
     const {academic_id} = await params;

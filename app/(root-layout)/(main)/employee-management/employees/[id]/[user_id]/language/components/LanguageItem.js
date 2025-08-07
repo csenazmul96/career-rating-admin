@@ -9,7 +9,7 @@ import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
 import {deleteAcademicRecords} from "@/utils/api/career/academicApi";
 
 
-function AcademicItemCard({academic, userId, id}) {
+function LanguageItem({language, id, userId}) {
 
     const deleteEducation = async () => {
         confirmAlert({
@@ -60,16 +60,43 @@ function AcademicItemCard({academic, userId, id}) {
                     <GraduationCap className={`text-themeColor`} size={32}/>
                 </div>
                 <div className="text flex flex-col gap-1 w-full">
-                    <p className={`text-baseNormal text-textSubColor`}>{academic.degree_title}</p>
-                    <span>{academic.institution_name}</span>
-                    <span className={`text-13 text-textColor`}>{academic.start_date.replaceAll('-', '.')} - {academic.is_current ?
-                        <Button color="primaryRoundedSmall" className={`!bg-transparent !text-themeColor whitespace-nowrap flex-shrink-0 cursor-auto`}>
-                            Continue
+                    <p className={`text-baseNormal text-textSubColor`}>{language.language}</p>
+                    {language.proficiency_level && <span>Proficiency Level: <span className={"font-bold"}>{language.proficiency_level}</span> </span>}
+                    {language.certification && <span>Certification: <span className={"font-bold"}>{language.certification}</span></span>}
+                    <div className={'flex items-center  justify-between mt-2 w-full text-13'}>
+                        {language.reading &&
+                            <div className={'flex items-center gap-1'}>
+                                 <span>R:</span>
+                                 <span className={'font-bold'}>{language.reading}</span>
+                            </div>
+                        }
+                        {language.writing &&
+                            <div className={'flex items-center gap-1'}>
+                                 <span>W:</span>
+                                 <span className={'font-bold'}>{language.writing}</span>
+                            </div>
+                        }
+                        {language.speaking &&
+                            <div className={'flex items-center gap-1'}>
+                                 <span>S:</span>
+                                 <span className={'font-bold'}>{language.speaking}</span>
+                            </div>
+                        }
+                        {language.listening &&
+                            <div className={'flex items-center gap-1'}>
+                                 <span>L:</span>
+                                 <span className={'font-bold'}>{language.listening}</span>
+                            </div>
+                        }
+                    </div>
+                    {language.score &&
+                        <Button color="primaryRoundedSmall" className={`!bg-transparent !text-themeColor whitespace-nowrap flex-shrink-0 cursor-auto w-[50px]`}>
+                            {language.score}
                         </Button>
-                        : academic.end_date.replaceAll('-', '.')}</span>
+                    }
                 </div>
             </div>
-            <Link href={`/employee-management/employees/${id}/${userId}/educations/${academic.id}`} className="opacity-0 absolute right-2 top-2 invisible transition-opacity duration-200 group-hover:opacity-100 group-hover:visible">
+            <Link href={`/employee-management/employees/${id}/${userId}/language`} className="opacity-0 absolute right-2 top-2 invisible transition-opacity duration-200 group-hover:opacity-100 group-hover:visible">
                 <Button color={"primaryLightRoundedSmall"} className={'!h-10  rounded-full'}><Pencil size={16} /> </Button>
             </Link>
             <span className="opacity-0 absolute right-2 bottom-2 invisible transition-opacity duration-200 group-hover:opacity-100 group-hover:visible">
@@ -79,4 +106,4 @@ function AcademicItemCard({academic, userId, id}) {
     );
 }
 
-export default AcademicItemCard;
+export default LanguageItem;

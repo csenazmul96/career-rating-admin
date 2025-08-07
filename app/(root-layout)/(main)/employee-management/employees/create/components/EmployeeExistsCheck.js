@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import FieldWrapper from "@/components/common/form/FieldWrapper";
 import LmsStandardInputField from "@/components/common/form/LmsStandardInputField";
 import {Button} from "@/components/common/button";
-import {checkIfEmployeeExists} from "@/utils/api/employeeApi";
+import {checkIfEmployeeExists} from "@/utils/api/career/employeeApi";
 
 function EmployeeExistsCheck({ form,  errors, setForm }) {
     const [loading, setLoading] = useState(false);

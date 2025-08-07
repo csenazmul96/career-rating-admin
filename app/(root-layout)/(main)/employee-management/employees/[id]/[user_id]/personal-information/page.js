@@ -1,5 +1,5 @@
 import LmsPageHeading from "@/components/common/LmsPageHeading";
-import {getsSingleEmployee} from "@/utils/api/employeeApi";
+import {getsSingleEmployee} from "@/utils/api/career/employeeApi";
 import FieldWrapper from "@/components/common/form/FieldWrapper";
 import {Eye, EyeOff, Menu, Pencil} from "lucide-react";
 import {Button} from "@/components/common/button";

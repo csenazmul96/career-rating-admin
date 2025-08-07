@@ -1,4 +1,4 @@
-import {getsEmployee} from "@/utils/api/employeeApi";
+import {getsEmployee} from "@/utils/api/career/employeeApi";
 import LmsPageHeading from "@/components/common/LmsPageHeading";
 import EmployeeTable from "@/app/(root-layout)/(main)/employee-management/employees/components/EmployeeTable";
 import EmployeeTableFilter

@@ -9,7 +9,7 @@ import EmployeeExistsCheck
 import {Button} from "@/components/common/button";
 import Link from "next/link";
 import {Menu} from "lucide-react";
-import {storeEmployee, storeEmployeeUpdate} from "@/utils/api/employeeApi";
+import {storeEmployee, storeEmployeeUpdate} from "@/utils/api/career/employeeApi";
 import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 const formObject = {
     email: "",

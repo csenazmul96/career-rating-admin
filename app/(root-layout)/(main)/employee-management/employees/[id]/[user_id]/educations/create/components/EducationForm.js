@@ -12,7 +12,7 @@ import LmsStandardTextArea from "@/components/common/form/LmsStandardTextArea";
 import Link from "next/link";
 import {Button} from "@/components/common/button";
 import {Menu} from "lucide-react";
-import {createAcademic, updateAcademic} from "@/utils/api/employeeApi";
+import {createAcademic, updateAcademic} from "@/utils/api/career/employeeApi";
 import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 const initialForm = {
     user_id: "",
