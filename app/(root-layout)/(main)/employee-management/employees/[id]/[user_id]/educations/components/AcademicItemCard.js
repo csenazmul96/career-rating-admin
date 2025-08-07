@@ -1,10 +1,58 @@
+"use client";
 import { GraduationCap, Pencil, Trash2} from "lucide-react";
 import Link from "next/link";
 import {Button} from "@/components/common/button";
 import React from "react";
+import {confirmAlert} from "react-confirm-alert";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
+import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
+import {deleteAcademicRecords} from "@/utils/api/academicApi";
 
 
 function AcademicItemCard({academic, userId, id}) {
+
+    const deleteEducation = async () => {
+        confirmAlert({
+            title: "Delete",
+            message:
+                "Do you really want to delete this evaluation?",
+            buttons: [
+                {
+                    label: "Cancel",
+                    buttonLabel: "Cancel",
+                    onClick: () => {
+                        return false;
+                    },
+                },
+                {
+                    label: "Ok",
+                    buttonLabel: "Ok",
+                    onClick: async () => {
+                        try {
+                            const request = await deleteAcademicRecords(academic.id);
+
+                            if (request && request.status === "success") {
+                                LmsToastMessage('성공.', 'Academic has been deleted successfully.', 'success')
+                            }
+                        } catch (error) {
+                            console.error("Error in deleteEvaluation:", error);
+                        }
+                    },
+                },
+            ],
+            customUI: ({ title, message, onClose, buttons }) => {
+                return (
+                    <ConfirmPopup
+                        title={title}
+                        message={message}
+                        onClose={onClose}
+                        onConfirm={buttons}
+                    />
+                );
+            },
+        });
+    }
+
     return (
         <div className={`shadow-dashboardShadow relative flex-1 min-w-0 bg-white py-[1.625rem] px-8 group`}>
             <div className="flex gap-x-4   ">
@@ -25,7 +73,7 @@ function AcademicItemCard({academic, userId, id}) {
                 <Button color={"primaryLightRoundedSmall"} className={'!h-10  rounded-full'}><Pencil size={16} /> </Button>
             </Link>
             <span className="opacity-0 absolute right-2 bottom-2 invisible transition-opacity duration-200 group-hover:opacity-100 group-hover:visible">
-                <Button color={"primaryLightRoundedSmall"} className={'!h-10  rounded-full !text-dangerDeppColor'}><Trash2 size={16} /> </Button>
+                <Button onClick={deleteEducation} color={"primaryLightRoundedSmall"} className={'!h-10  rounded-full !text-dangerDeppColor'}><Trash2 size={16} /> </Button>
             </span>
         </div>
     );
