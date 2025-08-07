@@ -12,3 +12,13 @@ export async function getAcademicRecords (params) {
         throw new Error(JSON.stringify(res));
     }
 }
+export async function getSingleAcademicRecords (id) {
+    const req = await fetchRequest(`/academic/${id}`)
+    const res = await req.json();
+
+    if (req.ok) {
+        return res.data
+    } else {
+        throw new Error(JSON.stringify(res));
+    }
+}

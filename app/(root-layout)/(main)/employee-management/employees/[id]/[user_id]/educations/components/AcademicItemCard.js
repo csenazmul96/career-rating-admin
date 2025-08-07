@@ -4,7 +4,7 @@ import {Button} from "@/components/common/button";
 import React from "react";
 
 
-function AcademicItemCard({academic, userId}) {
+function AcademicItemCard({academic, userId, id}) {
     return (
         <div className={`shadow-dashboardShadow relative flex-1 min-w-0 bg-white py-[1.625rem] px-8 group`}>
             <div className="flex gap-x-4   ">
@@ -21,7 +21,7 @@ function AcademicItemCard({academic, userId}) {
                         : academic.end_date.replaceAll('-', '.')}</span>
                 </div>
             </div>
-            <Link href={`/employee-management/employees/${userId}/educations/${academic.id}`} className="opacity-0 absolute right-2 top-2 invisible transition-opacity duration-200 group-hover:opacity-100 group-hover:visible">
+            <Link href={`/employee-management/employees/${id}/${userId}/educations/${academic.id}`} className="opacity-0 absolute right-2 top-2 invisible transition-opacity duration-200 group-hover:opacity-100 group-hover:visible">
                 <Button color={"primaryLightRoundedSmall"} className={'!h-10  rounded-full'}><Pencil size={16} /> </Button>
             </Link>
             <span className="opacity-0 absolute right-2 bottom-2 invisible transition-opacity duration-200 group-hover:opacity-100 group-hover:visible">

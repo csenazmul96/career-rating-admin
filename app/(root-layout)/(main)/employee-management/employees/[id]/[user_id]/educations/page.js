@@ -8,17 +8,6 @@ import Link from "next/link";
 export default async function Page({params}) {
     const {id, user_id} = await params;
     const academics = await getAcademicRecords(user_id)
-
-
-
-
-
-
-
-
-
-
-
     return (
         <div className="dashboaed-stat flex flex-col">
             <div className="w-full flex justify-end">
@@ -28,7 +17,7 @@ export default async function Page({params}) {
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 w-full">
                 {academics.map((academic, index) => (
-                    <AcademicItemCard key={`index-${index}`} academic={academic} userId={id}/>
+                    <AcademicItemCard key={`index-${index}`} academic={academic} userId={user_id} id={id}/>
                 ))}
             </div>
         </div>
