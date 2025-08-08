@@ -40,7 +40,7 @@ body {
         @apply  flex-1 py-[16px] px-4 pl-[18px];
     }
     .common-label-style {
-        @apply whitespace-nowrap font-bold text-[15px];
+        @apply whitespace-nowrap  text-[15px];
     }
 
     /*custom form style*/

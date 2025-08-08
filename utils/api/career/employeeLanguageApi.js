@@ -14,3 +14,32 @@ export async function getsEmployeeLanguage (params) {
         throw new Error(JSON.stringify(res));
     }
 }
+
+export async function createEmployeeLanguage (payload) {
+    try {
+        const request = await fetchRequest(`/employee-languages`, {
+            method: "POST",
+            body: JSON.stringify(payload)
+        });
+
+        const res = await request.json();
+
+        return {...res, status: request.status};
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
+export async function updateEmployeeLanguage (payload, id) {
+    try {
+        const request = await fetchRequest(`/employee-languages/${id}`, {
+            method: "PUT",
+            body: JSON.stringify(payload)
+        });
+        const res = await request.json();
+
+        return {...res, status: request.status};
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}

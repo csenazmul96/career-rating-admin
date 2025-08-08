@@ -14,7 +14,7 @@ function ToolTip({title, content }) {
                         <div
                             className="absolute w-4 h-4 bg-white border-l border-t border-commonBorderColor top-1/2 transform -translate-y-1/2 left-[-8px] rotate-[-45deg]"></div>
                         {title && <h2 className={`font-bold text-textColor text-base pb-3`}>{title}</h2>}
-                        <p className={`text-textSubColor text-base whitespace-normal`}>{content}</p>
+                        <p className={`text-textSubColor whitespace-normal text-13`}>{content}</p>
                     </div>
                 }
                      placement="right"
