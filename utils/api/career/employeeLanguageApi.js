@@ -23,7 +23,7 @@ export async function createEmployeeLanguage (payload) {
         });
 
         const res = await request.json();
-
+revalidateTag("employee-language")
         return {...res, status: request.status};
     } catch (error) {
         throw new Error(error.message);
@@ -37,7 +37,19 @@ export async function updateEmployeeLanguage (payload, id) {
             body: JSON.stringify(payload)
         });
         const res = await request.json();
-
+revalidateTag("employee-language")
+        return {...res, status: request.status};
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+export async function deleteEmployeeLanguage ( id) {
+    try {
+        const request = await fetchRequest(`/employee-languages/${id}`, {
+            method: "DELETE",
+        });
+        const res = await request.json();
+revalidateTag("employee-language")
         return {...res, status: request.status};
     } catch (error) {
         throw new Error(error.message);

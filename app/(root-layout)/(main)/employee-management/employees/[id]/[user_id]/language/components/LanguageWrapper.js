@@ -14,6 +14,12 @@ function LanguageWrapper({languages, employeeLanguages, id, user_id}) {
         setOpen(true);
         setEditItem(null);
     }
+
+    const hangleEditButtonClick = (language) => {
+        setOpen(true);
+        setEditItem(language);
+    }
+
     return (
         <>
             <div className="w-full flex justify-end">
@@ -21,7 +27,7 @@ function LanguageWrapper({languages, employeeLanguages, id, user_id}) {
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 w-full">
                 {employeeLanguages.map((language, index) => (
-                    <LanguageItem language={language} key={`index-${index}`} id={id} user_id={user_id} />
+                    <LanguageItem language={language} key={`index-${index}`} id={id} user_id={user_id} setEditItem={hangleEditButtonClick}  />
                 ))}
             </div>
             <LanguageFormModal openForm={open}

@@ -1,17 +1,16 @@
 "use client";
-import { GraduationCap, Pencil, Trash2} from "lucide-react";
-import Link from "next/link";
+import {GraduationCap, Languages, Pencil, Trash2} from "lucide-react";
 import {Button} from "@/components/common/button";
 import React from "react";
 import {confirmAlert} from "react-confirm-alert";
 import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
-import {deleteAcademicRecords} from "@/utils/api/career/academicApi";
+import {deleteEmployeeLanguage} from "@/utils/api/career/employeeLanguageApi";
 
 
-function LanguageItem({language, id, userId}) {
+function LanguageItem({language, id, userId, setEditItem=()=>{}}) {
 
-    const deleteEducation = async () => {
+    const deleteLanguage = async () => {
         confirmAlert({
             title: "Delete",
             message:
@@ -29,13 +28,13 @@ function LanguageItem({language, id, userId}) {
                     buttonLabel: "Ok",
                     onClick: async () => {
                         try {
-                            const request = await deleteAcademicRecords(academic.id);
+                            const request = await deleteEmployeeLanguage(language.id);
 
-                            if (request && request.status === "success") {
-                                LmsToastMessage('성공.', 'Academic has been deleted successfully.', 'success')
+                            if (request && request.status === 200) {
+                                LmsToastMessage('Delete.', 'Language has been deleted successfully.', 'success')
                             }
                         } catch (error) {
-                            console.error("Error in deleteEvaluation:", error);
+                            console.error("Error in deleteEmployeeLanguage:", error);
                         }
                     },
                 },
@@ -57,7 +56,7 @@ function LanguageItem({language, id, userId}) {
         <div className={`shadow-dashboardShadow relative flex-1 min-w-0 bg-white py-[1.625rem] px-8 group`}>
             <div className="flex gap-x-4   ">
                 <div className="icon size-[60px] flex-shrink-0 bg-secondaryBgColor flex items-center justify-center rounded-[12px]">
-                    <GraduationCap className={`text-themeColor`} size={32}/>
+                    <Languages className={`text-themeColor`} size={32} />
                 </div>
                 <div className="text flex flex-col gap-1 w-full">
                     <p className={`text-baseNormal text-textSubColor`}>{language.language}</p>
@@ -96,11 +95,11 @@ function LanguageItem({language, id, userId}) {
                     }
                 </div>
             </div>
-            <Link href={`/employee-management/employees/${id}/${userId}/language`} className="opacity-0 absolute right-2 top-2 invisible transition-opacity duration-200 group-hover:opacity-100 group-hover:visible">
-                <Button color={"primaryLightRoundedSmall"} className={'!h-10  rounded-full'}><Pencil size={16} /> </Button>
-            </Link>
+            <div  className="opacity-0 absolute right-2 top-2 invisible transition-opacity duration-200 group-hover:opacity-100 group-hover:visible">
+             <Button onClick={()=>setEditItem(language)} color={"primaryLightRoundedSmall"} className={'!h-10  rounded-full'}><Pencil size={16} /> </Button>
+            </div>
             <span className="opacity-0 absolute right-2 bottom-2 invisible transition-opacity duration-200 group-hover:opacity-100 group-hover:visible">
-                <Button onClick={deleteEducation} color={"primaryLightRoundedSmall"} className={'!h-10  rounded-full !text-dangerDeppColor'}><Trash2 size={16} /> </Button>
+                <Button onClick={deleteLanguage} color={"primaryLightRoundedSmall"} className={'!h-10  rounded-full !text-dangerDeppColor'}><Trash2 size={16} /> </Button>
             </span>
         </div>
     );

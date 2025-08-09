@@ -1,34 +1,39 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Dialog, DialogActions, DialogBody, DialogTitle} from "@/components/common/dialog";
 import LmsStandardInputField from "@/components/common/form/LmsStandardInputField";
 import {Button} from "@/components/common/button";
 import {LmsToastMessage} from "@/components/common/LmsToastMessage";
-import {formatErrors} from "@/utils/helpers/ErrorHeloper";
 import LmsStandardSelectInputV2 from "@/components/common/form/LmsStandardSelectInputV2";
 import FieldWrapper from "@/components/common/form/FieldWrapper";
 import {Heading} from "@/components/common/heading";
 import ToolTip from "@/components/common/ToolTip";
 import {createEmployeeLanguage, updateEmployeeLanguage} from "@/utils/api/career/employeeLanguageApi";
-
+const formObject = {
+    "language_id": "",
+    "language": "",
+    "user_id": null,
+    "proficiency_level": "",
+    "reading": "",
+    "writing": "",
+    "speaking": "",
+    "listening": "",
+    "certification": "",
+    "score": ""
+}
 function LanguageFormModal({openForm, setOpenForm, id, user_id,editItem, languages }) {
     const [errors, setErrors] = useState(null);
     const [loading, setLoading] = useState(false)
 
-    const [form, setForm] = useState({
-        "language_id": "",
-        "language": "",
-        "user_id": user_id,
-        "proficiency_level": "",
-        "reading": "",
-        "writing": "",
-        "speaking": "",
-        "listening": "",
-        "certification": "",
-        "score": ""
-    });
+    const [form, setForm] = useState({...formObject, user_id: user_id});
     const handleOnChange = (column, value) => {
         setForm((prev) => ({...prev, [column]: value}));
     }
+
+    useEffect(() => {
+        if (editItem) {
+            setForm(editItem);
+        }
+    }, [editItem])
 
     const submitForm = async () => {
         setLoading(true)
@@ -39,11 +44,11 @@ function LanguageFormModal({openForm, setOpenForm, id, user_id,editItem, languag
             } else {
                 response = await createEmployeeLanguage(form)
             }
-console.log(response)
-            if (response.status === 'success') {
-                LmsToastMessage('성공.', 'Chapter has been created.', 'success')
+
+            if (response.status === 201 || response.status === 200) {
+                LmsToastMessage('성공.', editItem ? "Language has been updated" : 'Language has been created.', 'success')
                 setOpenForm(false)
-                setForm({chapterName: ''})
+                setForm({...formObject, user_id: user_id})
             }
             if (response.status === 422) {
                 setErrors(response.errors)
@@ -141,16 +146,13 @@ console.log(response)
                         changeDataHandler={handleOnChange}
                     />
                 </FieldWrapper>
-                <FieldWrapper label="Proficency Level" required>
-                    <LmsStandardSelectInputV2
-                        fieldClass={"h-[200px] w-[270px]"}
-                        name={`proficiency_level`}
-                        initialText={"Overall proficiency level "}
-                        value={form.proficiency_level}
-                        search={true}
-                        error={errors?.proficiency_level}
-                        options={proficiencyLevels}
+                <FieldWrapper label="Score">
+                    <LmsStandardInputField
                         changeDataHandler={handleOnChange}
+                        name="score"
+                        error={errors?.score}
+                        value={form.score}
+                        placeholder={`Score`}
                     />
                 </FieldWrapper>
 
