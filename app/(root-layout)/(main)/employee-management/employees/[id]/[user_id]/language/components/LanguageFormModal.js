@@ -46,7 +46,7 @@ function LanguageFormModal({openForm, setOpenForm, id, user_id,editItem, languag
             }
 
             if (response.status === 201 || response.status === 200) {
-                LmsToastMessage('성공.', editItem ? "Language has been updated" : 'Language has been created.', 'success')
+                LmsToastMessage(editItem ? 'Update.' : "Create", editItem ? "Language has been updated" : 'Language has been created.', 'success')
                 setOpenForm(false)
                 setForm({...formObject, user_id: user_id})
             }

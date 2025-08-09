@@ -26,7 +26,7 @@ export default async function Page({params}) {
 
     return (
         <div className="flex flex-col">
-            <LmsPageHeading title="과정 등록"/>
+            <LmsPageHeading title="Create Academic Record"/>
             <EducationForm
                 education={null}
                 countries={countries}

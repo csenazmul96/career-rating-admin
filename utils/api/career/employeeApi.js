@@ -107,3 +107,30 @@ export async function updateAcademic (payload, id) {
         throw new Error(error.message);
     }
 }
+
+export async function getAddress (params) {
+    const req = await fetchRequest(`/address?${new URLSearchParams(params)}`, {
+        next: { tags: ['address'] }
+    })
+    const res = await req.json();
+
+    if (req.ok) {
+        return res.data
+    } else {
+        throw new Error(JSON.stringify(res));
+    }
+}
+
+export async function createUpdateAddress (payload) {
+    try {
+        const request = await fetchRequest(`/address`, {
+            method: "POST",
+            body: JSON.stringify(payload)
+        });
+        const res = await request.json();
+        revalidateTag("address")
+        return {...res, status: request.status};
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
