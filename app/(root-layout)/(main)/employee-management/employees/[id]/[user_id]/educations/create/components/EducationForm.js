@@ -63,7 +63,7 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
 
         if (response.status === 422) {
             setErrors(response.errors);
-        } else if (response.status === 200) {
+        } else if (response.status === 200 || response.status === 201) {
             LmsToastMessage(education ? "Update" : 'Create', education ? 'Education updated successfully ' : 'Education created successfully', 'success')
             replace(`/employee-management/employees/${params.id}/${params.user_id}/educations`);
         }

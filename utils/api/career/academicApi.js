@@ -29,10 +29,10 @@ export async function deleteAcademicRecords (id) {
         method: 'DELETE',
     })
     const res = await req.json();
-console.log(res)
+
     if (req.ok) {
         revalidatePath('academic');
-        return res.data
+        return {...res.data, status: req.status};
     } else {
         throw new Error(JSON.stringify(res));
     }

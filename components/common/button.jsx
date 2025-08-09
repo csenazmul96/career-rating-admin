@@ -7,7 +7,7 @@ const styles = {
         // Base
         'relative isolate inline-flex items-center justify-center gap-x-1  font-normal ',
         // Sizing
-        // 'px-[20px] py-[5px]  md:text-[19px] ',
+        // 'px-[20px] py-[5px]  md:text-[16px] ',
         // Focus
         // 'focus:outline-none data-[focus]:outline data-[focus]:outline-2 data-[focus]:outline-offset-2 data-[focus]:outline-blue-500',
         // Disabled
@@ -63,19 +63,19 @@ const styles = {
         // ],
 
         primary: [
-            'bg-themeColor border border-themeColor rounded-[0]  !gap-2.5 text-white  font-normal min-w-[190px] px-4 h-[48px]  md:text-[19px] cursor-pointer',
+            'bg-themeColor border border-themeColor rounded-[0]  !gap-2.5 text-white  font-normal min-w-[190px] px-4 h-[48px]  md:text-[16px] cursor-pointer',
         ],
         primaryLarge: [
-            'bg-themeColor border border-themeColor rounded-[0]  text-white text-[17px] h-[40px] px-4 text-textSubColor leading-40 cursor-pointer',
+            'bg-themeColor border border-themeColor rounded-[0]  text-white text-[15px] h-[40px] px-4 text-textSubColor leading-40 cursor-pointer',
         ],
         primaryLightLarge: [
-            'bg-primaryLightColor border border-primaryLightColor rounded-[0]   text-themeColor text-[17px] h-[40px] px-4 text-textSubColor leading-40 cursor-pointer',
+            'bg-primaryLightColor border border-primaryLightColor rounded-[0]   text-themeColor text-[15px] h-[40px] px-4 text-textSubColor leading-40 cursor-pointer',
         ],
         primaryMedium: [
-            'bg-themeColor border border-themeColor rounded-[0]  text-white text-[17px] h-[32px] px-4 text-textSubColor leading-32 cursor-pointer',
+            'bg-themeColor border border-themeColor rounded-[0]  text-white text-[15px] h-[32px] px-4 text-textSubColor leading-32 cursor-pointer',
         ],
         primaryLightMedium: [
-            'bg-primaryLightColor border border-primaryLightColor rounded-[0]   text-themeColor text-[17px] h-[32px] px-4 text-textSubColor leading-32 cursor-pointer',
+            'bg-primaryLightColor border border-primaryLightColor rounded-[0]   text-themeColor text-[15px] h-[32px] px-4 text-textSubColor leading-32 cursor-pointer',
         ],
         primarySmall: [
             'bg-themeColor rounded-[2px] border border-themeColor text-white   py-[0px] text-[13px] px-2 font-normal min-w-[auto] h-[24px] leading-19 cursor-pointer',
@@ -89,7 +89,7 @@ const styles = {
 
 
         primaryLight: [
-            'bg-primaryLightColor border border-primaryLightColor rounded-[0]  !gap-2.5 text-themeColor  font-normal min-w-[190px] px-4 h-[48px]  md:text-[19px] cursor-pointer',
+            'bg-primaryLightColor border border-primaryLightColor rounded-[0]  !gap-2.5 text-themeColor  font-normal min-w-[190px] px-4 h-[48px]  md:text-[16px] cursor-pointer',
         ],
         primaryLightSmall: [
             'bg-primaryLightColor rounded-[2px] border border-primaryLightColor rounded-[0]   text-themeColor  py-[0px] text-[13px] px-2 font-normal min-w-[auto] h-[24px] leading-19 cursor-pointer',
@@ -109,16 +109,16 @@ const styles = {
 
 
         secondary: [
-            'bg-secondaryColor border border-secondaryColor rounded-[0] !gap-2.5  text-white  font-normal min-w-[190px] px-4 h-[48px]  md:text-[19px] cursor-pointer',
+            'bg-secondaryColor border border-secondaryColor rounded-[0] !gap-2.5  text-white  font-normal min-w-[190px] px-4 h-[48px]  md:text-[16px] cursor-pointer',
         ],
         secondaryLarge: [
-            'bg-secondaryColor border border-secondaryColor  rounded-[0] text-white text-[17px] h-[40px] px-4  leading-40 cursor-pointer',
+            'bg-secondaryColor border border-secondaryColor  rounded-[0] text-white text-[15px] h-[40px] px-4  leading-40 cursor-pointer',
         ],
         secondaryMedium: [
-            'bg-secondaryColor border border-secondaryColor  rounded-[0] text-white text-[17px] h-[32px] px-4  leading-32 cursor-pointer',
+            'bg-secondaryColor border border-secondaryColor  rounded-[0] text-white text-[15px] h-[32px] px-4  leading-32 cursor-pointer',
         ],
         secondaryLightMedium: [
-            'bg-secondaryLightColor border border-secondaryLightColor text-textSubColor rounded-[0]  text-[17px] h-[32px] px-4  leading-32 cursor-pointer',
+            'bg-secondaryLightColor border border-secondaryLightColor text-textSubColor rounded-[0]  text-[15px] h-[32px] px-4  leading-32 cursor-pointer',
         ],
         secondaryRoundedSmall: [
             'bg-secondaryColor border border-secondaryColor text-white rounded-[16px]   py-[0px] text-[13px] px-3 font-normal min-w-[auto] h-[24px] leading-19 cursor-pointer ',
@@ -148,16 +148,16 @@ const styles = {
 
 
         danger: [
-            'bg-dangerColor border border-dangerColor rounded-[0] !gap-2.5  text-white  font-normal min-w-[190px] px-4 h-[48px]  md:text-[19px] cursor-pointer ',
+            'bg-dangerColor border border-dangerColor rounded-[0] !gap-2.5  text-white  font-normal min-w-[190px] px-4 h-[48px]  md:text-[16px] cursor-pointer ',
         ],
         dangerLarge: [
-            'bg-dangerColor border border-dangerColor rounded-[0] text-white text-[17px] h-[40px] px-4 leading-40 cursor-pointer',
+            'bg-dangerColor border border-dangerColor rounded-[0] text-white text-[15px] h-[40px] px-4 leading-40 cursor-pointer',
         ],
         dangerMedium: [
-            'bg-dangerColor border border-dangerColor rounded-[0] text-white text-[17px] h-[32px] px-4 leading-32 cursor-pointer',
+            'bg-dangerColor border border-dangerColor rounded-[0] text-white text-[15px] h-[32px] px-4 leading-32 cursor-pointer',
         ],
         dangerLightMedium: [
-            'bg-dangerLightColor border border-dangerLightColor text-dangerDeppColor rounded-[0] text-[17px] h-[32px] px-4 leading-32 cursor-pointer',
+            'bg-dangerLightColor border border-dangerLightColor text-dangerDeppColor rounded-[0] text-[15px] h-[32px] px-4 leading-32 cursor-pointer',
         ],
         dangerRoundedSmall: [
             'bg-dangerColor border border-dangerColor text-white rounded-[16px]  py-[0px] text-[13px] px-3 font-normal min-w-[auto] h-[24px] leading-19 cursor-pointer',
@@ -177,16 +177,16 @@ const styles = {
 
 
         transparent: [
-            'bg-transparent border border-borderColor rounded-[0] !gap-2.5 min-w-[190px] px-4 h-[48px]  text-textSubColor  md:text-[19px] cursor-pointer',
+            'bg-transparent border border-borderColor rounded-[0] !gap-2.5 min-w-[190px] px-4 h-[48px]  text-textSubColor  md:text-[16px] cursor-pointer',
         ],
         transparentRoundedMedium: [
-            'bg-transparent border border-borderColor rounded-[16px]  text-[17px] h-[32px] px-4 text-textSubColor leading-32 cursor-pointer',
+            'bg-transparent border border-borderColor rounded-[16px]  text-[15px] h-[32px] px-4 text-textSubColor leading-32 cursor-pointer',
         ],
         transparentLarge: [
-            'bg-transparent border border-borderColor rounded-[0]  text-[17px] h-[40px] px-4 text-textSubColor leading-40 cursor-pointer',
+            'bg-transparent border border-borderColor rounded-[0]  text-[15px] h-[40px] px-4 text-textSubColor leading-40 cursor-pointer',
         ],
         transparentMedium: [
-            'bg-transparent border border-borderColor rounded-[0]  text-[17px] h-[32px] px-4 text-textSubColor leading-32 cursor-pointer',
+            'bg-transparent border border-borderColor rounded-[0]  text-[15px] h-[32px] px-4 text-textSubColor leading-32 cursor-pointer',
         ],
         transparentRoundedSmall: [
             'bg-transparent border border-borderColor rounded-[16px]   text-textSubColor  py-[0px] text-[13px] px-3 font-normal min-w-[auto] h-[24px] leading-19 cursor-pointer',

@@ -31,7 +31,7 @@ function AcademicItemCard({academic, userId, id}) {
                         try {
                             const request = await deleteAcademicRecords(academic.id);
 
-                            if (request && request.status === "success") {
+                            if (request && request.status === 200) {
                                 LmsToastMessage('성공.', 'Academic has been deleted successfully.', 'success')
                             }
                         } catch (error) {

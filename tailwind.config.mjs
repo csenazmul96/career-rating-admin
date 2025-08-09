@@ -35,9 +35,9 @@ export default {
                 sm: '12px',
                 '13': '13px',
                 '14': '14px',
-                base: '15px',
-                baseNormal: '17px',
-                medium: '19px',
+                base: '13px',
+                baseNormal: '15px',
+                medium: '16px',
                 '25': '1.5625rem',
             },
             backgroundImage: {
