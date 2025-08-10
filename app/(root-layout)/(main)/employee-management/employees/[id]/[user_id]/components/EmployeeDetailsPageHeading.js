@@ -5,10 +5,10 @@ const EmployeeDetailsPageHeading = ({employee}) => {
     return (
         <>
             <Heading level={2} className={`items-center gap-2 flex`}>
-                <Button color={`${employee?.courseDivision === 'regular' ? 'primarySmall' : 'transparentSmall'}`}>
-                    {employee?.courseDivision === 'regular' ? '정규' : '상시'}
+                <Button color={`${employee?.status ? 'primarySmall' : 'transparentSmall'}`}>
+                    {employee?.status ? 'Active' : 'Inactive'}
                 </Button>
-                <span>{employee?.name}</span>
+                <span>{employee?.first_name} {employee?.last_name} ({employee?.username})</span>
             </Heading>
         </>
     );
