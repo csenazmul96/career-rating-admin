@@ -14,6 +14,16 @@ export async function getEmploymentHistory (params) {
         throw new Error(JSON.stringify(res));
     }
 }
+export async function getSingleEmploymentHistory (id) {
+    const req = await fetchRequest(`/employment-histories/${id}`)
+    const res = await req.json();
+
+    if (req.ok) {
+        return res.data
+    } else {
+        throw new Error(JSON.stringify(res));
+    }
+}
 
 export async function storeEmploymentHistory (payload) {
     try {
@@ -22,20 +32,33 @@ export async function storeEmploymentHistory (payload) {
             body: JSON.stringify(payload)
         });
         const res = await request.json();
-
+        revalidateTag("employment-histories")
         return {...res, status: request.status};
     } catch (error) {
         throw new Error(error.message);
     }
 }
-export async function deleteAcademicRecords (id) {
-    const req = await fetchRequest(`/academic/${id}`,{
+export async function updateEmploymentHistory (payload, id) {
+    try {
+        const request = await fetchRequest(`/employment-histories/${id}`, {
+            method: "PUT",
+            body: JSON.stringify(payload)
+        });
+        const res = await request.json();
+        revalidateTag("employment-histories")
+        return {...res, status: request.status};
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+export async function deleteEmployeHistory (id) {
+    const req = await fetchRequest(`/employment-histories/${id}`,{
         method: 'DELETE',
     })
     const res = await req.json();
 
     if (req.ok) {
-        revalidatePath('academic');
+        revalidatePath('employment-histories');
         return {...res.data, status: req.status};
     } else {
         throw new Error(JSON.stringify(res));

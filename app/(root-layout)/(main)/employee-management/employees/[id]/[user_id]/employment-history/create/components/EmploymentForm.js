@@ -15,7 +15,7 @@ import LmsStandardRadioFieldGroup from "@/components/common/form/LmsStandardRadi
 import Link from "next/link";
 import {Button} from "@/components/common/button";
 import {Menu} from "lucide-react";
-import {storeEmploymentHistory} from "@/utils/api/career/employeementHistory";
+import {storeEmploymentHistory, updateEmploymentHistory} from "@/utils/api/career/employeementHistory";
 
 const initialForm = {
     user_id: "",
@@ -59,9 +59,9 @@ function EmploymentForm({countries, industries, job = null}) {
         if (!job) {
             response = await storeEmploymentHistory({...form, user_id: params.user_id});
         } else {
-            response = await updateAcademic({...form, user_id: params.user_id}, job.id);
+            response = await updateEmploymentHistory({...form, user_id: params.user_id}, job.id);
         }
-console.log(response)
+
         if (response.status === 422) {
             setErrors(response.errors);
         } else if (response.status === 200 || response.status === 201) {

@@ -12,7 +12,6 @@ export default async function Page({params}) {
         getEmploymentHistory({user_id}),
         getCountries()
     ])
-
     return (
         <div className="dashboaed-stat flex flex-col">
             <div className="w-full flex justify-end">
