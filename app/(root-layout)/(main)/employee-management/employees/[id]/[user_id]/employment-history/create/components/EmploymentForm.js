@@ -15,6 +15,7 @@ import LmsStandardRadioFieldGroup from "@/components/common/form/LmsStandardRadi
 import Link from "next/link";
 import {Button} from "@/components/common/button";
 import {Menu} from "lucide-react";
+import {storeEmploymentHistory} from "@/utils/api/career/employeementHistory";
 
 const initialForm = {
     user_id: "",
@@ -56,11 +57,11 @@ function EmploymentForm({countries, industries, job = null}) {
         setErrors(null);
         let response = {};
         if (!job) {
-            response = await createAcademic({...form, user_id: params.user_id});
+            response = await storeEmploymentHistory({...form, user_id: params.user_id});
         } else {
             response = await updateAcademic({...form, user_id: params.user_id}, job.id);
         }
-
+console.log(response)
         if (response.status === 422) {
             setErrors(response.errors);
         } else if (response.status === 200 || response.status === 201) {
@@ -183,6 +184,37 @@ function EmploymentForm({countries, industries, job = null}) {
                     name="work_mode"
                 />
             </FieldWrapper>
+            <FieldWrapper label="Duration" singleElement={true} required>
+                <div className={"flex items-center gap-x-2"}>
+                    <LmsStandardDatePicker
+                        name={'start_date'}
+                        value={form.start_date}
+                        error={errors?.start_date}
+                        placeholder={'YYYY-MM-DD'}
+                        changeDataHandler={inputChangeHandler}
+                    />
+                    <span>-</span>
+                    {!form.is_current &&
+                        <LmsStandardDatePicker
+                            name={'end_date'}
+                            value={form.end_date}
+                            error={errors?.end_date}
+                            placeholder={'YYYY-MM-DD'}
+                            changeDataHandler={inputChangeHandler}
+                        />
+                    }
+                    <CheckboxField>
+                        <Checkbox
+                            color="lmscheckbox"
+                            name="is_current"
+                            value={1}
+                            clickHandler={()=>inputChangeHandler('is_current', !form.is_current)}
+                            checked={form.is_current}
+                        />
+                        <Label className="font-normal">Currently studying</Label>
+                    </CheckboxField>
+                </div>
+            </FieldWrapper>
             <div className={"flex items-center justify-between"}>
                 <FieldWrapper label="Employment Type" required className={'w-[50%]'}>
                     <LmsStandardSelectInputV2
@@ -267,37 +299,7 @@ function EmploymentForm({countries, industries, job = null}) {
                     />
                 </FieldWrapper>
             </div>
-            <FieldWrapper label="Duration" singleElement={true} required>
-                <div className={"flex items-center gap-x-2"}>
-                    <LmsStandardDatePicker
-                        name={'start_date'}
-                        value={form.start_date}
-                        error={errors?.start_date}
-                        placeholder={'YYYY-MM-DD'}
-                        changeDataHandler={inputChangeHandler}
-                    />
-                    <span>-</span>
-                    {!form.is_current &&
-                        <LmsStandardDatePicker
-                            name={'end_date'}
-                            value={form.end_date}
-                            error={errors?.end_date}
-                            placeholder={'YYYY-MM-DD'}
-                            changeDataHandler={inputChangeHandler}
-                        />
-                    }
-                    <CheckboxField>
-                        <Checkbox
-                            color="lmscheckbox"
-                            name="is_current"
-                            value={1}
-                            clickHandler={()=>inputChangeHandler('is_current', !form.is_current)}
-                            checked={form.is_current}
-                        />
-                        <Label className="font-normal">Currently studying</Label>
-                    </CheckboxField>
-                </div>
-            </FieldWrapper>
+
             <div className={"flex items-center justify-between"}>
                 <FieldWrapper label="Job level" required className={'w-[50%]'}>
                     <LmsStandardSelectInputV2

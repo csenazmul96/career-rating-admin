@@ -15,14 +15,17 @@ export async function getEmploymentHistory (params) {
     }
 }
 
-export async function getSingleAcademicRecords (id) {
-    const req = await fetchRequest(`/academic/${id}`)
-    const res = await req.json();
+export async function storeEmploymentHistory (payload) {
+    try {
+        const request = await fetchRequest(`/employment-histories`, {
+            method: "POST",
+            body: JSON.stringify(payload)
+        });
+        const res = await request.json();
 
-    if (req.ok) {
-        return res.data
-    } else {
-        throw new Error(JSON.stringify(res));
+        return {...res, status: request.status};
+    } catch (error) {
+        throw new Error(error.message);
     }
 }
 export async function deleteAcademicRecords (id) {
