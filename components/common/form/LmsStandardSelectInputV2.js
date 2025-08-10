@@ -130,9 +130,9 @@ const LmsStandardSelectInputV2 = ({label = "",
                                     {initialText}
                                 </div>
                             }
-                            {filteredOptions.map((option) => (
+                            {filteredOptions.map((option, index) => (
                                 <div
-                                    key={`option_item_${label}_${option[optionValue]}`}
+                                    key={`option_item_${label}_${index}_${option[optionValue]}`}
                                     onClick={(e) => handleSelect(option)}
                                     className={`cursor-pointer px-4 min-h-[48px] py-3 text-base text-textColor hover:bg-primaryLightColor  hover:text-themeColor ${
                                         value === option[optionValue] ? 'bg-primaryLightColor text-themeColor' : 'text-textColor'
