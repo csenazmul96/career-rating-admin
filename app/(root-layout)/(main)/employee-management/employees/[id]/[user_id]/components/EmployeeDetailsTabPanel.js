@@ -24,8 +24,8 @@ const EmployeeDetailsTabPanel = ({employee}) => {
             <Tab className={`p-0 tab-list-controller-btn inline-flex w-auto ${pathName.includes('employment-history') ? "border-themeColor font-bold text-textColor" : "border-transparent"}` }>
                 <Link className={"py-2 px-5"} href={`/employee-management/employees/${params.id}/${employee?.user_id}/employment-history`}> Employment History </Link>
             </Tab>
-            <Tab className={`p-0 tab-list-controller-btn inline-flex w-auto ${pathName.includes('educations') ? "border-themeColor font-bold text-textColor" : "border-transparent"}` }>
-                <Link className={"py-2 px-5"} href={`/employee-management/employees/${params.id}/${employee?.user_id}/educations`}> 과정평가 </Link>
+            <Tab className={`p-0 tab-list-controller-btn inline-flex w-auto ${pathName.includes('recommendations') ? "border-themeColor font-bold text-textColor" : "border-transparent"}` }>
+                <Link className={"py-2 px-5"} href={`/employee-management/employees/${params.id}/${employee?.user_id}/recommendations`}> Recommendations </Link>
             </Tab>
             <Tab className={`p-0 tab-list-controller-btn inline-flex w-auto ${pathName.includes('educations') ? "border-themeColor font-bold text-textColor" : "border-transparent"}` }>
                 <Link className={"py-2 px-5"} href={`/employee-management/employees/${params.id}/${employee?.user_id}/educations`}> 강의문의 </Link>

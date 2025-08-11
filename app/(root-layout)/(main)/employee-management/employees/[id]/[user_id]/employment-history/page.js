@@ -3,8 +3,8 @@ import {getCountries} from "@/utils/api/career/commonAPI";
 import Link from "next/link";
 import {Button} from "@/components/common/button";
 import {PlusIcon} from "lucide-react";
-import EmploymentHistoryCard
-    from "@/app/(root-layout)/(main)/employee-management/employees/[id]/[user_id]/employment-history/components/EmploymentHistoryCard";
+import EmploymentHistoryOuter
+    from "@/app/(root-layout)/(main)/employee-management/employees/[id]/[user_id]/employment-history/components/EmploymentHistoryOuter";
 
 export default async function Page({params}) {
     const {id, user_id} = await params;
@@ -19,10 +19,8 @@ export default async function Page({params}) {
                     <Button color={"primaryLightRoundedSmall"} className={'!h-10  rounded-full'}><PlusIcon size={16} /> Create New </Button>
                 </Link>
             </div>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-                {employmentHistory.map((job, index) => (
-                    <EmploymentHistoryCard key={`history-${index}`} job={job} userId={user_id} id={id}/>
-                ))}
+            <div className="flex flex-col">
+                <EmploymentHistoryOuter employmentHistory={employmentHistory} userId={user_id} id={id} />
             </div>
         </div>
     );

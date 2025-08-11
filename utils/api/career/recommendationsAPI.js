@@ -2,9 +2,9 @@
 import {fetchRequest} from "@/utils/fetchRequest";
 import {revalidatePath, revalidateTag} from "next/cache";
 
-export async function getEmploymentHistory (params) {
-    const req = await fetchRequest(`/employment-histories?${new URLSearchParams(params)}`, {
-        next: { tags: ['employment-histories'] },
+export async function getRecommendations (params) {
+    const req = await fetchRequest(`/recommendations?${new URLSearchParams(params)}`, {
+        next: { tags: ['recommendations'] },
     })
     const res = await req.json();
 
@@ -14,8 +14,8 @@ export async function getEmploymentHistory (params) {
         throw new Error(JSON.stringify(res));
     }
 }
-export async function getSingleEmploymentHistory (id) {
-    const req = await fetchRequest(`/employment-histories/${id}`)
+export async function getSingleRecommendations (id) {
+    const req = await fetchRequest(`/recommendations/${id}`)
     const res = await req.json();
 
     if (req.ok) {
@@ -25,40 +25,40 @@ export async function getSingleEmploymentHistory (id) {
     }
 }
 
-export async function storeEmploymentHistory (payload) {
+export async function storeRecommendations (payload) {
     try {
-        const request = await fetchRequest(`/employment-histories`, {
+        const request = await fetchRequest(`/recommendations`, {
             method: "POST",
             body: JSON.stringify(payload)
         });
         const res = await request.json();
-        revalidateTag("employment-histories")
+        revalidateTag("recommendations")
         return {...res, status: request.status};
     } catch (error) {
         throw new Error(error.message);
     }
 }
-export async function updateEmploymentHistory (payload, id) {
+export async function updateRecommendations (payload, id) {
     try {
-        const request = await fetchRequest(`/employment-histories/${id}`, {
+        const request = await fetchRequest(`/recommendations/${id}`, {
             method: "PUT",
             body: JSON.stringify(payload)
         });
         const res = await request.json();
-        revalidateTag("employment-histories")
+        revalidateTag("recommendations")
         return {...res, status: request.status};
     } catch (error) {
         throw new Error(error.message);
     }
 }
-export async function deleteEmployeHistory (id) {
-    const req = await fetchRequest(`/employment-histories/${id}`,{
+export async function deleteRecommendations (id) {
+    const req = await fetchRequest(`/recommendations/${id}`,{
         method: 'DELETE',
     })
     const res = await req.json();
 
     if (req.ok) {
-        revalidatePath('employment-histories');
+        revalidatePath('recommendations');
         return {...res.data, status: req.status};
     } else {
         throw new Error(JSON.stringify(res));
@@ -66,14 +66,14 @@ export async function deleteEmployeHistory (id) {
 }
 
 
-export async function sortEmploymentHistory (payload) {
+export async function sortRecommendations (payload) {
     try {
-        const request = await fetchRequest(`/employment-histories/sort`, {
+        const request = await fetchRequest(`/recommendations/sort`, {
             method: "POST",
             body: JSON.stringify(payload)
         });
         const res = await request.json();
-        // revalidateTag("employment-histories")
+
         return {...res, status: request.status};
     } catch (error) {
         throw new Error(error.message);
