@@ -38,7 +38,7 @@ const LmsStandardInputField = ({
     return (
         <div className={` ${vertical ? "" : "flex items-center"} ${ singleElement ? "flex-[0_1_auto] w-full" : "flex-[0_1_auto]" }`}>
             {label && (
-                <div className={`self-stretch flex items-center ${ vertical ? "pb-2" : "pl-6  min-w-[153px] bg-secondaryBgColor" }`} >
+                <div className={`self-stretch flex items-center ${ vertical ? "pb-2 pt-2" : "pl-6  min-w-[153px] bg-secondaryBgColor" }`} >
                   <span className="common-label-style">
                         {label}
                         {required && <span className="text-dangerColor">*</span>}

@@ -72,14 +72,11 @@ const LmsStandardDatePicker = ({
     }
 
     return (
-        <div className={`flex items-center ${
-            singleElement ? "flex-[0_1_auto] w-full" : "flex-[0_1_auto]"
-        }`}
-        >
+        <div className={` ${vertical ? "" : "flex items-center"} ${ singleElement ? "flex-[0_1_auto] w-full" : "flex-[0_1_auto]" }`}>
             {label && (
-                <div className="pl-6 flex items-center min-w-[153px] bg-secondaryBgColor self-stretch">
+                <div className={`self-stretch flex items-center ${ vertical ? "pb-2" : "pl-6  min-w-[153px] bg-secondaryBgColor" }`} >
                   <span className="common-label-style">
-                    {label}
+                        {label}
                       {required && <span className="text-dangerColor">*</span>}
                   </span>
                 </div>

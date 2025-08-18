@@ -27,8 +27,8 @@ const EmployeeDetailsTabPanel = ({employee}) => {
             <Tab className={`p-0 tab-list-controller-btn inline-flex w-auto ${pathName.includes('recommendations') ? "border-themeColor font-bold text-textColor" : "border-transparent"}` }>
                 <Link className={"py-2 px-5"} href={`/employee-management/employees/${params.id}/${employee?.user_id}/recommendations`}> Recommendations </Link>
             </Tab>
-            <Tab className={`p-0 tab-list-controller-btn inline-flex w-auto ${pathName.includes('educations') ? "border-themeColor font-bold text-textColor" : "border-transparent"}` }>
-                <Link className={"py-2 px-5"} href={`/employee-management/employees/${params.id}/${employee?.user_id}/educations`}> 강의문의 </Link>
+            <Tab className={`p-0 tab-list-controller-btn inline-flex w-auto ${pathName.includes('trainings') ? "border-themeColor font-bold text-textColor" : "border-transparent"}` }>
+                <Link className={"py-2 px-5"} href={`/employee-management/employees/${params.id}/${employee?.user_id}/trainings`}> Trainings </Link>
             </Tab>
         </TabList>
     );
