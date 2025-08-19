@@ -8,22 +8,24 @@ import {ChevronDown, Folder} from "lucide-react";
 
 const LmsPageSidebarItem = ({ menu, index, level,  slug, menuRef }) => {
     const {setCurrentGroup, currentGroup, activeDropdown} = usePageSidebarContext()
-    console.log(activeDropdown)
     const params = useParams()
     const urlPath = usePathname()
-    const pathname = urlPath.split('/').slice(0, 3).join('/');
+    // const pathname = urlPath.split('/').slice(0, 3).join('/');
+    const pathname = '/' + urlPath.split('/')[1];
+
     const {replace} = useRouter();
+
 
 
     const [isActive, setIsActive] = useState(false);
 
     useEffect(() => {
         if (level === 1) {
-            setIsActive(params.id?.length >= 1 && menu.id === +params?.id[0] ? true : false);
+            setIsActive(params.id?.length >= 1 && menu.id === params?.id[0] ? true : false);
         } else if (level === 2) {
-            setIsActive(params.id?.length > 1 && menu.id === +params?.id[1] ? true : false);
+            setIsActive(params.id?.length > 1 && menu.id === params?.id[1] ? true : false);
         } else if (level === 3) {
-            setIsActive(params.id?.length > 2 && menu.id === +params?.id[2] ? true : false);
+            setIsActive(params.id?.length > 2 && menu.id === params?.id[2] ? true : false);
         }
     }, [activeDropdown]);
 
@@ -74,9 +76,10 @@ const LmsPageSidebarItem = ({ menu, index, level,  slug, menuRef }) => {
 
     const changeRoute = (menu) => {
         let remakeSlug = slug
-        if(level === 1 && params.id && menu.id ===  +params.id[0]){
+
+        if(level === 1 && params.id && menu.id ===  params.id[0]){
             remakeSlug = ''
-        } else if (level === 2 && params.id && params.id.length > 1 &&  menu.id ===  +params.id[1]) {
+        } else if (level === 2 && params.id && params.id.length > 1 &&  menu.id ===  params.id[1]) {
             remakeSlug = params?.id[0]
         }
         setCurrentGroup({...menu, level});

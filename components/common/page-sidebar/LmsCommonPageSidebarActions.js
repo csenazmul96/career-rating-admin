@@ -7,8 +7,9 @@ import ConfirmPopup from "@/components/common/confirmAlert/ConfirmPopup";
 import {deleteParentGroup, deleteSubGroup, deleteSubSubGroup} from "@/utils/api/lmsPageCommonSidebar";
 import {usePageSidebarContext} from "@/store/PageSidebarContext";
 import {Pencil, Plus, Trash2} from "lucide-react";
+import {deleteSidebarGroup} from "@/utils/api/career/commonAPI";
 
-const LmsCommonPageSidebarActions = ({apiPrefix, apiPostFix, tag,
+const LmsCommonPageSidebarActions = ({apiPrefix, tag,
                                          deleteMessage= "선택한 그룹을 삭제하시겠습니까?",
                                          headingMessage='그룹 삭제',
                                          editBtnText='수정',
@@ -42,15 +43,15 @@ const LmsCommonPageSidebarActions = ({apiPrefix, apiPostFix, tag,
                     onClick: async () => {
                         let response = null;
 
-                        if (currentGroup.level === 1) {
-                            response = await deleteParentGroup(currentGroup.id, `${apiPrefix}/${apiPostFix}`, tag)
-                        } else if (currentGroup.level === 2) {
-                            response = await deleteSubGroup(currentGroup.id, `${apiPrefix}/sub/${apiPostFix}`, tag)
-                        } else if (currentGroup.level === 3) {
-                            response = await deleteSubSubGroup(currentGroup.id, `${apiPrefix}/sub-sub/${apiPostFix}`, tag)
-                        }
+                        // if (currentGroup.level === 1) {
+                            response = await deleteSidebarGroup( `${apiPrefix}/${currentGroup.id}`, tag)
+                        // } else if (currentGroup.level === 2) {
+                        //     response = await deleteSubGroup(currentGroup.id, `${apiPrefix}`, tag)
+                        // } else if (currentGroup.level === 3) {
+                        //     response = await deleteSubSubGroup(currentGroup.id, `${apiPrefix}`, tag)
+                        // }
 
-                        if (response && response.status === 'success') {
+                        if (response && response.status === 200) {
                             toast.success('Group has been removed')
                         } else {
                             toast.error('Something went wrong')
