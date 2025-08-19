@@ -8,6 +8,7 @@ import {ChevronDown, Folder} from "lucide-react";
 
 const LmsPageSidebarItem = ({ menu, index, level,  slug, menuRef }) => {
     const {setCurrentGroup, currentGroup, activeDropdown} = usePageSidebarContext()
+    console.log(activeDropdown)
     const params = useParams()
     const urlPath = usePathname()
     const pathname = urlPath.split('/').slice(0, 3).join('/');

@@ -18,8 +18,9 @@ import {
 } from "@/utils/api/lmsPageCommonSidebar";
 import { formatErrors } from "@/utils/helpers/ErrorHeloper";
 import { toast } from "react-toastify";
+import {storeSidebarGroup, updateSidebarGroup} from "@/utils/api/career/commonAPI";
 
-const LmsCommonPageSidebarForm = ({ apiPrefix, apiPostFix, tag = "" }) => {
+const LmsCommonPageSidebarForm = ({ apiPrefix, tag = "" }) => {
   const {
     openForm,
     activeDropdown,
@@ -59,73 +60,38 @@ const LmsCommonPageSidebarForm = ({ apiPrefix, apiPostFix, tag = "" }) => {
       let response = null;
       let newForm = { ...form };
 
-      if (actionType === "edit") {
-        newForm = {
-          ...form,
-          id: currentGroup.id,
-        };
-      }
-
       if (!currentGroup) {
-        response = await createEditParentGroup(
-          newForm,
-          `${apiPrefix}/${apiPostFix}`,
-          tag
+        response = await storeSidebarGroup(
+            newForm,
+            `${apiPrefix}`,
+            tag
         );
       } else {
-        if (currentGroup.level === 1) {
-          if (actionType === "edit") {
-            response = await createEditParentGroup(
+        if (actionType === "edit") {
+          response = await updateSidebarGroup(
               newForm,
-              `${apiPrefix}/${apiPostFix}`,
+              `${apiPrefix}/${currentGroup.id}`,
               tag
-            );
-          } else {
-            response = await createEditSubGroup(
+          );
+        } else {
+          response = await storeSidebarGroup(
               newForm,
-              currentGroup.id,
-              `${apiPrefix}/sub/${apiPostFix}`,
+              `${apiPrefix}`,
               tag
-            );
-          }
-        } else if (currentGroup.level === 2) {
-          if (actionType === "edit") {
-            response = await createEditSubGroup(
-              newForm,
-              activeDropdown.first.id,
-              `${apiPrefix}/sub/${apiPostFix}`,
-              tag
-            );
-          } else {
-            response = await createEditSubSubGroup(
-              newForm,
-              currentGroup.id,
-              `${apiPrefix}/sub-sub/${apiPostFix}`,
-              tag
-            );
-          }
-        } else if (currentGroup.level === 3) {
-          if (actionType === "edit") {
-            response = await createEditSubSubGroup(
-              newForm,
-              activeDropdown.second.id,
-              `${apiPrefix}/sub-sub/${apiPostFix}`,
-              tag
-            );
-          }
+          );
         }
       }
 
-      if (response && response.status === "success") {
+      if (response && response.status === 200) {
         cancelForm();
         toast.success(
-          `${
-            currentGroup ? "Group has been updated" : "Group has been created"
-          }`
+            `${
+                currentGroup ? "Group has been updated" : "Group has been created"
+            }`
         );
       } else {
         if (response?.errors) {
-          setErrors(formatErrors(response?.errors));
+          setErrors(response.errors);
         }
         toast.error("something went wrong!");
       }
@@ -139,47 +105,47 @@ const LmsCommonPageSidebarForm = ({ apiPrefix, apiPostFix, tag = "" }) => {
   const isEdit = actionType === "edit" && currentGroup && currentGroup.id;
 
   return (
-    <>
-      <Dialog open={openForm} onClose={setOpenForm}>
-        <DialogTitle>
-          <span>{isEdit ? "그룹 수정" : "그룹 추가"}</span>
-        </DialogTitle>
-        <DialogBody>
-          <LmsStandardInputField
-            error={errors?.name}
-            name="name"
-            label={"그룹명"}
-            vertical={true}
-            fieldClass={"w-full"}
-            value={form.name}
-            placeholder="그룹명을 입력해주세요."
-            changeDataHandler={handleOnChange}
-          />
-        </DialogBody>
-        <DialogActions>
-          <Button
-            type="button"
-            color="transparentMedium"
-            className={"!h-10"}
-            onClick={cancelForm}
-          >
-            {" "}
-            취소{" "}
-          </Button>
-          <Button
-            type="button"
-            disable={!form.name ? true : loading ? true : false}
-            color={`${!form.name ? "secondaryMedium" : "primaryMedium"}`}
-            className={"!h-10"}
-            loading={loading}
-            onClick={submitForm}
-          >
-            {" "}
-            확인{" "}
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </>
+      <>
+        <Dialog open={openForm} onClose={setOpenForm}>
+          <DialogTitle>
+            <span>{isEdit ? "그룹 수정" : "그룹 추가"}</span>
+          </DialogTitle>
+          <DialogBody>
+            <LmsStandardInputField
+                error={errors?.name}
+                name="name"
+                label={"그룹명"}
+                vertical={true}
+                fieldClass={"w-full"}
+                value={form.name}
+                placeholder="그룹명을 입력해주세요."
+                changeDataHandler={handleOnChange}
+            />
+          </DialogBody>
+          <DialogActions>
+            <Button
+                type="button"
+                color="transparentMedium"
+                className={"!h-10"}
+                onClick={cancelForm}
+            >
+              {" "}
+              취소{" "}
+            </Button>
+            <Button
+                type="button"
+                disable={!form.name ? true : loading ? true : false}
+                color={`${!form.name ? "secondaryMedium" : "primaryMedium"}`}
+                className={"!h-10"}
+                loading={loading}
+                onClick={submitForm}
+            >
+              {" "}
+              확인{" "}
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </>
   );
 };
 

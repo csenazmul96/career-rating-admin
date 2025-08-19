@@ -63,13 +63,57 @@ export async function getLanguages () {
     }
 }
 
-export async function getIndustries () {
-    const req = await fetchRequest(`/industries`)
+
+export async function storeSidebarGroup (payload,  endpoint, tag='') {
+    try {
+        const request = await fetchRequest(`${endpoint}`, {
+            method: "POST",
+            body: JSON.stringify(payload)
+        });
+        const res = await request.json();
+         if (request.status === 200)
+                revalidateTag(tag);
+
+        return {...res, status: request.status};
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
+export async function updateSidebarGroup (payload, endpoint, tag='') {
+    try {
+        const request = await fetchRequest(`${endpoint}`, {
+            method: "PUT",
+            body: JSON.stringify(payload)
+        });
+        const res = await request.json();
+        revalidateTag(tag);
+        return {...res, status: request.status};
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
+export async function getsSingleSidebarGroup (endpoint) {
+    const req = await fetchRequest(`${endpoint}`)
     const res = await req.json();
 
     if (req.ok) {
-        return res.data;
+        return res.data
     } else {
         throw new Error(JSON.stringify(res));
+    }
+}
+
+export async function deleteSidebarGroup (endpoint, tag='') {
+    try {
+        const request = await fetchRequest(`${endpoint}`, {
+            method: "DELETE"
+        });
+        const res = await request.json();
+        revalidateTag(tag);
+        return {...res, status: request.status};
+    } catch (error) {
+        throw new Error(error.message);
     }
 }

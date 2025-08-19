@@ -1,8 +1,9 @@
 import LmsPageHeading from "@/components/common/LmsPageHeading";
 import {getEmploymentHistory} from "@/utils/api/career/employeementHistory";
-import {getCountries, getIndustries} from "@/utils/api/career/commonAPI";
+import {getCountries} from "@/utils/api/career/commonAPI";
 import EmploymentForm
     from "@/app/(root-layout)/(main)/employee-management/employees/[id]/[user_id]/employment-history/create/components/EmploymentForm";
+import {getIndustries} from "@/utils/api/career/industriesAPI";
 
 export default async function Page({params}) {
     const {id, user_id} = await params;

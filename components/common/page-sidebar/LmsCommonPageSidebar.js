@@ -14,7 +14,6 @@ const LmsCommonPageSidebar = ({
                                   groups,
                                   showActions = true,
                                   apiPrefix = "",
-                                  apiPostFix = "group",
                                   labels = { heading: "챕터분류" },
                                   editBtnText = "수정",
                                   deleteBtnText = "삭제",
@@ -33,13 +32,12 @@ const LmsCommonPageSidebar = ({
     const menuRef = useRef(null);
     useEffect(() => {
         if (groups.length > 0) {
-            let parentId = params.id?.length ? +params.id[0] : "";
-            let secondId = params.id?.length > 1 ? +params?.id[1] : "";
-            let thirdId = params.id?.length > 2 ? +params?.id[2] : "";
-
-            let first = groups.find((item) => +item.id === parentId);
-            let second = first?.subGroups.find((item) => +item.id === secondId);
-            let third = second?.subGroups.find((item) => +item.id === thirdId);
+            let parentId = params.id?.length ? params.id[0] : "";
+            let secondId = params.id?.length > 1 ? params?.id[1] : "";
+            let thirdId = params.id?.length > 2 ? params?.id[2] : "";
+            let first = groups.find((item) => item.id === parentId);
+            let second = first?.subGroups.find((item) => item.id === secondId);
+            let third = second?.subGroups.find((item) => item.id === thirdId);
 
             setActiveDropdown({
                 first: first ?? null,
@@ -131,7 +129,6 @@ const LmsCommonPageSidebar = ({
                     {showActions && (
                         <LmsCommonPageSidebarActions
                             apiPrefix={apiPrefix}
-                            apiPostFix={apiPostFix}
                             tag={module}
                             editBtnText={editBtnText}
                             deleteBtnText={deleteBtnText}
@@ -146,7 +143,6 @@ const LmsCommonPageSidebar = ({
             {openForm && (
                 <LmsCommonPageSidebarForm
                     apiPrefix={apiPrefix}
-                    apiPostFix={apiPostFix}
                     tag={module}
                 />
             )}
