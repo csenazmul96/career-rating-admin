@@ -8,10 +8,11 @@ import CompaniesDataTable
 export default async function Page({searchParams}) {
     const queryParams = await searchParams
     const {companies, pagination} = await getCompanies(queryParams)
+
     return (
         <div className="flex flex-col member-list">
             <LmsPageHeading title="Companies" />
-            <CompaniesFilter queryParams={queryParams} />
+            <CompaniesFilter queryParams={queryParams}/>
             <div className="flex flex-col pt-12 lg:pt-16">
                 <CompaniesDataTable companies={companies} pagination={pagination}/>
             </div>

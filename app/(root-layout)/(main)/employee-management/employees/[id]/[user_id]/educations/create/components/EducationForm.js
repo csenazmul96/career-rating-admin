@@ -14,6 +14,7 @@ import {Button} from "@/components/common/button";
 import {Menu} from "lucide-react";
 import {createAcademic, updateAcademic} from "@/utils/api/career/employeeApi";
 import {LmsToastMessage} from "@/components/common/LmsToastMessage";
+import {useCommonContext} from "@/store/CommonContext";
 const initialForm = {
     user_id: "",
     institution_name: "",
@@ -40,7 +41,13 @@ const initialForm = {
     description: "",
     verified: false
 };
-function EducationForm({education, educationLevels, countries, gradingScales, gradingSystems, degreeNames, languages}) {
+function EducationForm({education}) {
+    const { countries,
+        degreeNames,
+        languages,
+        gradingScales,
+        gradingSystems,
+        educationLevels} = useCommonContext()
     const params = useParams();
     const {replace} = useRouter();
     const [errors, setErrors] = useState(null);
@@ -314,13 +321,13 @@ function EducationForm({education, educationLevels, countries, gradingScales, gr
             </FieldWrapper>
             <FieldWrapper label="Description" singleElement={true} >
                 <LmsStandardTextArea
-                     singleElement={true}
-                     error={errors?.description}
-                     value={form.description}
-                     name="description"
-                     placeholder={"Description"}
-                     changeDataHandler={inputChangeHandler}
-                     className={`w-full`} />
+                    singleElement={true}
+                    error={errors?.description}
+                    value={form.description}
+                    name="description"
+                    placeholder={"Description"}
+                    changeDataHandler={inputChangeHandler}
+                    className={`w-full`} />
             </FieldWrapper>
             <div className="flex items-center justify-between border-t border-commonBorderColor pt-10">
                 <div className="left-col flex items-center">

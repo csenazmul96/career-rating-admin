@@ -16,13 +16,33 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import LmsNotificationWrapper from "@/components/header/notification-components/LmsNotificationWrapper";
 import {useNotificationContext} from "@/store/NotificationContext";
-import {useRef} from "react";
+import {useEffect, useRef} from "react";
+import {useCommonContext} from "@/store/CommonContext";
 
-const Header = () => {
+const Header = ({countries, educationLevels, gradingSystems, gradingScales, degreeNames,languages, industries}) => {
   const { toggleMainSidebar } = useSidebar();
   const { data: session } = useSession();
   const {setIsOpen, isOpen} = useNotificationContext()
   const bellRef = useRef(null);
+  const {setCountries,
+    setIndustries,
+    setLanguages,
+    setDegreeNames,
+    setGradingSystems,
+    setGradingScales,
+    setEducationLevels,} = useCommonContext()
+
+  useEffect(() => {
+    return () => {
+      setIndustries(industries)
+      setCountries(countries)
+      setLanguages(languages)
+      setDegreeNames(degreeNames)
+      setGradingSystems(gradingSystems)
+      setGradingScales(gradingScales)
+      setEducationLevels(educationLevels)
+    }
+  }, []);
 
   const handleClick = (e) => {
     e.stopPropagation();
