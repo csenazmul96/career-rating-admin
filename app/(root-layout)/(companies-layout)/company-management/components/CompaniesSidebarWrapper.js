@@ -1,7 +1,5 @@
 'use client'
 import React from 'react';
-import {usePathname} from "next/navigation";
-import {curriculumChapterDateFormat} from "@/utils/helpers/CommonHelper";
 import LmsCommonPageSidebar from "@/components/common/page-sidebar/LmsCommonPageSidebar";
 
 const CompaniesSidebarWrapper = ({industries}) => {

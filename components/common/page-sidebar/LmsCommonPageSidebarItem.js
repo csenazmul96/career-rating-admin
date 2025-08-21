@@ -10,8 +10,7 @@ const LmsPageSidebarItem = ({ menu, index, level,  slug, menuRef }) => {
     const {setCurrentGroup, currentGroup, activeDropdown} = usePageSidebarContext()
     const params = useParams()
     const urlPath = usePathname()
-    // const pathname = urlPath.split('/').slice(0, 3).join('/');
-    const pathname = '/' + urlPath.split('/')[1];
+    const pathname = urlPath.split('/').slice(0, 3).join('/');
 
     const {replace} = useRouter();
 
@@ -36,17 +35,7 @@ const LmsPageSidebarItem = ({ menu, index, level,  slug, menuRef }) => {
 
     const toggleDropdown = (menu) => {
         setCurrentGroup(menu);
-        // changeRoute(menu);
         setIsOpen((prev) => !prev);
-        // setTimeout(()=>{
-        //     if (menuRef.current) {
-        //         menuRef.current.scrollTo({
-        //             top: menuRef.current.scrollHeight,
-        //             behavior: "smooth"
-        //         });
-        //     }
-        // }, 200);
-
     };
 
     const getTotalHeight = (element) => {

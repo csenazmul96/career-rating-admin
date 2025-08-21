@@ -25,6 +25,7 @@ const LmsCommonPageSidebar = ({
     const {
         openForm,
         setActiveDropdown,
+        currentGroup,
         setCurrentGroup,
         setChapterGroup,
         setActiveContent,
@@ -66,8 +67,8 @@ const LmsCommonPageSidebar = ({
 
     let mainPathname = pathName.split('?')[0];
     const mainPath = mainPathname.replace(/(\/\d+)+$/, '');
-    const extractPath = pathName.split("/")
-    const lastSegment = extractPath[extractPath.length - 1];
+    const pathname = mainPath.split('/').slice(0, 3).join('/');
+
     return (
         <div
             className={`transition-all duration-300 chapterSidebar-container   bg-white  text-subColor ${
@@ -101,15 +102,13 @@ const LmsCommonPageSidebar = ({
 
                         <ul className="custom-scrollbar h-[600px] flex flex-col gap-2" ref={menuRef}>
                             <li>
-                                <div className={`${lastSegment === 'course' || lastSegment === 'evaluations' || lastSegment === 'video-management' || lastSegment === 'document-management'? 'bg-primaryLightColor text-themeColor font-bold' : ''} group flex items-center px-4 cursor-pointer hover:bg-primaryLightColor hover:text-themeColor`}>
-                                    <Link href={mainPath}>
+                                <div className={`${!currentGroup? 'bg-primaryLightColor text-themeColor font-bold' : ''} group flex items-center px-4 cursor-pointer hover:bg-primaryLightColor hover:text-themeColor`}>
+                                    <Link href={pathname}>
                                         <div className={`flex items-center   w-full gap-3`}>
-                          <span className={`group-hover:fill-themeColor`}>
-                            <Folder size={20}/>
-                          </span>
-                                            <span className={`py-3 w-full cursor-pointer`}>
-                                <span>전체보기</span>
-                              </span>
+                                              <span className={`group-hover:fill-themeColor`}>
+                                                <Folder size={20}/>
+                                              </span>
+                                              <span className={`py-3 w-full cursor-pointer`}> <span>All</span> </span>
                                         </div>
                                     </Link>
                                 </div>

@@ -13,10 +13,8 @@ const Footer = () => {
 
 
     const showSidebarPaths = [
-        '/curriculum/evaluations',
-        '/content-management/video-management',
-        '/content-management/document-management',
-        '/curriculum/course',
+        '/employee-management/employees',
+        '/company-management/companies',
     ]
 
     let paddingLeft = isMainSidebarOpen ? 'pl-[308px]' : 'pl-[48px]';

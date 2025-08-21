@@ -13,7 +13,7 @@ const MainContentWrapper = ({children, classes = ''}) => {
 
     const showSidebarPaths = [
         '/employee-management/employees',
-        '/companies',
+        '/company-management/companies',
     ]
 
     let paddingLeft;

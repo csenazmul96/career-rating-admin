@@ -1,4 +1,4 @@
-import {LayoutDashboard, LayoutList, Monitor, Package, Phone, Users, ChartPie} from "lucide-react";
+import {LayoutDashboard, LayoutList, Monitor, Package, Phone, Users, ChartPie, Building2} from "lucide-react";
 
 export const menuItems = [
     {
@@ -14,6 +14,15 @@ export const menuItems = [
         slug:'/employee-management',
         dropdown: [
             { id: "12", label: "Employees", slug: '/employees' },
+        ],
+    },
+    {
+        id: "12",
+        label: "Company Management",
+        icon: <Building2 size={16} />,
+        slug:'/company-management',
+        dropdown: [
+            { id: "21", label: "Company", slug: '/companies' },
         ],
     },
 
