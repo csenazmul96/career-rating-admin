@@ -11,7 +11,7 @@ export default async function Page({searchParams}) {
         <div className="flex flex-col member-list">
             <LmsPageHeading title="Employees" />
             <EmployeeTableFilter queryParams={queryParams} />
-            <div className="member-list-table pt-8">
+            <div className="flex flex-col pt-12 lg:pt-16">
             <EmployeeTable employees={employees} pagination={pagination}/>
             </div>
         </div>

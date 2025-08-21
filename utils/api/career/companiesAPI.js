@@ -2,12 +2,14 @@
 import {fetchRequest} from "@/utils/fetchRequest";
 import {revalidatePath, revalidateTag} from "next/cache";
 
-export async function getCountries () {
-    const req = await fetchRequest(`/countries`)
+export async function getCompanies () {
+    const req = await fetchRequest(`/companies`,{
+        next: { tags: ['companies'] },
+    })
     const res = await req.json();
 
     if (req.ok) {
-        return res.data;
+        return {companies: res.data, pagination: res.meta};
     } else {
         throw new Error(JSON.stringify(res));
     }
