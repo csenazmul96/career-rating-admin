@@ -2,7 +2,7 @@
 
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import UploadAdapter from "@/utils/helpers/UploadAdapter";
+// import UploadAdapter from "@/utils/helpers/UploadAdapter";
 
 export default function TextEditor({    name = '',
                                         value = '',
@@ -19,9 +19,9 @@ export default function TextEditor({    name = '',
     };
 
     function uploadPlugin(editor) {
-        editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
-            return UploadAdapter(loader, true);
-        };
+        // editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+        //     return UploadAdapter(loader, true);
+        // };
     }
 
     return (
