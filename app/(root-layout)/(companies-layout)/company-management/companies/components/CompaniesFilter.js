@@ -32,7 +32,7 @@ const CompaniesFilter = ({queryParams}) => {
                 page: oldParams && oldParams.get('page') ? oldParams.get('page') : 1,
                 per_page: oldParams && oldParams.get('per_page') ? oldParams.get('per_page') : 10,
                 search: oldParams && oldParams.get('search') ? oldParams.get('search') : '',
-                country_id: oldParams && oldParams.get('country_id') ? oldParams.get('country_id') : '',
+                country_code: oldParams && oldParams.get('country_code') ? oldParams.get('country_code') : '',
                 industry: oldParams && oldParams.get('industry') ? oldParams.get('industry') : '',
                 company_type: oldParams && oldParams.get('company_type') ? oldParams.get('company_type') : '',
             })
@@ -66,15 +66,23 @@ const CompaniesFilter = ({queryParams}) => {
     }
 
     const filterCriteria  = [
-        {label: 'Rating', paramsName: 'average_rating'},
+        {label: 'Country Code', paramsName: 'country_code'},
         {label: 'Search', paramsName: 'search'},
-        {label: 'Date', paramsName: 'startDate'}
+        {label: 'Company Type', paramsName: 'company_type'},
+        {label: 'Industry', paramsName: 'industry'}
     ]
 
     const finallist = filterCriteria.map(item => {
         const { label, paramsName } = item;
         let value = '';
+        if (params && params[paramsName]) {
 
+            value = params[paramsName];
+
+            if (paramsName === "industry") {
+                value = industries.find(item => item.id === value)?.name || "";
+            }
+        }
         return {
             label,
             paramsName,
@@ -94,13 +102,13 @@ const CompaniesFilter = ({queryParams}) => {
                             changeDataHandler={handleOnChnage}
                         />
                     </FilterFormWrapper>
-                    <FilterFormWrapper label={'Rating'} className={``}  >
+                    <FilterFormWrapper label={'Country'} className={``}  >
                         <LmsStandardSelectInputV2
-                            name={`country_id`}
+                            name={`country_code`}
                             initialText={'Select Country'}
                             fieldClass={'h-[250px] w-[270px]'}
                             search={true}
-                            value={params && params.country_id ? params.country_id : ''}
+                            value={params && params.country_code ? params.country_code : ''}
                             options={countries}
                             changeDataHandler={handleOnChnage}/>
                     </FilterFormWrapper>

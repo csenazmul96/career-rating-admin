@@ -50,7 +50,7 @@ function LmsDatatableFilterSummary({filterCriteria}) {
                     <div className="flex">
                         {filterCriteria && filterCriteria.length > 0 &&
                             <Button color="transparentSmall" onClick={handleReset} className="min-w-[auto] !font-bold border-none w-[80px] whitespace-nowrap !gap-2 h-[24px] !pl-3 !pr-3 cursor-pointer !text-[13px]">
-                                <span> <RotateCw size={16} /> </span>  초기화
+                                <span> <RotateCw size={16} /> </span>  Clear
                             </Button>
                         }
                     </div>
