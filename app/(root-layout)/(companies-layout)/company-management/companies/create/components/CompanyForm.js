@@ -9,6 +9,11 @@ import {useCommonContext} from "@/store/CommonContext";
 import LmsStandardTextEditor from "@/components/common/form/LmsStandardTextEditor";
 import {Checkbox, CheckboxField} from "@/components/common/checkbox";
 import {Label} from "@/components/common/fieldset";
+import {Button} from "@/components/common/button";
+import {Menu} from "lucide-react";
+import Link from "next/link";
+import {storeCompany} from "@/utils/api/career/companiesAPI";
+import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
 function CompanyForm(props) {
     const [errors, setErrors] = useState(null);
@@ -46,20 +51,63 @@ function CompanyForm(props) {
     const handleOnChange = (column, value) => {
         setForm((prev) => ({ ...prev, [column]: value }));
     };
-    const handleCorrectAnswer = (e) => {
-        console.log(e.target)
+
+
+    const submitForm = async () => {
+        setErrors(null);
+        setLoading(true);
+        try {
+            let data = null;
+            if (!form.id) {
+                data = await storeCompany(form);
+            }
+            console.log(data)
+            if (data.status === 422) {
+                setErrors(data.errors);
+                if (!errors) {
+                    LmsToastMessage("오류.", "문제가 발생했습니다.", "error");
+                }
+            } else {
+                if (!form.id) {
+                    resetForm();
+                }
+                LmsToastMessage(
+                    "성공.",
+                    form?.id
+                        ? "회원이 성공적으로 업데이트되었습니다."
+                        : "회원이 성공적으로 생성되었습니다.",
+                    "success"
+                );
+            }
+            setLoading(false);
+        } catch (e) {
+            setLoading(false);
+            toast.error("문제가 발생했습니다.");
+        }
     };
 
     return (
         <>
-            <FieldWrapper label="Company Type" required={true}>
-                <LmsStandardRadioFieldGroup
-                    options={companyTypes}
-                    name="company_type"
-                    value={form.company_type}
-                    changeDataHandler={handleOnChange}
-                />
-            </FieldWrapper>
+            <div className={"flex"}>
+                <FieldWrapper label="Company Type" required={true} singleElement={true} className={'w-1/2'}>
+                    <LmsStandardRadioFieldGroup
+                        options={companyTypes}
+                        name="company_type"
+                        value={form.company_type}
+                        changeDataHandler={handleOnChange}
+                    />
+                </FieldWrapper>
+                <FieldWrapper label="Verify" singleElement={true} className={'w-1/2'}>
+                    <CheckboxField>
+                        <Checkbox color="lmscheckbox"
+                                  onClickHandler={()=>handleOnChange('verified', !form.verified)}
+                                  name="verified"
+                                  checked={form.verified} />
+                        <Label className={`font-normal cursor-pointer hover:text-themeColor ${form.verified ? " text-themeColor !font-bold" : "text-black "}`}
+                               htmlFor={`verified`}>Verified?</Label>
+                    </CheckboxField>
+                </FieldWrapper>
+            </div>
             <div className={"flex"}>
                 <FieldWrapper label="Name" required={true} className={"w-1/2"}>
                     <LmsStandardInputField
@@ -81,12 +129,12 @@ function CompanyForm(props) {
                 </FieldWrapper>
             </div>
             <div className={"flex"}>
-                <FieldWrapper label="Phone" required={true} className={"w-1/2"}>
+                <FieldWrapper label="Username" required={true} className={"w-1/2"}>
                     <LmsStandardInputField
-                        error={errors?.phone}
-                        name="phone"
-                        value={form.phone}
-                        placeholder="Phone"
+                        error={errors?.username}
+                        name="username"
+                        value={form.username}
+                        placeholder="Login Admin Username"
                         changeDataHandler={handleOnChange}
                     />
                 </FieldWrapper>
@@ -97,6 +145,27 @@ function CompanyForm(props) {
                         type="email"
                         value={form.email}
                         placeholder="Email"
+                        changeDataHandler={handleOnChange}
+                    />
+                </FieldWrapper>
+            </div>
+            <div className={"flex"}>
+                <FieldWrapper label="Password" required={true} singleElement={true} className={'w-1/2'}>
+                    <LmsStandardInputField
+                        error={errors?.password}
+                        name="password"
+                        type="password"
+                        value={form.password}
+                        placeholder="Password"
+                        changeDataHandler={handleOnChange}
+                    />
+                </FieldWrapper>
+                <FieldWrapper label="Phone" className={"w-1/2"}>
+                    <LmsStandardInputField
+                        error={errors?.phone}
+                        name="phone"
+                        value={form.phone}
+                        placeholder="Phone"
                         changeDataHandler={handleOnChange}
                     />
                 </FieldWrapper>
@@ -123,7 +192,7 @@ function CompanyForm(props) {
                 </FieldWrapper>
             </div>
             <div className={"flex"}>
-                <FieldWrapper label="Founded Year" required={true} className={'w-1/2'}>
+                <FieldWrapper label="Founded Year" className={'w-1/2'}>
                     <LmsStandardInputField
                         error={errors?.founded_year}
                         name="founded_year"
@@ -157,11 +226,12 @@ function CompanyForm(props) {
                 <FieldWrapper label={'Country'} required={true} singleElement={true} className={'w-1/2'}>
                     <LmsStandardSelectInputV2
                         name={`country_code`}
+                        error={errors?.country_code}
                         initialText={'Select Country'}
                         fieldClass={'h-[250px] w-[270px]'}
                         search={true}
                         value={form?.country_code}
-                        options={industries}
+                        options={countries}
                         changeDataHandler={handleOnChange}/>
                 </FieldWrapper>
             </div>
@@ -175,7 +245,7 @@ function CompanyForm(props) {
                         changeDataHandler={handleOnChange}
                     />
                 </FieldWrapper>
-                <FieldWrapper label="City" singleElement={true} required={true} className={'w-1/2'}>
+                <FieldWrapper label="City" singleElement={true} className={'w-1/2'}>
                     <LmsStandardInputField
                         singleElement={true}
                         error={errors?.city}
@@ -187,7 +257,7 @@ function CompanyForm(props) {
                 </FieldWrapper>
             </div>
             <div className={"flex"}>
-                <FieldWrapper label="Address Line 1" required={true} className={'w-1/2'}>
+                <FieldWrapper label="Address Line 1" className={'w-1/2'}>
                     <LmsStandardInputField
                         error={errors?.address_line_1}
                         name="address_line_1"
@@ -196,7 +266,7 @@ function CompanyForm(props) {
                         changeDataHandler={handleOnChange}
                     />
                 </FieldWrapper>
-                <FieldWrapper label="Address Line 2" singleElement={true} className={'w-1/2'}>
+                <FieldWrapper label="Address Line 2" className={'w-1/2'}>
                     <LmsStandardInputField
                         singleElement={true}
                         error={errors?.address_line_2}
@@ -208,26 +278,17 @@ function CompanyForm(props) {
                 </FieldWrapper>
             </div>
             <div className={'flex'}>
-            <FieldWrapper label="Post Code" required={true} singleElement={true} className={'w-1/2'}>
-                <LmsStandardInputField
-                    singleElement={true}
-                    error={errors?.post_code}
-                    name="post_code"
-                    value={form.post_code}
-                    placeholder="Post Code"
-                    changeDataHandler={handleOnChange}
-                />
-            </FieldWrapper>
-            <FieldWrapper label="Post Code" required={true} singleElement={true} className={'w-1/2'}>
-                <CheckboxField>
-                    <Checkbox color="lmscheckbox"
-                              onClickHandler={()=>handleOnChange('verified', !form.verified)}
-                              name="verified"
-                              checked={form.verified} />
-                    <Label className={`font-normal cursor-pointer hover:text-themeColor ${form.verified ? " text-themeColor !font-bold" : "text-black "}`}
-                           htmlFor={`verified`}>Verified?</Label>
-                </CheckboxField>
-            </FieldWrapper>
+                <FieldWrapper label="Post Code" singleElement={true} className={'w-1/2'}>
+                    <LmsStandardInputField
+                        singleElement={true}
+                        error={errors?.post_code}
+                        name="post_code"
+                        value={form.post_code}
+                        placeholder="Post Code"
+                        changeDataHandler={handleOnChange}
+                    />
+                </FieldWrapper>
+
             </div>
 
             <FieldWrapper label="About Company" singleElement={true} className={'w-full'}>
@@ -240,6 +301,31 @@ function CompanyForm(props) {
                     value={form.about_company}
                     changeDataHandler={handleOnChange}/>
             </FieldWrapper>
+            <div className="flex items-center justify-between border-t border-commonBorderColor pt-8 lg:pt-10">
+                <div className="left-col flex items-center">
+                    <div className="member-collapse-list ">
+                        <Link href={`/members-and-message-management/membership-management/total-member-management`}>
+                            <Button color="transparent" className="w-full text-center cursor-pointer gap">
+                            <span className={`flex`}>
+                              <Menu />
+                            </span>
+                                <span className="text-19px flex leading-[normal]">List</span>
+                            </Button>
+                        </Link>
+                    </div>
+                </div>
+                <div className="right-col flex justify-end items-end flex-1  px-4 pl-[20px] pr-0">
+                    <Button
+                        color="primary"
+                        onClick={() => submitForm()}
+                        loading={loading}
+                        disable={loading}
+                        className={"cursor-pointer"}
+                    >
+                        Save
+                    </Button>
+                </div>
+            </div>
         </>
     );
 }

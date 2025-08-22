@@ -14,3 +14,21 @@ export async function getCompanies (params) {
         throw new Error(JSON.stringify(res));
     }
 }
+export async function storeCompany (payload) {
+    const req = await fetchRequest(`/companies`,{
+        method: 'POST',
+        body: JSON.stringify(payload)
+    })
+    const res = await req.json();
+    if (req.status !== 200) {
+        return {...res, status: req.status};
+    } else {
+        return {...res.data, status: req.status};
+        revalidateTag('companies')
+    }
+    if (req.ok) {
+        return res.data
+    } else {
+        throw new Error(JSON.stringify(res));
+    }
+}
