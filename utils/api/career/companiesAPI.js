@@ -51,3 +51,17 @@ export async function updateCompany (payload, id) {
         return {...res.data, status: req.status};
     }
 }
+
+export async function deleteCompany (payload) {
+    const req = await fetchRequest(`/companies/delete`,{
+        method: 'DELETE',
+        body: JSON.stringify(payload)
+    })
+    const res = await req.json();
+    if (req.status !== 200) {
+        return {...res, status: req.status};
+    } else {
+        revalidateTag('companies')
+        return {...res.data, status: req.status};
+    }
+}

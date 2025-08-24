@@ -19,7 +19,7 @@ export default function LmsTable({
                                      checkMark = false,
                                      serialNo = false,
                                      pagination = null,
-                                     pageSize = 10,
+                                     pageSize = 20,
                                      emptyMessage = "표에 사용 가능한 데이터가 없습니다",
                                      showEmptyMessage = false,
                                      rowLink = () =>{}

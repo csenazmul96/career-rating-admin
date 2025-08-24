@@ -6,7 +6,7 @@ import { useState } from "react";
 const LmsTableHeaderActions = ({
                                  pagination,
                                  TableActions = null,
-                                 pageSize = 10,
+                                 pageSize = 20,
                                  classes = "",
                                }) => {
   const searchParams = useSearchParams();
@@ -47,10 +47,7 @@ const LmsTableHeaderActions = ({
                     { id: pageSize, name: pageSize },
                     { id: 25, name: "25" },
                     { id: 50, name: "50" },
-                    {
-                      id: 100,
-                      name: "100",
-                    },
+                    { id: 100, name: "100"}
                   ]}
                   changeDataHandler={handleOnChnage}
               />
