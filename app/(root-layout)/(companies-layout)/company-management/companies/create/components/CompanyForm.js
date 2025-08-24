@@ -26,7 +26,7 @@ function CompanyForm({company = null}) {
         user_id: "",
         verified: false,
         tax_id: "",
-        industry: "",
+        industry_id: "",
         company_type: "Private",
         founded_year: "",
         phone: "",
@@ -218,12 +218,12 @@ function CompanyForm({company = null}) {
             <div className={"flex"}>
                 <FieldWrapper label={'Industry'} required={true} className={'w-1/2'}>
                     <LmsStandardSelectInputV2
-                        name={`industry`}
+                        name={`industry_id`}
                         initialText={'Select Industry'}
                         fieldClass={'h-[250px] w-[270px]'}
                         search={true}
-                        error={errors?.industry}
-                        value={form?.industry}
+                        error={errors?.industry_id}
+                        value={form?.industry_id}
                         options={industries}
                         changeDataHandler={handleOnChange}/>
                 </FieldWrapper>

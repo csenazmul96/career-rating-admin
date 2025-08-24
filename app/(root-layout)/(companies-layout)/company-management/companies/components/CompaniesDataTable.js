@@ -64,6 +64,7 @@ const CompaniesDataTable = ({ companies, pagination }) => {
                     serialNo={true}
                     rowLink={(row) => `/company-management/companies/details/${row.id}` }
                     checkMark={true}
+                    showEmptyMessage={true}
                     pagination={pagination}
                 />
             )}

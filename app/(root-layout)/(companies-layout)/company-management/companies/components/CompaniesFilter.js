@@ -33,7 +33,7 @@ const CompaniesFilter = ({queryParams}) => {
                 per_page: oldParams && oldParams.get('per_page') ? oldParams.get('per_page') : 10,
                 search: oldParams && oldParams.get('search') ? oldParams.get('search') : '',
                 country_code: oldParams && oldParams.get('country_code') ? oldParams.get('country_code') : '',
-                industry: oldParams && oldParams.get('industry') ? oldParams.get('industry') : '',
+                industry_id: oldParams && oldParams.get('industry_id') ? oldParams.get('industry_id') : '',
                 company_type: oldParams && oldParams.get('company_type') ? oldParams.get('company_type') : '',
             })
         }
@@ -69,7 +69,7 @@ const CompaniesFilter = ({queryParams}) => {
         {label: 'Country Code', paramsName: 'country_code'},
         {label: 'Search', paramsName: 'search'},
         {label: 'Company Type', paramsName: 'company_type'},
-        {label: 'Industry', paramsName: 'industry'}
+        {label: 'Industry', paramsName: 'industry_id'}
     ]
 
     const finallist = filterCriteria.map(item => {
@@ -79,7 +79,7 @@ const CompaniesFilter = ({queryParams}) => {
 
             value = params[paramsName];
 
-            if (paramsName === "industry") {
+            if (paramsName === "industry_id") {
                 value = industries.find(item => item.id === value)?.name || "";
             }
         }
@@ -114,11 +114,11 @@ const CompaniesFilter = ({queryParams}) => {
                     </FilterFormWrapper>
                     <FilterFormWrapper label={'Industry'} className={`justify-end`}  >
                         <LmsStandardSelectInputV2
-                            name={`industry`}
+                            name={`industry_id`}
                             initialText={'Select Industry'}
                             fieldClass={'h-[250px] w-[270px]'}
                             search={true}
-                            value={params && params.industry ? params.industry : ''}
+                            value={params && params.industry_id ? params.industry_id : ''}
                             options={industries}
                             changeDataHandler={handleOnChnage}/>
                     </FilterFormWrapper>

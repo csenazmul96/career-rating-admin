@@ -1,4 +1,5 @@
 import LmsPageHeading from "@/components/common/LmsPageHeading";
+import {getCompanies} from "@/utils/api/career/companiesAPI";
 
 export default async function Page({params, searchParams}) {
     const searchParamsAll = await searchParams
@@ -6,6 +7,8 @@ export default async function Page({params, searchParams}) {
     const parentId = id && id.length ? id[0] : ''
     const secondId = id && id.length > 1 ? id[1] : ''
     const thirdId = id && id.length > 2 ? id[2] : ''
+
+    const {companies, pagination} = await getCompanies({...searchParamsAll, parentId, secondId, thirdId})
     return (
         <>
             <>

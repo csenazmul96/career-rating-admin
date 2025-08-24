@@ -11,12 +11,6 @@ import LmsStandardInputField from "@/components/common/form/LmsStandardInputFiel
 import { useEffect, useState } from "react";
 
 import { usePageSidebarContext } from "@/store/PageSidebarContext";
-import {
-  createEditParentGroup,
-  createEditSubGroup,
-  createEditSubSubGroup,
-} from "@/utils/api/lmsPageCommonSidebar";
-import { formatErrors } from "@/utils/helpers/ErrorHeloper";
 import { toast } from "react-toastify";
 import {storeSidebarGroup, updateSidebarGroup} from "@/utils/api/career/commonAPI";
 
@@ -75,7 +69,9 @@ const LmsCommonPageSidebarForm = ({ apiPrefix, tag = "" }) => {
           );
         } else {
           response = await storeSidebarGroup(
-              newForm,
+              {...newForm,
+                parent_id: activeDropdown.second?.id ?? activeDropdown.first?.id ?? activeDropdown.third?.id ?? ""
+              },
               `${apiPrefix}`,
               tag
           );

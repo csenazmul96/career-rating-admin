@@ -20,8 +20,8 @@ export default function LmsTable({
                                      serialNo = false,
                                      pagination = null,
                                      pageSize = 20,
-                                     emptyMessage = "표에 사용 가능한 데이터가 없습니다",
-                                     showEmptyMessage = false,
+                                     emptyMessage = "No Data Found.!",
+                                     showEmptyMessage = true,
                                      rowLink = () =>{}
                                  }) {
     const { selectedRow, setSelectedRows } = useDataTable();
