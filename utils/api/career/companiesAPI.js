@@ -14,6 +14,16 @@ export async function getCompanies (params) {
         throw new Error(JSON.stringify(res));
     }
 }
+export async function getSingleCompanies (id) {
+    const req = await fetchRequest(`/companies/${id}`)
+    const res = await req.json();
+
+    if (req.ok) {
+        return res.data
+    } else {
+        throw new Error(JSON.stringify(res));
+    }
+}
 export async function storeCompany (payload) {
     const req = await fetchRequest(`/companies`,{
         method: 'POST',
@@ -23,12 +33,21 @@ export async function storeCompany (payload) {
     if (req.status !== 200) {
         return {...res, status: req.status};
     } else {
-        return {...res.data, status: req.status};
         revalidateTag('companies')
+        return {...res.data, status: req.status};
     }
-    if (req.ok) {
-        return res.data
+
+}
+export async function updateCompany (payload, id) {
+    const req = await fetchRequest(`/companies/${id}`,{
+        method: 'PUT',
+        body: JSON.stringify(payload)
+    })
+    const res = await req.json();
+    if (req.status !== 200) {
+        return {...res, status: req.status};
     } else {
-        throw new Error(JSON.stringify(res));
+        revalidateTag('companies')
+        return {...res.data, status: req.status};
     }
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import FieldWrapper from "@/components/common/form/FieldWrapper";
 import LmsStandardRadioFieldGroup from "@/components/common/form/LmsStandardRadioFieldGroup";
 import LmsStandardInputField from "@/components/common/form/LmsStandardInputField";
@@ -12,10 +12,10 @@ import {Label} from "@/components/common/fieldset";
 import {Button} from "@/components/common/button";
 import {Menu} from "lucide-react";
 import Link from "next/link";
-import {storeCompany} from "@/utils/api/career/companiesAPI";
+import {storeCompany, updateCompany} from "@/utils/api/career/companiesAPI";
 import {LmsToastMessage} from "@/components/common/LmsToastMessage";
 
-function CompanyForm(props) {
+function CompanyForm({company = null}) {
     const [errors, setErrors] = useState(null);
     const [loading, setLoading] = useState(false);
     const {countries, industries} = useCommonContext()
@@ -27,7 +27,7 @@ function CompanyForm(props) {
         verified: false,
         tax_id: "",
         industry: "",
-        company_type: "",
+        company_type: "Private",
         founded_year: "",
         phone: "",
         email: "",
@@ -43,7 +43,6 @@ function CompanyForm(props) {
     })
 
     const companyTypes = [
-        { id: "", name: "All" },
         { id: "Private", name: "Private" },
         { id: "Govt", name: "Govt" },
     ]
@@ -52,30 +51,32 @@ function CompanyForm(props) {
         setForm((prev) => ({ ...prev, [column]: value }));
     };
 
+    useEffect(() => {
+        if (company) {
+            setForm({...company, username: company.user?.username || ""})
+        }
+    }, [company])
+
 
     const submitForm = async () => {
         setErrors(null);
         setLoading(true);
         try {
             let data = null;
-            if (!form.id) {
+            if (!company) {
                 data = await storeCompany(form);
+            } else {
+                data = await updateCompany(form, company.id);
             }
-            console.log(data)
+
             if (data.status === 422) {
                 setErrors(data.errors);
-                if (!errors) {
-                    LmsToastMessage("오류.", "문제가 발생했습니다.", "error");
-                }
-            } else {
-                if (!form.id) {
-                    resetForm();
-                }
+            } else if (data.status === 201 || data.status === 200) {
                 LmsToastMessage(
-                    "성공.",
+                    "Create",
                     form?.id
-                        ? "회원이 성공적으로 업데이트되었습니다."
-                        : "회원이 성공적으로 생성되었습니다.",
+                        ? "Company has been updated."
+                        : "New company has been created.",
                     "success"
                 );
             }
@@ -150,6 +151,7 @@ function CompanyForm(props) {
                 </FieldWrapper>
             </div>
             <div className={"flex"}>
+                {!company &&
                 <FieldWrapper label="Password" required={true} singleElement={true} className={'w-1/2'}>
                     <LmsStandardInputField
                         error={errors?.password}
@@ -160,7 +162,8 @@ function CompanyForm(props) {
                         changeDataHandler={handleOnChange}
                     />
                 </FieldWrapper>
-                <FieldWrapper label="Phone" className={"w-1/2"}>
+                }
+                <FieldWrapper label="Phone" className={!company ? "w-1/2" : "w-full"}>
                     <LmsStandardInputField
                         error={errors?.phone}
                         name="phone"
@@ -219,6 +222,7 @@ function CompanyForm(props) {
                         initialText={'Select Industry'}
                         fieldClass={'h-[250px] w-[270px]'}
                         search={true}
+                        error={errors?.industry}
                         value={form?.industry}
                         options={industries}
                         changeDataHandler={handleOnChange}/>
@@ -230,6 +234,7 @@ function CompanyForm(props) {
                         initialText={'Select Country'}
                         fieldClass={'h-[250px] w-[270px]'}
                         search={true}
+                        optionValue={'code'}
                         value={form?.country_code}
                         options={countries}
                         changeDataHandler={handleOnChange}/>
@@ -278,7 +283,7 @@ function CompanyForm(props) {
                 </FieldWrapper>
             </div>
             <div className={'flex'}>
-                <FieldWrapper label="Post Code" singleElement={true} className={'w-1/2'}>
+                <FieldWrapper label="Post Code" singleElement={true} className={'w-full'}>
                     <LmsStandardInputField
                         singleElement={true}
                         error={errors?.post_code}
@@ -294,7 +299,7 @@ function CompanyForm(props) {
             <FieldWrapper label="About Company" singleElement={true} className={'w-full'}>
                 <LmsStandardTextEditor
                     singleElement={true}
-                    placeholder="about_company"
+                    placeholder="About Company"
                     error={errors?.about_company}
                     name="about_company"
                     fieldClass={'w-full max-h-[200px] mb-2'}
@@ -304,7 +309,7 @@ function CompanyForm(props) {
             <div className="flex items-center justify-between border-t border-commonBorderColor pt-8 lg:pt-10">
                 <div className="left-col flex items-center">
                     <div className="member-collapse-list ">
-                        <Link href={`/members-and-message-management/membership-management/total-member-management`}>
+                        <Link href={`/company-management/companies`}>
                             <Button color="transparent" className="w-full text-center cursor-pointer gap">
                             <span className={`flex`}>
                               <Menu />
