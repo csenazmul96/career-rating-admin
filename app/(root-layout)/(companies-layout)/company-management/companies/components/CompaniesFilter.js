@@ -16,6 +16,7 @@ import FilterForm from "@/components/common/form/FilterForm";
 import {useCommonContext} from "@/store/CommonContext";
 import LmsStandardRadioFieldGroup from "@/components/common/form/LmsStandardRadioFieldGroup";
 import FieldWrapper from "@/components/common/form/FieldWrapper";
+import MultiStageSingleSelect from "@/components/common/form/MultiStageSingleSelect";
 
 const CompaniesFilter = ({queryParams}) => {
     const pathname = usePathname();
@@ -34,6 +35,8 @@ const CompaniesFilter = ({queryParams}) => {
                 search: oldParams && oldParams.get('search') ? oldParams.get('search') : '',
                 country_code: oldParams && oldParams.get('country_code') ? oldParams.get('country_code') : '',
                 industry_id: oldParams && oldParams.get('industry_id') ? oldParams.get('industry_id') : '',
+                sub_industry_id: oldParams && oldParams.get('sub_industry_id') ? oldParams.get('sub_industry_id') : '',
+                sub_sub_industry_id: oldParams && oldParams.get('sub_sub_industry_id') ? oldParams.get('sub_sub_industry_id') : '',
                 company_type: oldParams && oldParams.get('company_type') ? oldParams.get('company_type') : '',
             })
         }
@@ -89,6 +92,20 @@ const CompaniesFilter = ({queryParams}) => {
             value
         };
     });
+    const [selectedIndustry, setSelectedIndustry] = useState(null);
+    const receiveOrganizationFilter = (category) => {
+        setParams(prevForm => ({
+            ...prevForm,
+            industry_id: category.recent_parent_id && category.parent_id ? category.parent_id :
+                category.parent_id && !category.recent_parent_id ? category.parent_id :
+                    category.id,
+            sub_industry_id: category.recent_parent_id && category.parent_id ? category.recent_parent_id :
+                category.parent_id && !category.recent_parent_id ? category.id :
+                    '',
+            sub_sub_industry_id: category.recent_parent_id && category.parent_id ? category.id : ''
+        }));
+        setSelectedIndustry(category);
+    };
 
     return (
         <>
@@ -113,14 +130,10 @@ const CompaniesFilter = ({queryParams}) => {
                             changeDataHandler={handleOnChnage}/>
                     </FilterFormWrapper>
                     <FilterFormWrapper label={'Industry'} className={`justify-end`}  >
-                        <LmsStandardSelectInputV2
-                            name={`industry_id`}
-                            initialText={'Select Industry'}
-                            fieldClass={'h-[250px] w-[270px]'}
-                            search={true}
-                            value={params && params.industry_id ? params.industry_id : ''}
-                            options={industries}
-                            changeDataHandler={handleOnChnage}/>
+                        <MultiStageSingleSelect dataList={industries}
+                                                selected={selectedIndustry}
+                                                setSelected={receiveOrganizationFilter}
+                                                classes={'w-[270px]'} />
                     </FilterFormWrapper>
 
                 </div>
