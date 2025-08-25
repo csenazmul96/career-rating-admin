@@ -3,9 +3,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import {ChevronDown, ChevronUp, ChevronLeft, ChevronRight} from "lucide-react";
 
 const MultiStageSingleSelect = ({    selected,
-                                  setSelected = () =>{},
-                                  dataList=[],
-                                  classes = ''}) => {
+                                    setSelected = () =>{},
+                                    error= null,
+                                    dataList=[],
+                                    classes = ''}) => {
     const [open, setOpen] = useState(false);
     const [finalSelection, setFinalSelection] = useState(selected );
 
@@ -107,7 +108,7 @@ const MultiStageSingleSelect = ({    selected,
                 onClick={ handleToggleClick}
                 className={`w-full border relative overflow-hidden border-borderColor h-[48px] px-4 py-2 bg-white flex justify-between items-center focus:outline-none`}
             >
-                    <span className={`text-base text-inputColor truncate`}>
+                    <span className={`text-base ${finalSelection ? "" : "text-inputColor"} truncate`}>
                         {renderButtonText()}
                     </span>
                 <span className={`absolute top-1/2 -translate-y-1/2 bg-white pr-4 right-0`}>
@@ -150,6 +151,7 @@ const MultiStageSingleSelect = ({    selected,
                     </div>
                 </div>
             )}
+            {error && <span className={"text-dangerColor"}>{error}</span>}
         </div>
     );
 };

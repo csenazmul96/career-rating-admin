@@ -239,6 +239,7 @@ function CompanyForm({company = null}) {
             <div className={"flex"}>
                 <FieldWrapper label={'Industry'} required={true} className={'w-1/2'}>
                     <MultiStageSingleSelect dataList={industries}
+                                            error={errors?.industry_id}
                                             selected={selectedIndustry}
                                             setSelected={receiveOrganizationFilter}
                                             classes={'w-[270px]'} />
