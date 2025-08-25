@@ -22,6 +22,7 @@ function CompanyForm({company = null}) {
     const [errors, setErrors] = useState(null);
     const [loading, setLoading] = useState(false);
     const {countries, industries} = useCommonContext()
+    const [selectedIndustry, setSelectedIndustry] = useState(null);
     const [form, setForm] = useState({
         name: "",
         brand_name: "",
@@ -59,6 +60,7 @@ function CompanyForm({company = null}) {
     useEffect(() => {
         if (company) {
             setForm({...company, username: company.user?.username || ""})
+            setSelectedIndustry(company.subSubIndustry || company.subIndustry || company.industry)
         }
     }, [company])
 
@@ -91,7 +93,7 @@ function CompanyForm({company = null}) {
             toast.error("문제가 발생했습니다.");
         }
     };
-    const [selectedIndustry, setSelectedIndustry] = useState(null);
+
     const receiveOrganizationFilter = (category) => {
         setForm(prevForm => ({
             ...prevForm,

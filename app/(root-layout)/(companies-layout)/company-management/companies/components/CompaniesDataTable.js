@@ -24,7 +24,7 @@ const CompaniesDataTable = ({ companies, pagination }) => {
         },
         {
             header: "Industry",
-            accessor: "industry"
+            accessor: "industry_name"
         },
         {
             header: "Company Type",
