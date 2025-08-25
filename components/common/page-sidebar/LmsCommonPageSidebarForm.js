@@ -32,7 +32,7 @@ const LmsCommonPageSidebarForm = ({ apiPrefix, tag = "" }) => {
   const [errors, setErrors] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const [form, setForm] = useState({ name: "" });
+  const [form, setForm] = useState({ name: "", level: 1 });
   const handleOnChange = (column, value) => {
     setForm((prev) => ({ ...prev, [column]: value }));
   };
@@ -42,7 +42,7 @@ const LmsCommonPageSidebarForm = ({ apiPrefix, tag = "" }) => {
       if (currentGroup && actionType === "edit") {
         setForm({ name: currentGroup.name });
       } else {
-        setForm({ name: "" });
+        setForm({ name: "", level: 1 });
       }
       setErrors(null);
     }
@@ -52,7 +52,8 @@ const LmsCommonPageSidebarForm = ({ apiPrefix, tag = "" }) => {
     setLoading(true);
     try {
       let response = null;
-      let newForm = { ...form };
+      let newForm = { ...form, level: currentGroup ? currentGroup.level + 1 : 1};
+
 
       if (!currentGroup) {
         response = await storeSidebarGroup(

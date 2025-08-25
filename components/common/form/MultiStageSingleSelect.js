@@ -62,6 +62,16 @@ const MultiStageSingleSelect = ({    selected,
         }
     }
 
+    const findSubgroupById = (dataList, targetId) => {
+        for (const item of dataList) {
+            const found = item.subGroups.find(subGroup => subGroup.id === targetId);
+            if (found) {
+                return found;
+            }
+        }
+        return null;
+    };
+
     const handleToggleClick = () => {
         setCurrentShowList(dataList);
         setOpen(!open);
@@ -69,31 +79,27 @@ const MultiStageSingleSelect = ({    selected,
         setLevel(0)
     }
     const handleMenuFinalSelect = (item) => {
-        let parentId = null;
-        let secondParentId = null;
-        let ids = [item.id];
+        let recent_parent_id = null;
+        let parent_id = null;
 
         if (level === 2) {
-            secondParentId = item.parent_id;
-            parentId = parentItem.id;
-            ids.push(parentId, secondParentId);
+            const found = findSubgroupById(dataList, item.parent_id);
+            parent_id = found?.parent_id || '';
+            recent_parent_id = item.parent_id;
         } else if (level === 1) {
-            secondParentId = null
-            parentId = item.parent_id;
-            ids.push(parentId);
-        } else {
-            secondParentId = null;
-            parentId = null;
+            parent_id = item.parent_id || '';
+            recent_parent_id = null
         }
 
-        setFinalSelection({...item, parentId, secondParentId, ids: ids});
-        setSelected({...item, parentId, secondParentId, ids: ids});
+        setFinalSelection({...item, recent_parent_id, parent_id});
+        setSelected({...item, recent_parent_id,parent_id});
 
         setCurrentShowList(dataList);
         setOpen(!open);
         setParentItem(null)
         setLevel(0)
     }
+
 
     return (
         <div ref={dropdownRef} className={`relative inline-block text-left ${classes ? classes : "w-[270px]"} `}>
@@ -129,12 +135,11 @@ const MultiStageSingleSelect = ({    selected,
                                     key={menu.id}
                                     className={`flex justify-between items-center cursor-pointer px-4 pr-[7px] min-h-[48px] py-3 text-base text-[#000B17] hover:font-bold hover:text-themeColor transition-colors duration-150 ease-in-out
                                                 ${ finalSelection?.id === menu.id
-                                    || finalSelection?.parentId === menu.id
-                                    || finalSelection?.secondParentId === menu.id
-                                    || finalSelection?.ids?.includes(menu.id) ? 'bg-blue-100 text-themeColor font-bold' : ''}`}>
+                                    || finalSelection?.parent_id === menu.id
+                                    || finalSelection?.recent_parent_id === menu.id ? 'bg-blue-100 text-themeColor font-bold' : ''}`}>
                                     <p className={'w-full'} onClick={()=>handleMenuFinalSelect(menu)}>{menu.name}</p>
 
-                                    {menu.subGroups.length ?
+                                    {menu.subGroups && menu.subGroups.length ?
                                         <span onClick={() =>selectGroup(menu)}>
                                             <ChevronRight size={24} className="rotate-270 text-inputColor font-bold" />
                                         </span> : ''

@@ -41,9 +41,9 @@ const LmsCommonPageSidebar = ({
             let third = second?.subGroups.find((item) => item.id === thirdId);
 
             setActiveDropdown({
-                first: first ?? null,
-                second: second ?? null,
-                third: third ?? null,
+                first: first ? { ...first, level: 1 } : null,
+                second: second ? { ...second, level: 2 } :null,
+                third: third ? { ...third, level: 3 } : null,
             });
             setCurrentGroup(
                 third !== undefined

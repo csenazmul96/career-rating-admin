@@ -14,6 +14,9 @@ import {Menu} from "lucide-react";
 import Link from "next/link";
 import {storeCompany, updateCompany} from "@/utils/api/career/companiesAPI";
 import {LmsToastMessage} from "@/components/common/LmsToastMessage";
+import FilterFormWrapper from "@/components/common/form/FilterFormWrapper";
+import MultiStageSingleSelect from "@/components/common/form/MultiStageSingleSelect";
+import {toast} from "react-toastify";
 
 function CompanyForm({company = null}) {
     const [errors, setErrors] = useState(null);
@@ -27,6 +30,8 @@ function CompanyForm({company = null}) {
         verified: false,
         tax_id: "",
         industry_id: "",
+        sub_industry_id: "",
+        sub_sub_industry_id: "",
         company_type: "Private",
         founded_year: "",
         phone: "",
@@ -85,6 +90,20 @@ function CompanyForm({company = null}) {
             setLoading(false);
             toast.error("문제가 발생했습니다.");
         }
+    };
+    const [selectedIndustry, setSelectedIndustry] = useState(null);
+    const receiveOrganizationFilter = (category) => {
+        setForm(prevForm => ({
+            ...prevForm,
+            industry_id: category.recent_parent_id && category.parent_id ? category.parent_id :
+                category.parent_id && !category.recent_parent_id ? category.parent_id :
+                    category.id,
+            sub_industry_id: category.recent_parent_id && category.parent_id ? category.recent_parent_id :
+                category.parent_id && !category.recent_parent_id ? category.id :
+                    '',
+            sub_sub_industry_id: category.recent_parent_id && category.parent_id ? category.id : ''
+        }));
+        setSelectedIndustry(category);
     };
 
     return (
@@ -217,15 +236,10 @@ function CompanyForm({company = null}) {
             </div>
             <div className={"flex"}>
                 <FieldWrapper label={'Industry'} required={true} className={'w-1/2'}>
-                    <LmsStandardSelectInputV2
-                        name={`industry_id`}
-                        initialText={'Select Industry'}
-                        fieldClass={'h-[250px] w-[270px]'}
-                        search={true}
-                        error={errors?.industry_id}
-                        value={form?.industry_id}
-                        options={industries}
-                        changeDataHandler={handleOnChange}/>
+                    <MultiStageSingleSelect dataList={industries}
+                                            selected={selectedIndustry}
+                                            setSelected={receiveOrganizationFilter}
+                                            classes={'w-[270px]'} />
                 </FieldWrapper>
                 <FieldWrapper label={'Country'} required={true} singleElement={true} className={'w-1/2'}>
                     <LmsStandardSelectInputV2
