@@ -19,7 +19,7 @@ import {useNotificationContext} from "@/store/NotificationContext";
 import {useEffect, useRef} from "react";
 import {useCommonContext} from "@/store/CommonContext";
 
-const Header = ({countries, educationLevels, gradingSystems, gradingScales, degreeNames,languages, industries}) => {
+const Header = ({countries, educationLevels, gradingSystems, gradingScales, degreeNames,languages, industries, roles}) => {
   const { toggleMainSidebar } = useSidebar();
   const { data: session } = useSession();
   const {setIsOpen, isOpen} = useNotificationContext()

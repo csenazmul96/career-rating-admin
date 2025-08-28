@@ -20,7 +20,7 @@ import {
     getDegreeNames,
     getEducationLevel,
     getGradingScale,
-    getGradingSystem, getLanguages
+    getGradingSystem, getLanguages, getRoles
 } from "@/utils/api/career/commonAPI";
 import {getIndustries} from "@/utils/api/career/industriesAPI";
 export const metadata = {
@@ -36,7 +36,8 @@ export default async function RootLayout({ children }) {
         gradingScales,
         degreeNames,
         languages,
-        industries] = await Promise.all([
+        industries,
+        roles] = await Promise.all([
         getCountries(),
         getEducationLevel(),
         getGradingSystem(),
@@ -44,8 +45,9 @@ export default async function RootLayout({ children }) {
         getDegreeNames(),
         getLanguages(),
         getIndustries(),
+        getRoles(),
     ]);
-
+console.log('roles',roles)
     try {
         await validateToken();
     } catch (e) {
@@ -65,6 +67,7 @@ export default async function RootLayout({ children }) {
                         degreeNames={degreeNames}
                         languages={languages}
                         industries={industries}
+                        roles={roles}
                     />
                     <Sidebar />
                     {children}

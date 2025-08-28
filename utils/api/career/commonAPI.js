@@ -117,3 +117,14 @@ export async function deleteSidebarGroup (endpoint, tag='') {
         throw new Error(error.message);
     }
 }
+
+export async function getRoles () {
+    const req = await fetchRequest(`/roles`)
+    const res = await req.json();
+
+    if (req.ok) {
+        return res.data;
+    } else {
+        throw new Error(JSON.stringify(res));
+    }
+}

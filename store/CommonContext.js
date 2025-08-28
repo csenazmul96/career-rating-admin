@@ -8,6 +8,7 @@ const CommonContext = createContext({
     gradingSystems: [],
     gradingScales: [],
     educationLevels: [],
+    roles: [],
     setCountries: () => {},
     setCities: () => {},
     setIndustries: () => {},
@@ -16,6 +17,7 @@ const CommonContext = createContext({
     setGradingSystems: () => {},
     setGradingScales: () => {},
     setEducationLevels: () => {},
+    setRoles: () => {},
 });
 
 export const CommonContextProvider = ({ children }) => {
@@ -26,6 +28,7 @@ export const CommonContextProvider = ({ children }) => {
     const [gradingSystems, assignGradingSystems] = useState([]);
     const [gradingScales, assignGradingScales] = useState([]);
     const [educationLevels, assignEducationLevels] = useState([]);
+    const [roles, assignRoles] = useState([]);
 
     const setCountries = (payload) =>{
         assignCountries(payload)
@@ -48,6 +51,9 @@ export const CommonContextProvider = ({ children }) => {
     const setEducationLevels = (payload) =>{
         assignEducationLevels(payload)
     }
+    const setRoles = (payload) =>{
+        assignRoles(payload)
+    }
 
     const contexts = {
         countries,
@@ -57,6 +63,7 @@ export const CommonContextProvider = ({ children }) => {
         gradingScales,
         gradingSystems,
         educationLevels,
+        roles,
         setCountries,
         setIndustries,
         setLanguages,
@@ -64,6 +71,7 @@ export const CommonContextProvider = ({ children }) => {
         setGradingSystems,
         setGradingScales,
         setEducationLevels,
+        setRoles,
     };
 
     return (
