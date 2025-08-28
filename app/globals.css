@@ -3,7 +3,7 @@
 body {
     font-family: "Pretendard GOV Variable", "Pretendard GOV", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     color: #1d1d1d;
-    font-size: 13px;
+    font-size: 15px;
 }
 
 @tailwind base;
@@ -40,7 +40,7 @@ body {
         @apply  flex-1 py-[16px] px-4 pl-[18px];
     }
     .common-label-style {
-        @apply whitespace-nowrap  text-[15px];
+        @apply whitespace-nowrap font-bold text-[15px];
     }
 
     /*custom form style*/
@@ -106,7 +106,7 @@ body {
         @apply flex items-start justify-start flex-col w-full  ;
     }
     .tab-list-controller {
-        @apply flex self-end justify-end pb-10;
+        @apply flex self-end justify-end pb-10 overflow-auto;
     }
     .tab-list-controller-btn {
         @apply flex items-start text-medium text-textSubColor justify-start flex-col w-full py-2 px-5 border-b-[3px] whitespace-nowrap focus:outline-none;
@@ -628,11 +628,11 @@ body.react-confirm-alert-body-element {
 
 /*date picker v2*/
 .react-datepicker-wrapper {}
- .react-datepicker{
+.react-datepicker{
     border: 1px solid #D8D8D8!important;
     /*padding: 8px!important;*/
-     position: relative;
-     font-family: "Pretendard GOV Variable", "Pretendard GOV", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    position: relative;
+    font-family: "Pretendard GOV Variable", "Pretendard GOV", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 .react-datepicker__header {
@@ -710,4 +710,43 @@ body.react-confirm-alert-body-element {
 
 .react-datepicker__day--outside-month {
     color: #717171!important;
+}
+
+.dashboard .react-calendar__month-view__days .react-calendar__tile{
+    flex: 0 0 14.2% !important;
+}
+
+/*SWIPER SLIDER FOR DYNAMIC TEMPLATE*/
+
+.swiper-pagination {
+    bottom: 20px !important;
+}
+
+.swiper-pagination-bullet {
+    width: 8px !important;
+    height: 8px !important;
+    background: #6D7882 !important;
+    opacity: 1 !important;
+    transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: #256EF4 !important;
+    width: 20px !important;
+    height: 8px !important;
+    border-radius: 8px !important;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+    display: none !important;
+}
+.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal {
+    width: auto!important;
+}
+.custom-pagination-container {
+    background: #fff;
+    padding: 8px 15px;
+    border-radius: 1000px;
+    height: 40px;
 }

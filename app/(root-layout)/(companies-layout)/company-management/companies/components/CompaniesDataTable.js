@@ -45,7 +45,7 @@ const CompaniesDataTable = ({ companies, pagination }) => {
                 <Button>
                     <Link
                         className={"flex cursor-pointer"}
-                        href={`/company-management/companies/details/${employee.id}`}
+                        href={`/company-management/companies/details/${employee.id}/basic-information`}
                     >
                         <ChevronRight size={24} />
                     </Link>
@@ -62,7 +62,7 @@ const CompaniesDataTable = ({ companies, pagination }) => {
                     columns={columns}
                     data={companies}
                     serialNo={true}
-                    rowLink={(row) => `/company-management/companies/details/${row.id}` }
+                    rowLink={(row) => `/company-management/companies/details/${row.id}/basic-information` }
                     checkMark={true}
                     showEmptyMessage={true}
                     pagination={pagination}
