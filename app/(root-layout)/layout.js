@@ -47,7 +47,7 @@ export default async function RootLayout({ children }) {
         getIndustries(),
         getRoles(),
     ]);
-console.log('roles',roles)
+
     try {
         await validateToken();
     } catch (e) {

@@ -1,6 +1,6 @@
 "use client";
 
-import {useState} from "react";
+import React, {useState} from "react";
 import FieldWrapper from "@/components/common/form/FieldWrapper";
 import LmsStandardRadioFieldGroup from "@/components/common/form/LmsStandardRadioFieldGroup";
 import LmsStandardInputField from "@/components/common/form/LmsStandardInputField";
@@ -11,22 +11,29 @@ import Link from "next/link";
 import {Menu} from "lucide-react";
 import {storeEmployee, storeEmployeeUpdate} from "@/utils/api/career/employeeApi";
 import {LmsToastMessage} from "@/components/common/LmsToastMessage";
+import LmsStandardSelectInputV2 from "@/components/common/form/LmsStandardSelectInputV2";
+import FilterFormWrapper from "@/components/common/form/FilterFormWrapper";
+import {useCommonContext} from "@/store/CommonContext";
 const formObject = {
     email: "",
     password: "",
     confirmPassword: "",
     username: "",
     first_name: "",
+    current_company_id: "",
+    current_role_id: "",
     last_name: "",
     status: true,
     checkEmployee: false,
 }
 
-function EmployeeForm({employee = null}) {
+function EmployeeForm({employee = null, companies}) {
 
     const [errors, setErrors] = useState(null);
     const [loading, setLoading] = useState(false);
     const [form, setForm] = useState(employee ? {...employee, status: employee.status ? true : false} : formObject);
+
+    const {roles} = useCommonContext()
 
     const handleOnChnage = (column, value) => {
         setForm((prev) => ({ ...prev, [column]: value }));
@@ -50,6 +57,8 @@ function EmployeeForm({employee = null}) {
         }
         setLoading(false);
     }
+
+
 
     return (
         <div className="registration-form">
@@ -121,6 +130,26 @@ function EmployeeForm({employee = null}) {
                             changeDataHandler={handleOnChnage}
                         />
                     </FieldWrapper>
+                <FieldWrapper label={'Company'} className={``}  >
+                    <LmsStandardSelectInputV2
+                        name={`current_company_id`}
+                        initialText={'Select Company'}
+                        fieldClass={'h-[250px] w-[270px]'}
+                        search={true}
+                        error={errors?.current_company_id}
+                        value={ form.current_company_id}
+                        options={companies}
+                        changeDataHandler={handleOnChnage}/>
+
+                        <LmsStandardSelectInputV2
+                            name={`current_role_id`}
+                            initialText={'Select Role'}
+                            fieldClass={'h-[250px] w-[270px]'}
+                            error={errors?.current_role_id}
+                            value={form.current_role_id}
+                            options={roles && roles.filter((role)=> role.company_id === form.current_company_id)}
+                            changeDataHandler={handleOnChnage}/>
+                </FieldWrapper>
 
                 <div className="flex items-center justify-between border-t border-commonBorderColor pt-10">
                     <div className="left-col flex items-center">

@@ -12,7 +12,7 @@ export default async function Page({params, searchParams}) {
     const secondId = id && id.length > 1 ? id[1] : ''
     const thirdId = id && id.length > 2 ? id[2] : ''
 
-    const {companies, pagination} = await getCompanies({...searchParamsAll, industry_id:parentId, sub_industry_id:secondId, sub_sub_industry_id:thirdId})
+    const {companies, pagination} = await getCompanies({...searchParamsAll, per_page: searchParamsAll.per_page || 10, industry_id:parentId, sub_industry_id:secondId, sub_sub_industry_id:thirdId})
     return (
         <>
             <LmsPageHeading title="Companies" />

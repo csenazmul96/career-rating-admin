@@ -30,7 +30,8 @@ const Header = ({countries, educationLevels, gradingSystems, gradingScales, degr
     setDegreeNames,
     setGradingSystems,
     setGradingScales,
-    setEducationLevels,} = useCommonContext()
+    setEducationLevels,
+    setRoles} = useCommonContext()
 
   useEffect(() => {
     return () => {
@@ -41,6 +42,7 @@ const Header = ({countries, educationLevels, gradingSystems, gradingScales, degr
       setGradingSystems(gradingSystems)
       setGradingScales(gradingScales)
       setEducationLevels(educationLevels)
+      setRoles(roles)
     }
   }, []);
 

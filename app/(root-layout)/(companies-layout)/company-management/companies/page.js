@@ -7,7 +7,7 @@ import CompaniesDataTable
 
 export default async function Page({searchParams}) {
     const queryParams = await searchParams
-    const {companies, pagination} = await getCompanies(queryParams)
+    const {companies, pagination} = await getCompanies({...queryParams, per_page: queryParams.per_page || 10});
 
     return (
         <div className="flex flex-col member-list">

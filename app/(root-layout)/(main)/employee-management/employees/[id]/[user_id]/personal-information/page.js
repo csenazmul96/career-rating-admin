@@ -9,7 +9,8 @@ import Link from "next/link";
 
 export default async function Page({params}) {
     const {id} = await params;
-    const employee = await getsSingleEmployee(id);
+    const employee = await getsSingleEmployee(id, {queries: "currentCompany,currentRole"});
+    console.log(employee)
 
 
     return (
@@ -44,6 +45,14 @@ export default async function Page({params}) {
                     </FieldWrapper>
                     <FieldWrapper label="Dob" className={"border-b border-borderColor"}>
                         <span>{employee.dob || "-"} </span>
+                    </FieldWrapper>
+                    <FieldWrapper label="Current Company" className={"border-b border-borderColor"}>
+                        <span>{employee.currentCompany?.name}</span>
+                        {employee.currentRole &&
+                            <Button color={`${employee.status ? 'primaryNoBgRoundedSmall' : "secondaryLightRoundedSmall"}`}  >
+                                {employee.currentRole?.name}
+                            </Button>
+                        }
                     </FieldWrapper>
                     <div className="flex items-center justify-between border-t border-commonBorderColor pt-10">
                         <div className="left-col flex items-center">
