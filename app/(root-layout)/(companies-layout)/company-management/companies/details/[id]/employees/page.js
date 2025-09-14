@@ -1,16 +1,22 @@
-export default async function Page() {
+import {getEmployeeOfCompany, getRoleByCompany} from "@/utils/api/career/companiesAPI";
+import CompanyEmployeeDataTable
+    from "@/app/(root-layout)/(companies-layout)/company-management/companies/details/[id]/employees/components/CompanyEmployeeDataTable";
+import CompanyEmployeeFilter
+    from "@/app/(root-layout)/(companies-layout)/company-management/companies/details/[id]/employees/components/CompanyEmployeeFilter";
+
+export default async function Page({params, searchParams}) {
+    const {id} = await params
+    const allSearchParams = await searchParams
+    const [{employees, pagination}, roles] = await Promise.all([
+        getEmployeeOfCompany({...allSearchParams, per_page: allSearchParams.per_page || 20}, id),
+        getRoleByCompany(id)
+    ])
+
     return (
         <>
-            <div className="flex flex-col member-list">
-                <div className="flex flex-col pt-12 lg:pt-16">
-                    <div className="overflow-x-auto">
-                        <div className="min-w-[600px]">
-                            <div className="text-center text-gray-500 py-20">
-                                <p>Employee information is being prepared.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <CompanyEmployeeFilter queryParams={allSearchParams} roles={roles} />
+            <div className="flex flex-col pt-12 lg:pt-16">
+            <CompanyEmployeeDataTable pagination={pagination} employees={employees} id={id} />
             </div>
         </>
     );

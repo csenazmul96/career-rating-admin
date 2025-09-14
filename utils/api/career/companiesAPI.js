@@ -14,6 +14,45 @@ export async function getCompanies (params) {
         throw new Error(JSON.stringify(res));
     }
 }
+
+export async function getEmployeeOfCompany (params, id) {
+    const req = await fetchRequest(`/companies/employees/${id}?${new URLSearchParams(params)}`,{
+        next: { tags: [`company-employee-${id}`] },
+    })
+    const res = await req.json();
+
+    if (req.ok) {
+        return {employees: res.data, pagination: res.meta};
+    } else {
+        throw new Error(JSON.stringify(res));
+    }
+}
+
+
+export async function getRoleByCompany ( id) {
+    const req = await fetchRequest(`/roles/company/${id}`)
+    const res = await req.json();
+
+    if (req.ok) {
+        return res.data
+    } else {
+        throw new Error(JSON.stringify(res));
+    }
+}
+export async function removeEmployeeFromCompany (payload) {
+    const req = await fetchRequest(`/remove/employee-of-company`, {
+        method: 'POST',
+        body: JSON.stringify(payload)
+    })
+    const res = await req.json();
+
+    if (req.ok) {
+        return {...res.data, status: req.status};
+    } else {
+        throw new Error(JSON.stringify(res));
+    }
+}
+
 export async function getSingleCompanies (id) {
     const req = await fetchRequest(`/companies/${id}`)
     const res = await req.json();
