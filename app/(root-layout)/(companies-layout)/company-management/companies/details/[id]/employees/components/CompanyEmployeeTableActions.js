@@ -49,14 +49,6 @@ function CompanyEmployeeTableActions({id}) {
             <Button color="transparentMedium" onClick={handleDelete} disable={selectedRow.length ? false : true}>
                 <Trash2 size={20} /> <span className={`flex`}>Delete</span>
             </Button>
-            <Link href={`/company-management/companies/details/${id}/employees/manage-imployee`} className={`h-[32px]`}>
-                <Button  color="primaryMedium">
-                    <span>
-                        <FilePen size={20} />
-                    </span>
-                    <span>Manage Employee</span>
-                </Button>
-            </Link>
         </>
     );
 }
